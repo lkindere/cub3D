@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/12 04:49:26 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/12 16:26:44 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,32 +27,32 @@ void	player_move(mlx_image_t *player, keys_t key, char **map)
 	if (key == MLX_KEY_UP)
 	{
 		if (map[(y - 5) / 64][x / 64] == '1'
-			|| map[(y - 5) / 64][(x + 16) / 64] == '1')
-			player->instances[0].y = (((y - 5) / 64) + 1) * 64 + 1;
+			|| map[(y - 5) / 64][(x + 15) / 64] == '1')
+			player->instances[0].y = (((y - 5) / 64) + 1) * 64;
 		else
 			player->instances[0].y -= 5;
 	}
 	if (key == MLX_KEY_DOWN)
 	{
 		if (map[(y + 5 + 16) / 64][x / 64] == '1'
-			|| map[(y + 5 + 16) / 64][(x + 16) / 64] == '1')
-			player->instances[0].y = (((y + 5 + 16) / 64)) * 64 - 17;
+			|| map[(y + 5 + 16) / 64][(x + 15) / 64] == '1')
+			player->instances[0].y = (((y + 5 + 16) / 64)) * 64 - 16;
 		else
 			player->instances[0].y += 5;
 	}
 	if (key == MLX_KEY_LEFT)
 	{
 		if (map[y / 64][(x - 5) / 64] == '1'
-			|| map[(y + 16) / 64][(x - 5) / 64] == '1')
-			player->instances[0].x = (((x - 5) / 64) + 1) * 64 + 1;
+			|| map[(y + 15) / 64][(x - 5) / 64] == '1')
+			player->instances[0].x = (((x - 5) / 64) + 1) * 64;
 		else
 			player->instances[0].x -= 5;
 	}
 	if (key == MLX_KEY_RIGHT)
 	{
 		if (map[y / 64][(x + 5 + 16) / 64] == '1'
-			|| map[(y + 16) / 64][(x + 5 + 16) / 64] == '1')
-			player->instances[0].x = (((x + 5 + 16) / 64)) * 64 - 17;
+			|| map[(y + 15) / 64][(x + 5 + 16) / 64] == '1')
+			player->instances[0].x = (((x + 5 + 16) / 64)) * 64 - 16;
 		else
 			player->instances[0].x += 5;
 	}
@@ -69,6 +69,11 @@ void	hook(void* param)
 	map = data->map;
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
+	if (mlx_is_key_down(mlx, MLX_KEY_R))
+	{
+		g_img->instances[0].x = 1 * 64;
+		g_img->instances[0].y = 1 * 64;
+	}
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
 		player_move(g_img, MLX_KEY_UP, map);
 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
@@ -77,6 +82,7 @@ void	hook(void* param)
 		player_move(g_img, MLX_KEY_LEFT, map);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		player_move(g_img, MLX_KEY_RIGHT, map);
+	printf("X: %i\tY: %i\n", g_img->instances[0].x, g_img->instances[0].y);
 }
 
 void	get_map(char ***map, char **argv)
