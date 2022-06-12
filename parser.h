@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:34:24 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/12 19:45:47 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/12 20:29:26 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,25 @@ typedef struct s_map
 
 int		parser(int argc, char **argv);
 
+//Init
+void	init_map(t_map *map);
+
+//Textures
+int		check_textures(t_map *map, char *line);
+
+//Colors
+int		check_colors(t_map *map, char *line);
+
+//Utils
+void	print_map(t_map map);
+int		invalidate_map(t_map *map, enum e_errors err);
+int		get_line(int fd, char **line);
+int		check_empty(char *line);
+
+//Helpers
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_join_free(char const *s1, char const *s2, int sfree);
-
 int		ft_atoi(const char *str);
-
 int		ft_isspace(int c);
 int		ft_isdigit(int c);
 

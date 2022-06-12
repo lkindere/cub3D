@@ -6,7 +6,7 @@
 #    By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/05 20:10:21 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/12 20:19:56 by lkindere         ###   ########.fr        #
+#    Updated: 2022/06/12 20:26:13 by lkindere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,10 @@ CFLAGS ?= -Wall -Werror -Wextra
 
 PARSE_S :=	main.c				\
 			parser.c 			\
+			textures.c 			\
+			colors.c 			\
+			init.c 				\
+			utils.c 			\
 
 UTILS :=	ft_atoi.c 			\
 			ft_is.c 			\
