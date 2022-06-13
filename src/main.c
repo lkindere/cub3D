@@ -6,56 +6,80 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/12 16:26:44 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/14 01:14:26 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-#define WIDTH 1280
-#define HEIGHT 720
+int	walk = 5;
+// int	step = 5;
+int	sprint = 10;
+int	sneak = 1;
 
-mlx_image_t	*g_img;
-
-void	player_move(mlx_image_t *player, keys_t key, char **map)
+int	collision(t_data *data, int32_t x, int32_t y, char **map)
 {
+	int	step;
+
+	step = data->player->speed;
+	
+	if (map[(y - step) / 64][x / 64] == '1'
+		|| map[(y - step) / 64][(x + 15) / 64] == '1')
+		return (1);
+	return (0);
+}
+
+void	move_up(t_data *data, t_player *player, mlx_instance_t *inst)
+{
+	if (collision(data, inst->x, inst->y, data->map))
+		inst->y = (((inst->y - player->speed) / data->ts) + 1) * 64;
+	else
+		inst->y -= player->speed;
+}
+
+void	player_move(t_data *data, keys_t key, char **map)
+{
+	mlx_image_t	*player;
 	int	x;
 	int	y;
 
+	player = data->player;
 	x = player->instances[0].x;
 	y = player->instances[0].y;
-	if (key == MLX_KEY_UP)
+	if (mlx_is_key_down(data->mlx, MLX_KEY_UP))
 	{
-		if (map[(y - 5) / 64][x / 64] == '1'
-			|| map[(y - 5) / 64][(x + 15) / 64] == '1')
-			player->instances[0].y = (((y - 5) / 64) + 1) * 64;
+		move_up(data, data->player, &data->player->img->instances[0]);
+		if (map[(y - step) / 64][x / 64] == '1'
+			|| map[(y - step) / 64][(x + 15) / 64] == '1')
+			player->instances[0].y = (((y - step) / 64) + 1) * 64;
 		else
-			player->instances[0].y -= 5;
+			player->instances[0].y -= step;
 	}
-	if (key == MLX_KEY_DOWN)
+	if (mlx_is_key_down(data->mlx, MLX_KEY_DOWN))
 	{
-		if (map[(y + 5 + 16) / 64][x / 64] == '1'
-			|| map[(y + 5 + 16) / 64][(x + 15) / 64] == '1')
-			player->instances[0].y = (((y + 5 + 16) / 64)) * 64 - 16;
+		if (map[(y + step + 16) / 64][x / 64] == '1'
+			|| map[(y + step + 16) / 64][(x + 15) / 64] == '1')
+			player->instances[0].y = (((y + step + 16) / 64)) * 64 - 16;
 		else
-			player->instances[0].y += 5;
+			player->instances[0].y += step;
 	}
-	if (key == MLX_KEY_LEFT)
+	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 	{
-		if (map[y / 64][(x - 5) / 64] == '1'
-			|| map[(y + 15) / 64][(x - 5) / 64] == '1')
-			player->instances[0].x = (((x - 5) / 64) + 1) * 64;
+		if (map[y / 64][(x - step) / 64] == '1'
+			|| map[(y + 15) / 64][(x - step) / 64] == '1')
+			player->instances[0].x = (((x - step) / 64) + 1) * 64;
 		else
-			player->instances[0].x -= 5;
+			player->instances[0].x -= step;
 	}
-	if (key == MLX_KEY_RIGHT)
+	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 	{
-		if (map[y / 64][(x + 5 + 16) / 64] == '1'
-			|| map[(y + 15) / 64][(x + 5 + 16) / 64] == '1')
-			player->instances[0].x = (((x + 5 + 16) / 64)) * 64 - 16;
+		if (map[y / 64][(x + step + 16) / 64] == '1'
+			|| map[(y + 15) / 64][(x + step + 16) / 64] == '1')
+			player->instances[0].x = (((x + step + 16) / 64)) * 64 - 16;
 		else
-			player->instances[0].x += 5;
+			player->instances[0].x += step;
 	}
+
 }
 
 void	hook(void* param)
@@ -71,40 +95,24 @@ void	hook(void* param)
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_R))
 	{
-		g_img->instances[0].x = 1 * 64;
-		g_img->instances[0].y = 1 * 64;
+		data->player->img->instances[0].x = 1 * 64;
+		data->player->img->instances[0].y = 1 * 64;
 	}
+	if (mlx_is_key_down(mlx, MLX_KEY_LEFT_SHIFT))
+		step = sprint;
+	else if (mlx_is_key_down(mlx, MLX_KEY_C))
+		step = sneak;
+	else
+		step = walk;
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		player_move(g_img, MLX_KEY_UP, map);
+		player_move(data, MLX_KEY_UP, map);
 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		player_move(g_img, MLX_KEY_DOWN, map);
+		player_move(data, MLX_KEY_DOWN, map);
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		player_move(g_img, MLX_KEY_LEFT, map);
+		player_move(data, MLX_KEY_LEFT, map);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		player_move(g_img, MLX_KEY_RIGHT, map);
-	printf("X: %i\tY: %i\n", g_img->instances[0].x, g_img->instances[0].y);
-}
-
-void	get_map(char ***map, char **argv)
-{
-	int	fd;
-	char	*line;
-	char	*buff;
-
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		return ;
-	line = get_next_line(fd);
-	buff = NULL;
-	while (line)
-	{
-		ft_add_str(&buff, line);
-		free(line);
-		line = NULL;
-		line = get_next_line(fd);
-	}
-	*map = ft_split(buff, '\n');
-	free(buff);
+		player_move(data, MLX_KEY_RIGHT, map);
+	printf("X: %i\tY: %i\n", data->player->img->instances[0].x, data->player->img->instances[0].y);
 }
 
 void	put_walls(mlx_t *mlx, mlx_image_t *walls, char **map)
@@ -129,28 +137,13 @@ void	put_walls(mlx_t *mlx, mlx_image_t *walls, char **map)
 int32_t	main(int argc, char **argv)
 {
 	t_data		*data;
-	mlx_t		*mlx;
-	mlx_image_t	*walls;
-	char		**map;
 
-	printf("works\n");
-	if (argc != 2 || !argv[1])
+	if (init(&data, argc, argv) != 0)
 		return (1);
-	get_map(&map, argv);
-	mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
-	data = ft_calloc(1, sizeof(t_data));
-	if (!mlx || !data)
-		exit(EXIT_FAILURE);
-	data->mlx = mlx;
-	data->map = map;
-	g_img = mlx_new_image(mlx, 16, 16);
-	memset(g_img->pixels, 255, g_img->width * g_img->height * sizeof(int));
-	walls = mlx_new_image(mlx, 64, 64);
-	memset(walls->pixels, 180, walls->width * walls->height * sizeof(int));
-	put_walls(mlx, walls, map);
-	mlx_image_to_window(mlx, g_img, 1 * 64, 1 * 64);
-	mlx_loop_hook(mlx, &hook, data);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+	put_walls(data->mlx, data->walls, data->map);
+	mlx_image_to_window(data->mlx, data->player->img, 1 * 64, 1 * 64);
+	mlx_loop_hook(data->mlx, &hook, data);
+	mlx_loop(data->mlx);
+	mlx_terminate(data->mlx);
 	return (EXIT_SUCCESS);
 }

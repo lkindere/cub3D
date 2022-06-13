@@ -6,7 +6,7 @@
 #    By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 23:16:18 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/12 02:47:53 by mmeising         ###   ########.fr        #
+#    Updated: 2022/06/13 21:23:25 by mmeising         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ CFLAGS ?= -Wall -Werror -Wextra
 SRC_M :=								\
 			main.c						\
 			utils.c						\
+			init.c						\
 
 OBJ_DIR := ./_obj
 OBJ_DIR_DEBUG := ./_obj_debug

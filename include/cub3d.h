@@ -6,23 +6,84 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/12 03:54:54 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/14 00:59:30 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libs/MLX42/include/MLX42/MLX42.h"
-#include "libft.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <memory.h>
-#include <fcntl.h>
+#ifndef CUB3D_H
+# define CUB3D_H
 
+# include "../libs/MLX42/include/MLX42/MLX42.h"
+# include "libft.h"
+# include "math_utils.h"
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <memory.h>
+# include <fcntl.h>
+
+# define WIDTH 920
+# define HEIGHT 480
+
+typedef enum s_error
+{
+	NONE,
+	ERROR_GENERAL,
+	ERROR_MALLOC
+}	t_error;
+
+typedef enum s_speed
+{
+	WALK = 5,
+	SPRINT = 10,
+	SNEAK = 1
+}	t_speed;
+
+typedef struct s_player
+{
+	mlx_image_t	*img;
+	int			pos_x;
+	int			pos_y;
+	int			angle;
+	int			delta_x;
+	int			delta_y;
+	int			speed;
+	int			size;
+}	t_player;
+
+/**
+ *	@param input_path Path to input map file.
+ *	@param map Array of strings with map content.
+ *	@param ts Tile size.
+ *	@param mlx Main mlx handle.
+ *	@param player Player struct carrying important data for the player.
+ *	@param walls Walls struct to be rendered.
+ */
 typedef struct s_data
 {
-	char	**map;
-	mlx_t	*mlx;
+	char		*input_path;
+	char		**map;
+	int			ts;
+	mlx_t		*mlx;
+	t_player	*player;
+	mlx_image_t	*walls;
 }	t_data;
 
-int	ft_add_char(char **str, char c);
-int	ft_add_str(char **str, char *add);
+/*	hook				*/
+
+void	hook(void* param);
+
+/*	inits				*/
+
+int		init(t_data **data, int argc, char **argv);
+
+/*	player				*/
+
+void	player_move(t_data *data, keys_t key, char **map);
+
+/*	utils				*/
+
+int		ft_add_char(char **str, char c);
+int		ft_add_str(char **str, char *add);
+
+#endif
