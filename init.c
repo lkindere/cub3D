@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:23:47 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/13 14:38:19 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:29:07 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	init_map(t_map *map)
 	map->ceiling_color = 0;
 	map->width = 0;
 	map->height = 0;
+	map->pos_x = 0;
+	map->pos_y = 0;
 	map->position = NONE;
 	map->valid = VALID;
 }

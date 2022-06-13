@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 14:23:00 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/13 14:23:25 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:00:22 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,30 @@ static int	is_surrounded(t_map *map, int h, int w)
 	return (1);
 }
 
+//Checks if top and bottom are only walls and spaces
+//Returns -1 on invalid
+//Returns 1 on valid
+static int	top_bottom(t_map *map)
+{
+	int	i;
+	int	h;
+
+	i = -1;
+	h = map->height - 1;
+	while (map->map[0][++i])
+	{
+		if (map->map[0][i] != '1' && map->map[0][i] != ' ')
+			return (invalidate_map(map, UNCLOSED_MAP));
+	}
+	i = -1;
+	while (map->map[h][++i])
+	{
+		if (map->map[h][i] != '1' && map->map[h][i] != ' ')
+			return (invalidate_map(map, UNCLOSED_MAP));
+	}
+	return (1);
+}
+
 //Checks if the middle is surrounded by walls
 //Returns 1 on valid top/bottom
 //Returns -1 on invalid
@@ -52,6 +76,8 @@ int	check_walls(t_map *map)
 
 	h = 0;
 	w = -1;
+	if (top_bottom(map) == -1)
+		return (invalidate_map(map, UNCLOSED_MAP));
 	while (map->map[++h] && map->map[h + 1])
 	{
 		while (map->map[h][++w])

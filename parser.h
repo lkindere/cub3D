@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:34:24 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/13 14:38:57 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:28:51 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct s_map
 	int				ceiling_color;
 	unsigned int	width;
 	unsigned int	height;
+	unsigned int	pos_x;
+	unsigned int	pos_y;
 	enum e_pos		position;
 	enum e_errors	valid;
 }	t_map;

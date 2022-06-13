@@ -6,35 +6,11 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 14:17:26 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/13 14:43:27 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:29:50 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-//Checks if top and bottom are only walls and spaces
-//Returns -1 on invalid
-//Returns 1 on valid
-static int	top_bottom(t_map *map)
-{
-	int	i;
-	int	h;
-
-	i = -1;
-	h = map->height - 1;
-	while (map->map[0][++i])
-	{
-		if (map->map[0][i] != '1' && map->map[0][i] != ' ')
-			return (-1);
-	}
-	i = -1;
-	while (map->map[h][++i])
-	{
-		if (map->map[h][i] != '1' && map->map[h][i] != ' ')
-			return (-1);
-	}
-	return (1);
-}
 
 //Stretches all lines to max width
 //Returns -1 on malloc failure
@@ -71,6 +47,7 @@ static int	stretch_width(t_map *map)
 //Returns -1 on invalid dimensions
 //Returns 1 on valid
 //Removes \n on end of lines
+//Sets starting position
 static int	width_height(t_map *map)
 {
 	int	i;
@@ -91,9 +68,66 @@ static int	width_height(t_map *map)
 		len = 0;
 	}
 	if (i < 3 || width < 3)
-		return (-1);
+		return (invalidate_map(map, INVALID_MAP_FORMAT));
 	map->height = i;
 	map->width = width;
+	return (1);
+}
+
+//Sets position to enum
+//Returns -1 on invalid
+//Returns 1 on valid
+static int	try_set_pos(t_map *map, char pos)
+{
+	if (map->position != NONE)
+		return (invalidate_map(map, DUPLICATE_DEFINITION));
+	if (pos == 'N')
+	{
+		map->position = N;
+		return (1);
+	}
+	if (pos == 'S')
+	{
+		map->position = S;
+		return (1);
+	}
+	if (pos == 'E')
+	{
+		map->position = E;
+		return (1);
+	}
+	if (pos == 'W')
+		map->position = W;
+	return (1);
+}
+
+//Checks for starting position
+//Returns -1 on invalid
+//Returns 1 on valid
+static int	check_pos(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	j = -1;
+	while (map->map[++i])
+	{
+		while (map->map[i][++j])
+		{
+			if (map->map[i][j] == 'N' || map->map[i][j] == 'S'
+				|| map->map[i][j] == 'E' || map->map[i][j] == 'W')
+			{
+				if (try_set_pos(map, map->map[i][j]) == -1)
+					return (invalidate_map(map, DUPLICATE_DEFINITION));
+				map->pos_x = j;
+				map->pos_y = i;
+			}
+		}
+		j = -1;
+	}
+	if (map->position == NONE)
+		return (invalidate_map(map, INVALID_MAP_FORMAT));
 	return (1);
 }
 
@@ -101,12 +135,12 @@ static int	width_height(t_map *map)
 //Returns -1 on invalid map
 int	check_map(t_map *map)
 {
+	if (check_pos(map) == -1)
+		return (invalidate_map(map, INVALID_MAP_FORMAT));
 	if (width_height(map) == -1)
 		return (invalidate_map(map, INVALID_MAP_FORMAT));
 	if (stretch_width(map) == -1)
 		return (invalidate_map(map, MALLOC));
-	if (top_bottom(map) == -1)
-		return (invalidate_map(map, INVALID_MAP_FORMAT));
 	if (check_walls(map) == -1)
 		return (invalidate_map(map, UNCLOSED_MAP));
 	return (1);

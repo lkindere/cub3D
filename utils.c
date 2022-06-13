@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:22:22 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/13 14:44:35 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:30:11 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 //Returns -1
 int	invalidate_map(t_map *map, enum e_errors err)
 {
-	map->valid = err;
+	if (map->valid == VALID)
+		map->valid = err;
 	return (-1);
 }
 
@@ -27,12 +28,12 @@ void	print_map(t_map map)
 	printf("WE: %s\n", map.we);
 	printf("EA: %s\n", map.ea);
 	printf("Floor: %d\n", map.floor_color);
-	printf("R: %d, G: %d, B: %d\n",
+	printf("R: %d, G: %d, B: %d\n\n",
 		(unsigned int)map.floor_color >> 16,
 		(unsigned int)(map.floor_color << 16) >> 24,
 		(unsigned int)(map.floor_color << 24) >> 24);
 	printf("Ceiling: %d\n", map.ceiling_color);
-	printf("R: %d, G: %d, B: %d\n",
+	printf("R: %d, G: %d, B: %d\n\n",
 		(unsigned int)map.ceiling_color >> 16,
 		(unsigned int)(map.ceiling_color << 16) >> 24,
 		(unsigned int)(map.ceiling_color << 24) >> 24);
@@ -42,7 +43,9 @@ void	print_map(t_map map)
 		for (int i = 0; map.map[i]; i++)
 			printf("%s\n", map.map[i]);
 	printf("\nHeight: %d\n", map.height);
-	printf("Width: %d\n", map.width);
+	printf("Width: %d\n\n", map.width);
+	printf("Starting pos: %d\n", map.position);
+	printf("Starting X: %d, Y:%d\n", map.pos_x, map.pos_y);
 }
 
 //Returns 1 if line is empty
