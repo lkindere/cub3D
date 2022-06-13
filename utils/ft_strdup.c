@@ -1,19 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/12 16:33:37 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/13 14:44:06 by lkindere         ###   ########.fr       */
+/*   Created: 2022/03/22 15:07:29 by lkindere          #+#    #+#             */
+/*   Updated: 2022/06/13 11:43:22 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include <stdlib.h>
 
-int	main(int argc, char **argv)
+static size_t	ft_strlen(const char *s)
 {
-	parser(argc, argv);
-	return (0);
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char			*dup;
+	unsigned int	len;
+	unsigned int	i;
+
+	len = ft_strlen(s1);
+	dup = malloc(len + 1);
+	i = 0;
+	if (!dup)
+		return (NULL);
+	while (i < len)
+	{
+		dup[i] = s1[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
 }

@@ -6,7 +6,7 @@
 #    By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/05 20:10:21 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/12 20:26:13 by lkindere         ###   ########.fr        #
+#    Updated: 2022/06/13 14:43:00 by lkindere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,16 +15,21 @@ VPATH = utils
 NAME := cube
 
 CC := gcc
-CFLAGS ?= -Wall -Werror -Wextra
+# CFLAGS ?= -Wall -Werror -Wextra
 
 PARSE_S :=	main.c				\
 			parser.c 			\
-			textures.c 			\
-			colors.c 			\
+			get_textures.c 		\
+			get_colors.c 		\
+			get_map.c			\
+			check_map.c 		\
+			check_walls.c		\
 			init.c 				\
 			utils.c 			\
 
-UTILS :=	ft_atoi.c 			\
+UTILS :=	ft_strlen.c 		\
+			ft_strdup.c			\
+			ft_atoi.c 			\
 			ft_is.c 			\
 			ft_join_free.c 		\
 			ft_strncmp.c 		\

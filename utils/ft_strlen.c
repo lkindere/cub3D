@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/12 16:33:37 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/13 14:44:06 by lkindere         ###   ########.fr       */
+/*   Created: 2022/03/21 17:24:58 by lkindere          #+#    #+#             */
+/*   Updated: 2022/06/13 11:10:45 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include <string.h>
 
-int	main(int argc, char **argv)
+size_t	ft_strlen(const char *s)
 {
-	parser(argc, argv);
-	return (0);
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

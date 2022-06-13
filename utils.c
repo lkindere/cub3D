@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:22:22 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/12 20:24:10 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/13 14:44:35 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,27 @@ int	invalidate_map(t_map *map, enum e_errors err)
 
 void	print_map(t_map map)
 {
-	printf("NO: %s\n", map.NO);
-	printf("SP: %s\n", map.SO);
-	printf("WE: %s\n", map.WE);
-	printf("EA: %s\n", map.EA);
+	printf("NO: %s\n", map.no);
+	printf("SP: %s\n", map.so);
+	printf("WE: %s\n", map.we);
+	printf("EA: %s\n", map.ea);
 	printf("Floor: %d\n", map.floor_color);
-	printf("R: %d, G: %d, B: %d\n", 
-		(unsigned int)map.floor_color >> 16, 
-		(unsigned int)(map.floor_color << 16) >> 24, 
+	printf("R: %d, G: %d, B: %d\n",
+		(unsigned int)map.floor_color >> 16,
+		(unsigned int)(map.floor_color << 16) >> 24,
 		(unsigned int)(map.floor_color << 24) >> 24);
 	printf("Ceiling: %d\n", map.ceiling_color);
-	printf("R: %d, G: %d, B: %d\n", 
-		(unsigned int)map.ceiling_color >> 16, 
-		(unsigned int)(map.ceiling_color << 16) >> 24, 
+	printf("R: %d, G: %d, B: %d\n",
+		(unsigned int)map.ceiling_color >> 16,
+		(unsigned int)(map.ceiling_color << 16) >> 24,
 		(unsigned int)(map.ceiling_color << 24) >> 24);
 	printf("Valid: %d\n", map.valid);
+	printf("\nMap:\n");
+	if (map.map)
+		for (int i = 0; map.map[i]; i++)
+			printf("%s\n", map.map[i]);
+	printf("\nHeight: %d\n", map.height);
+	printf("Width: %d\n", map.width);
 }
 
 //Returns 1 if line is empty
