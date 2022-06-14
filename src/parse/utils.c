@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:22:22 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/14 18:34:40 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/14 21:54:01 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,17 @@ int	invalidate_map(t_map *map, enum e_errors err)
 	if (map->valid == VALID)
 		map->valid = err;
 	return (-1);
+}
+
+
+//Checks if map block is a valid identifier
+//Spaces and null are considered valid
+int	is_block(char c)
+{
+	if (c != '0' && c != '1' && c != 'N' && c != 'S'
+		&& c != 'W' && c != 'E' && c != 0 && c != ' ')
+		return (0);
+	return (1);
 }
 
 void	print_map(t_map map)
@@ -76,6 +87,8 @@ int	get_line(int fd, char **line)
 	errno = 0;
 	while (read(fd, buffer, 1) > 0)
 	{
+		if (buffer[0] == 0 && write(2, "Go away code breaker!\n", 23))
+			exit(1);
 		len++;
 		*line = ft_join_free(*line, buffer, 1);
 		if (!(*line))
