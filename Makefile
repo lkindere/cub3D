@@ -6,7 +6,7 @@
 #    By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 23:16:18 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/14 15:38:18 by mmeising         ###   ########.fr        #
+#    Updated: 2022/06/14 17:33:18 by mmeising         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRC_M :=								\
 OBJ_DIR := ./_obj
 OBJ_DIR_DEBUG := ./_obj_debug
 
-SRC := $(SRC_M) 
+SRC := $(SRC_M) #$(PARSE_S) $(UTILS)
 OBJ := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 OBJ_DEBUG := $(addprefix $(OBJ_DIR_DEBUG)/, $(SRC:.c=.o))

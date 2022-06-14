@@ -1,1 +1,1 @@
-# cub3d
+Not even a project yet.
