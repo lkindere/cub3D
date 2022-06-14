@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 14:23:00 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/13 15:00:22 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/14 21:10:49 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,11 @@ int	check_walls(t_map *map)
 		{
 			while (map->map[h][w] == ' ')
 				w++;
+			if (map->map[h][w] != '0' && map->map[h][w] != '1'
+				&& map->map[h][w] != 'N' && map->map[h][w] != 'S'
+				&& map->map[h][w] != 'W' && map->map[h][w] != 'E'
+				&& map->map[h][w] != 0)
+				return (invalidate_map(map, INVALID_MAP_FORMAT));
 			if (!map->map[h][w])
 				break ;
 			if (map->map[h][w] != '1' && is_surrounded(map, h, w) < 0)
