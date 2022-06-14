@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/14 00:45:10 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/14 13:04:06 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	init_data(t_data **data, int argc, char **argv)
 		return (ERROR_MALLOC);
 	(*data)->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
 	get_map(&(*data)->map, argv);
+	(*data)->ts = 64;
+	(*data)->ps = 16;
 	return (0);
 }
 

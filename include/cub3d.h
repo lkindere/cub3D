@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/14 00:59:30 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/14 13:36:57 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ typedef struct s_player
 	int			delta_x;
 	int			delta_y;
 	int			speed;
-	int			size;
 }	t_player;
 
 /**
  *	@param input_path Path to input map file.
  *	@param map Array of strings with map content.
  *	@param ts Tile size.
+ *	@param ps Player size.
  *	@param mlx Main mlx handle.
  *	@param player Player struct carrying important data for the player.
  *	@param walls Walls struct to be rendered.
@@ -64,6 +64,7 @@ typedef struct s_data
 	char		*input_path;
 	char		**map;
 	int			ts;
+	int			ps;
 	mlx_t		*mlx;
 	t_player	*player;
 	mlx_image_t	*walls;
@@ -79,7 +80,10 @@ int		init(t_data **data, int argc, char **argv);
 
 /*	player				*/
 
-void	player_move(t_data *data, keys_t key, char **map);
+void	player_move(t_data *data);
+void	player_speed(t_data *data);
+
+int		collision(t_data *data, int32_t x, int32_t y, char **map);
 
 /*	utils				*/
 

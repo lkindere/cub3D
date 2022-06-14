@@ -6,80 +6,31 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/14 01:14:26 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/14 13:36:44 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 int	walk = 5;
-// int	step = 5;
 int	sprint = 10;
 int	sneak = 1;
 
 int	collision(t_data *data, int32_t x, int32_t y, char **map)
 {
 	int	step;
+	int	ts;
+	int	ps;
 
 	step = data->player->speed;
-	
-	if (map[(y - step) / 64][x / 64] == '1'
-		|| map[(y - step) / 64][(x + 15) / 64] == '1')
+	ts = data->ts;
+	ps = data->ps;
+	if (map[y / ts][x / ts] == '1'
+		|| map[y / ts][(x + ps - 1) / ts] == '1'
+		|| map[(y + ps - 1) / ts][x / ts] == '1'
+		|| map[(y + ps - 1) / ts][(x + ps - 1) / ts] == '1')
 		return (1);
 	return (0);
-}
-
-void	move_up(t_data *data, t_player *player, mlx_instance_t *inst)
-{
-	if (collision(data, inst->x, inst->y, data->map))
-		inst->y = (((inst->y - player->speed) / data->ts) + 1) * 64;
-	else
-		inst->y -= player->speed;
-}
-
-void	player_move(t_data *data, keys_t key, char **map)
-{
-	mlx_image_t	*player;
-	int	x;
-	int	y;
-
-	player = data->player;
-	x = player->instances[0].x;
-	y = player->instances[0].y;
-	if (mlx_is_key_down(data->mlx, MLX_KEY_UP))
-	{
-		move_up(data, data->player, &data->player->img->instances[0]);
-		if (map[(y - step) / 64][x / 64] == '1'
-			|| map[(y - step) / 64][(x + 15) / 64] == '1')
-			player->instances[0].y = (((y - step) / 64) + 1) * 64;
-		else
-			player->instances[0].y -= step;
-	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_DOWN))
-	{
-		if (map[(y + step + 16) / 64][x / 64] == '1'
-			|| map[(y + step + 16) / 64][(x + 15) / 64] == '1')
-			player->instances[0].y = (((y + step + 16) / 64)) * 64 - 16;
-		else
-			player->instances[0].y += step;
-	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
-	{
-		if (map[y / 64][(x - step) / 64] == '1'
-			|| map[(y + 15) / 64][(x - step) / 64] == '1')
-			player->instances[0].x = (((x - step) / 64) + 1) * 64;
-		else
-			player->instances[0].x -= step;
-	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
-	{
-		if (map[y / 64][(x + step + 16) / 64] == '1'
-			|| map[(y + 15) / 64][(x + step + 16) / 64] == '1')
-			player->instances[0].x = (((x + step + 16) / 64)) * 64 - 16;
-		else
-			player->instances[0].x += step;
-	}
-
 }
 
 void	hook(void* param)
@@ -95,23 +46,11 @@ void	hook(void* param)
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_R))
 	{
-		data->player->img->instances[0].x = 1 * 64;
-		data->player->img->instances[0].y = 1 * 64;
+		data->player->img->instances[0].x = 2 * data->ts;
+		data->player->img->instances[0].y = 2 * data->ts;
 	}
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT_SHIFT))
-		step = sprint;
-	else if (mlx_is_key_down(mlx, MLX_KEY_C))
-		step = sneak;
-	else
-		step = walk;
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		player_move(data, MLX_KEY_UP, map);
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		player_move(data, MLX_KEY_DOWN, map);
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		player_move(data, MLX_KEY_LEFT, map);
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		player_move(data, MLX_KEY_RIGHT, map);
+	player_speed(data);
+	player_move(data);
 	printf("X: %i\tY: %i\n", data->player->img->instances[0].x, data->player->img->instances[0].y);
 }
 
