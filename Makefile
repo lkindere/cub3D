@@ -6,7 +6,7 @@
 #    By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 23:16:18 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/14 17:33:18 by mmeising         ###   ########.fr        #
+#    Updated: 2022/06/14 17:54:09 by mmeising         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@ VPATH = src
 NAME := ./cub3d
 LIBFT_PATH := ./libs/libft/
 LIBFT := $(LIBFT_PATH)libft.a
+MLX_PATH := ./libs/MLX42/
+MLX := $(MLX_PATH)libmlx42.a
 
 CFLAGS ?= -Wall -Werror -Wextra
 
@@ -51,7 +53,7 @@ CUT := "\033[K"
 all: $(NAME)
 
 # only need to link the readline libraries for the executable with $(LIB)
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(OBJ) $(LIBFT) $(MLX)
 	@echo $(Y)Compiling [$(NAME)]...$(X)
 	$(CC) $(CFLAGS) $^ $(LIBFT) $(LIB) -o $(NAME)
 	@echo $(G)Finished"  "[$(NAME)]...$(X)
@@ -63,6 +65,9 @@ $(OBJ_DIR)/%.o: %.c
 
 $(LIBFT):
 	make -C $(LIBFT_PATH)
+
+$(MLX):
+	make -C $(MLX_PATH)
 
 clean:
 	@if [ -d "${OBJ_DIR}" ]; then \
