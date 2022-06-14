@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 00:54:35 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/14 16:27:05 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/14 22:32:15 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,16 +93,16 @@ void	player_move(t_data *data)
 	player = data->player->img;
 	x = player->instances[0].x;
 	y = player->instances[0].y;
-	if (mlx_is_key_down(data->mlx, MLX_KEY_UP)
-		|| mlx_is_key_down(data->mlx, MLX_KEY_W))
-		move_up(data, data->player, data->player->speed);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_DOWN)
-		|| mlx_is_key_down(data->mlx, MLX_KEY_S))
-		move_down(data, data->player, data->player->speed);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT)
-		|| mlx_is_key_down(data->mlx, MLX_KEY_A))
-		move_left(data, data->player, data->player->speed);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT)
-		|| mlx_is_key_down(data->mlx, MLX_KEY_D))
-		move_right(data, data->player, data->player->speed);
+	// if (mlx_is_key_down(data->mlx, MLX_KEY_UP)
+	// 	|| mlx_is_key_down(data->mlx, MLX_KEY_W))
+	// 	move_up(data, data->player, data->player->speed);
+	// if (mlx_is_key_down(data->mlx, MLX_KEY_DOWN)
+	// 	|| mlx_is_key_down(data->mlx, MLX_KEY_S))
+	// 	move_down(data, data->player, data->player->speed);
+	// if (mlx_is_key_down(data->mlx, MLX_KEY_A)
+	// 	|| mlx_is_key_down(data->mlx, MLX_KEY_A))
+	// 	move_left(data, data->player, data->player->speed);
+	// if (mlx_is_key_down(data->mlx, MLX_KEY_D)
+	// 	|| mlx_is_key_down(data->mlx, MLX_KEY_D))
+	// 	move_right(data, data->player, data->player->speed);
 }

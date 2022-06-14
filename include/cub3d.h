@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/14 15:38:36 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/14 21:55:38 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ typedef struct s_player
 	mlx_image_t	*img;
 	int			pos_x;
 	int			pos_y;
-	int			angle;
-	int			delta_x;
-	int			delta_y;
+	float		angle;
+	float		dx;
+	float		dy;
 	int			speed;
 }	t_player;
 
@@ -84,6 +84,7 @@ int			init(t_data **data, int argc, char **argv);
 
 void		player_move(t_data *data);
 void		player_dash(t_data *data);
+void		player_rotate(t_data *data);
 void		move_up(t_data *data, t_player *player, int step);
 void		move_down(t_data *data, t_player *player, int step);
 void		move_left(t_data *data, t_player *player, int step);

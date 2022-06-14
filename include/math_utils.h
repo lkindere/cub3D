@@ -6,12 +6,14 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 22:58:40 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/14 00:00:02 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/14 20:30:07 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MATH_UTILS_H
 # define MATH_UTILS_H
+
+# define PI2 6.283185307179586
 
 # include <math.h>
 

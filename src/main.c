@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/14 18:42:33 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/14 21:55:20 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	hook(void* param)
 	}
 	player_speed(data);
 	player_move(data);
-	// player_rotate(data);
-	printf("X: %i\tY: %i\n", data->player->img->instances[0].x, data->player->img->instances[0].y);
+	player_rotate(data);
+	printf("X: %i\tY: %i\tangle: %f\tdx: %f\tdy: %f\n", data->player->img->instances[0].x, data->player->img->instances[0].y, data->player->angle, data->player->dx, data->player->dy);
 }
 
 void	put_walls(mlx_t *mlx, mlx_image_t *walls, char **map)
