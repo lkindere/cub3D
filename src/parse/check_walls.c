@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 14:23:00 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/13 15:00:22 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/14 21:52:54 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,16 @@ static int	top_bottom(t_map *map)
 	h = map->height - 1;
 	while (map->map[0][++i])
 	{
+		if (!is_block(map->map[0][i]))
+			return (invalidate_map(map, INVALID_MAP_FORMAT));
 		if (map->map[0][i] != '1' && map->map[0][i] != ' ')
 			return (invalidate_map(map, UNCLOSED_MAP));
 	}
 	i = -1;
 	while (map->map[h][++i])
 	{
+		if (!is_block(map->map[0][i]))
+			return (invalidate_map(map, INVALID_MAP_FORMAT));
 		if (map->map[h][i] != '1' && map->map[h][i] != ' ')
 			return (invalidate_map(map, UNCLOSED_MAP));
 	}
@@ -84,6 +88,8 @@ int	check_walls(t_map *map)
 		{
 			while (map->map[h][w] == ' ')
 				w++;
+			if (!is_block(map->map[h][w]))
+				return (invalidate_map(map, INVALID_MAP_FORMAT));
 			if (!map->map[h][w])
 				break ;
 			if (map->map[h][w] != '1' && is_surrounded(map, h, w) < 0)

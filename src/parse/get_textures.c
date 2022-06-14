@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:24:54 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/13 14:40:49 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/14 19:20:33 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static int	try_set_texture(t_map *map, char **texture, char *line)
 {
 	if (*texture != NULL)
 		return (invalidate_map(map, DUPLICATE_DEFINITION));
+	while (ft_isspace(*line))
+		line++;
 	if (space_check(line) != 0)
 		return (invalidate_map(map, INVALID_PATH_FORMAT));
 	(*texture) = ft_strdup(line);
@@ -54,6 +56,8 @@ static int	try_set_texture(t_map *map, char **texture, char *line)
 //Returns -1 on error
 int	get_textures(t_map *map, char *line)
 {
+	while (ft_isspace(*line))
+		line++;
 	if (!ft_strncmp("NO ", line, 3))
 		return (try_set_texture(map, &map->no, &line[3]));
 	if (!ft_strncmp("SO ", line, 3))

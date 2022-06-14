@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:34:24 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/14 18:46:21 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/14 21:51:29 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ char	*ft_join_free(char const *s1, char const *s2, int sfree);
 int		ft_atoi(const char *str);
 int		ft_isspace(int c);
 int		ft_isdigit(int c);
+int		is_block(char c);
 
 #endif

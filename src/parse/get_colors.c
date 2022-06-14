@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:25:22 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/13 14:40:22 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/14 20:01:20 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,20 @@ static int	valid_format(char *line)
 	{
 		while (ft_isdigit(line[i]))
 			i++;
-		if (i < 1 || i > 3)
-			return (-1);
-		if (n < 3 && line[i] != ',')
+		if (i < 1 || i > 3 || (n < 3 && line[i] != ','))
 			return (-1);
 		line = &line[i + 1];
 		i = 0;
 		n++;
 	}
-	if (n != 4 || line[i] != 0)
+	if (n != 4)
 		return (-1);
+	while (line[i])
+	{
+		if (line[i] != ' ' && line[i] != '\n')
+			return (-1);
+		i++;
+	}
 	return (1);
 }
 
@@ -48,6 +52,10 @@ static int	try_set_color(t_map *map, int *color, char *line)
 
 	i = 0;
 	c = 0;
+	if ((*color) != -1)
+		return (invalidate_map(map, DUPLICATE_DEFINITION));
+	while (ft_isspace(*line))
+		line++;
 	if (valid_format(line) == -1)
 		return (invalidate_map(map, INVALID_COLOR_FORMAT));
 	while (c < 3)
@@ -68,10 +76,12 @@ static int	try_set_color(t_map *map, int *color, char *line)
 //Returns 0 if not a color
 //Returns -1 on error
 int	get_colors(t_map *map, char *line)
-{
+{	
+	while (ft_isspace(*line))
+		line++;
 	if (!ft_strncmp("F ", line, 2))
-		try_set_color(map, &map->floor_color, &line[2]);
+		return (try_set_color(map, &map->floor_color, &line[2]));
 	if (!ft_strncmp("C ", line, 2))
-		try_set_color(map, &map->ceiling_color, &line[2]);
+		return (try_set_color(map, &map->ceiling_color, &line[2]));
 	return (0);
 }
