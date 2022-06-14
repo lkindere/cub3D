@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/14 17:22:55 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:42:33 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "parser.h"
 
 int	walk = 5;
 int	sprint = 10;
@@ -51,7 +52,7 @@ void	hook(void* param)
 	}
 	player_speed(data);
 	player_move(data);
-	player_rotate(data);
+	// player_rotate(data);
 	printf("X: %i\tY: %i\n", data->player->img->instances[0].x, data->player->img->instances[0].y);
 }
 
@@ -77,9 +78,13 @@ void	put_walls(mlx_t *mlx, mlx_image_t *walls, char **map)
 int32_t	main(int argc, char **argv)
 {
 	t_data		*data;
+	t_map		map;
 
+	if (parser(argc, argv, &map) != 0)
+		return (1);
 	if (init(&data, argc, argv) != 0)
 		return (1);
+	data->map = map.map;
 	put_walls(data->mlx, data->walls, data->map);
 	mlx_image_to_window(data->mlx, data->player->img, 1 * 64, 1 * 64);
 	mlx_key_hook(data->mlx, key_hook, data);

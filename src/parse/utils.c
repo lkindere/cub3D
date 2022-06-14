@@ -6,11 +6,13 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:22:22 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/13 15:30:11 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:34:40 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+#include <string.h>
 
 //Sets map valid to enum
 //Returns -1
@@ -71,6 +73,7 @@ int	get_line(int fd, char **line)
 
 	len = 0;
 	buffer[1] = 0;
+	errno = 0;
 	while (read(fd, buffer, 1) > 0)
 	{
 		len++;

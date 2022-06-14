@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+         #
+#    By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 23:16:18 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/14 17:54:09 by mmeising         ###   ########.fr        #
+#    Updated: 2022/06/14 18:05:59 by lkindere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # gcc main.c libmlx42.a -lglfw -L "/Users/$USER/.brew/opt/glfw/lib" -I ./include/
 
-VPATH = src
+VPATH = src src/parse
 
 NAME := ./cub3d
 LIBFT_PATH := ./libs/libft/
@@ -22,18 +22,29 @@ MLX := $(MLX_PATH)libmlx42.a
 
 CFLAGS ?= -Wall -Werror -Wextra
 
-SRC_M :=								\
-			main.c						\
+SRC_M :=	main.c						\
 			utils.c						\
 			init.c						\
 			movement.c					\
 			move_utils.c				\
 			hook.c						\
 
+PARSE_S := 	parser.c					\
+			inits.c 					\
+			get_textures.c 				\
+			get_colors.c 				\
+			get_map.c 					\
+			check_map.c 				\
+			check_walls.c 				\
+			utils.c						\
+			ft_is.c 					\
+			ft_join_free.c 				\
+
+
 OBJ_DIR := ./_obj
 OBJ_DIR_DEBUG := ./_obj_debug
 
-SRC := $(SRC_M) #$(PARSE_S) $(UTILS)
+SRC := $(SRC_M) $(PARSE_S)
 OBJ := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 OBJ_DEBUG := $(addprefix $(OBJ_DIR_DEBUG)/, $(SRC:.c=.o))
@@ -52,13 +63,11 @@ CUT := "\033[K"
 
 all: $(NAME)
 
-# only need to link the readline libraries for the executable with $(LIB)
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
 	@echo $(Y)Compiling [$(NAME)]...$(X)
 	$(CC) $(CFLAGS) $^ $(LIBFT) $(LIB) -o $(NAME)
 	@echo $(G)Finished"  "[$(NAME)]...$(X)
 
-# only need the header files for the object file compilation
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p _obj
 	@$(CC) $(CFLAGS) -MMD -MP -c $< $(INC) -o $@

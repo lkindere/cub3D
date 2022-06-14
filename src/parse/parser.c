@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:34:16 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/13 14:43:53 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:57:37 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	read_map(t_map *map, char **argv)
 	line = NULL;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-		; // Error open can exit
+		return (-1);
 	while (get_line(fd, &line) > 0 && check_line(map, line) != -1)
 	{
 		free(line);
@@ -56,18 +56,15 @@ int	read_map(t_map *map, char **argv)
 	return (1);
 }
 
-int	parser(int argc, char **argv)
+int	parser(int argc, char **argv, t_map *map)
 {
-	t_map	map;
-
 	if (argc != 2)
-		; //Error invalid argument
-	init_map(&map);
-	if (read_map(&map, argv) == -1)
-		; //Error invalid map exit free
-	if (check_map(&map) == -1)
-		; //Map not valid exit free
-	print_map(map);
-	free_map(&map);
+		return (parse_error(NULL, "Wrong amount of arguments\n"));
+	init_map(map);
+	if (read_map(map, argv) == -1)
+		return (parse_error(map, NULL));
+	if (check_map(map) == -1)
+		return (parse_error(map, NULL));
+	print_map(*map);
 	return (0);
 }

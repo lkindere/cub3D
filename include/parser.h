@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:34:24 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/13 15:28:51 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:46:21 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef enum e_errors
 
 typedef enum e_pos
 {
-	NONE,
+	NO_POS,
 	N,
 	S,
 	E,
@@ -61,11 +61,12 @@ typedef struct s_map
 	enum e_errors	valid;
 }	t_map;
 
-int		parser(int argc, char **argv);
+int		parser(int argc, char **argv, t_map *map);
 
 //Init
 void	init_map(t_map *map);
-void	free_map(t_map *map);
+int		free_map(t_map *map);
+int		parse_error(t_map *map, char *str);
 
 //Get
 int		get_textures(t_map *map, char *line);

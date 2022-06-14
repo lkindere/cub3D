@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 14:17:26 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/13 15:29:50 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:13:40 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	width_height(t_map *map)
 //Returns 1 on valid
 static int	try_set_pos(t_map *map, char pos)
 {
-	if (map->position != NONE)
+	if (map->position != NO_POS)
 		return (invalidate_map(map, DUPLICATE_DEFINITION));
 	if (pos == 'N')
 	{
@@ -126,7 +126,7 @@ static int	check_pos(t_map *map)
 		}
 		j = -1;
 	}
-	if (map->position == NONE)
+	if (map->position == NO_POS)
 		return (invalidate_map(map, INVALID_MAP_FORMAT));
 	return (1);
 }

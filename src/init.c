@@ -3,36 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/14 13:04:06 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:08:07 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	get_map(char ***map, char **argv)
-{
-	int	fd;
-	char	*line;
-	char	*buff;
-
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		return ;
-	line = get_next_line(fd);
-	buff = NULL;
-	while (line)
-	{
-		ft_add_str(&buff, line);
-		free(line);
-		line = NULL;
-		line = get_next_line(fd);
-	}
-	*map = ft_split(buff, '\n');
-	free(buff);
-}
 
 int	init_data(t_data **data, int argc, char **argv)
 {
@@ -42,7 +20,7 @@ int	init_data(t_data **data, int argc, char **argv)
 	if (!*data)
 		return (ERROR_MALLOC);
 	(*data)->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
-	get_map(&(*data)->map, argv);
+	// get_map(&(*data)->map, argv);
 	(*data)->ts = 64;
 	(*data)->ps = 16;
 	return (0);
