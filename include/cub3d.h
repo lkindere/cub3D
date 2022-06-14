@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/14 13:36:57 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/14 15:38:36 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ typedef enum s_speed
 {
 	WALK = 5,
 	SPRINT = 10,
-	SNEAK = 1
+	SNEAK = 1,
+	DASH = 96
 }	t_speed;
 
 typedef struct s_player
@@ -72,22 +73,29 @@ typedef struct s_data
 
 /*	hook				*/
 
-void	hook(void* param);
+void		hook(void* param);
+void		key_hook(mlx_key_data_t keydata, void *param);
 
 /*	inits				*/
 
-int		init(t_data **data, int argc, char **argv);
+int			init(t_data **data, int argc, char **argv);
 
 /*	player				*/
 
-void	player_move(t_data *data);
-void	player_speed(t_data *data);
+void		player_move(t_data *data);
+void		player_dash(t_data *data);
+void		move_up(t_data *data, t_player *player, int step);
+void		move_down(t_data *data, t_player *player, int step);
+void		move_left(t_data *data, t_player *player, int step);
+void		move_right(t_data *data, t_player *player, int step);
 
-int		collision(t_data *data, int32_t x, int32_t y, char **map);
+void		player_speed(t_data *data);
+
+int			collision(t_data *data, int32_t x, int32_t y, char **map);
 
 /*	utils				*/
 
-int		ft_add_char(char **str, char c);
-int		ft_add_str(char **str, char *add);
+int			ft_add_char(char **str, char c);
+int			ft_add_str(char **str, char *add);
 
 #endif

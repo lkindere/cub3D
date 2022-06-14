@@ -6,7 +6,7 @@
 #    By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 23:16:18 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/14 13:41:20 by mmeising         ###   ########.fr        #
+#    Updated: 2022/06/14 15:38:18 by mmeising         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC_M :=								\
 			init.c						\
 			movement.c					\
 			move_utils.c				\
+			hook.c						\
 
 OBJ_DIR := ./_obj
 OBJ_DIR_DEBUG := ./_obj_debug

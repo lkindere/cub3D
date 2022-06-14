@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/14 13:36:44 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/14 15:34:25 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int32_t	main(int argc, char **argv)
 		return (1);
 	put_walls(data->mlx, data->walls, data->map);
 	mlx_image_to_window(data->mlx, data->player->img, 1 * 64, 1 * 64);
+	mlx_key_hook(data->mlx, key_hook, data);
 	mlx_loop_hook(data->mlx, &hook, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
