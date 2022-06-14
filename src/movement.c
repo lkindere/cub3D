@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 00:54:35 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/14 15:36:59 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/14 16:27:05 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ void	move_up(t_data *data, t_player *player, int step)
 	inst = &player->img->instances[0];
 	ts = data->ts;
 	if (collision(data, inst->x, inst->y - step, data->map))
+	{
+		while (step > data->ts && collision(data, inst->x, inst->y - step, data->map))
+			step -= data->ts;
 		inst->y = (((inst->y - step) / ts) + 1) * ts;
+	}
 	else
 		inst->y -= step;
 }
@@ -35,7 +39,11 @@ void	move_down(t_data *data, t_player *player, int step)
 	ts = data->ts;
 	ps = data->ps;
 	if (collision(data, inst->x, inst->y + step, data->map))
+	{
+		while (step > data->ts && collision(data, inst->x, inst->y + step, data->map))
+			step -= data->ts;
 		inst->y = ((inst->y + step + ps) / ts) * ts - ps;
+	}
 	else
 		inst->y += step;
 }
@@ -48,7 +56,11 @@ void	move_left(t_data *data, t_player *player, int step)
 	inst = &player->img->instances[0];
 	ts = data->ts;
 	if (collision(data, inst->x - step, inst->y, data->map))
+	{
+		while (step > data->ts && collision(data, inst->x - step, inst->y, data->map))
+			step -= data->ts;
 		inst->x = (((inst->x - step) / ts) + 1) * ts;
+	}
 	else
 		inst->x -= step;
 }
@@ -63,7 +75,11 @@ void	move_right(t_data *data, t_player *player, int step)
 	ts = data->ts;
 	ps = data->ps;
 	if (collision(data, inst->x + step, inst->y, data->map))
+	{
+		while (step > data->ts && collision(data, inst->x + step, inst->y, data->map))
+			step -= data->ts;
 		inst->x = ((inst->x + step + ps) / ts) * ts - ps;
+	}
 	else
 		inst->x += step;
 }

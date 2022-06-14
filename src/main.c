@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/14 15:34:25 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/14 17:22:55 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	hook(void* param)
 	}
 	player_speed(data);
 	player_move(data);
+	player_rotate(data);
 	printf("X: %i\tY: %i\n", data->player->img->instances[0].x, data->player->img->instances[0].y);
 }
 
