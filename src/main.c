@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/14 22:39:36 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/14 23:14:23 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,18 @@ int	collision(t_data *data, int32_t x, int32_t y, char **map)
 	return (0);
 }
 
+void	draw_line(t_data *data)
+{
+	data->player->crosshair = mlx_new_image(data->mlx, 10, 10);
+
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+			mlx_put_pixel(data->player->crosshair, i, j, 3093151);
+	}
+	mlx_image_to_window(data->mlx, data->player->crosshair, data->player->img->instances[0].x , data->player->img->instances[0].y);
+}
+
 void	hook(void* param)
 {
 	t_data	*data;
@@ -53,6 +65,8 @@ void	hook(void* param)
 	player_speed(data);
 	player_move(data);
 	player_rotate(data);
+	data->player->crosshair->instances[0].x = data->player->img->instances[0].x + data->player->dx * 50;
+	data->player->crosshair->instances[0].y = data->player->img->instances[0].y + data->player->dy * 50;
 	printf("X: %i\tY: %i\tangle: %f\tdx: %f\tdy: %f\n", data->player->img->instances[0].x, data->player->img->instances[0].y, data->player->angle, data->player->dx, data->player->dy);
 }
 
@@ -87,6 +101,7 @@ int32_t	main(int argc, char **argv)
 	data->map = map.map;
 	put_walls(data->mlx, data->walls, data->map);
 	mlx_image_to_window(data->mlx, data->player->img, 1 * 64, 1 * 64);
+	draw_line(data);
 	mlx_key_hook(data->mlx, key_hook, data);
 	mlx_loop_hook(data->mlx, &hook, data);
 	mlx_loop(data->mlx);
