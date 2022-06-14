@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/14 23:14:23 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/15 01:11:43 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	collision(t_data *data, int32_t x, int32_t y, char **map)
 	int	ts;
 	int	ps;
 
-	step = data->player->speed;
+	step = data->speed;
 	ts = data->ts;
 	ps = data->ps;
 	if (map[y / ts][x / ts] == '1'
@@ -36,14 +36,14 @@ int	collision(t_data *data, int32_t x, int32_t y, char **map)
 
 void	draw_line(t_data *data)
 {
-	data->player->crosshair = mlx_new_image(data->mlx, 10, 10);
+	data->crosshair = mlx_new_image(data->mlx, 10, 10);
 
 	for (int i = 0; i < 10; i++)
 	{
 		for (int j = 0; j < 10; j++)
-			mlx_put_pixel(data->player->crosshair, i, j, 3093151);
+			mlx_put_pixel(data->crosshair, i, j, 0xFF00FF);
 	}
-	mlx_image_to_window(data->mlx, data->player->crosshair, data->player->img->instances[0].x , data->player->img->instances[0].y);
+	mlx_image_to_window(data->mlx, data->crosshair, data->p_x , data->p_y);
 }
 
 void	hook(void* param)
@@ -59,18 +59,19 @@ void	hook(void* param)
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_R))
 	{
-		data->player->img->instances[0].x = 2 * data->ts;
-		data->player->img->instances[0].y = 2 * data->ts;
+		data->p_x = 2 * data->ts;
+		data->p_y = 2 * data->ts;
 	}
 	player_speed(data);
-	player_move(data);
 	player_rotate(data);
-	data->player->crosshair->instances[0].x = data->player->img->instances[0].x + data->player->dx * 50;
-	data->player->crosshair->instances[0].y = data->player->img->instances[0].y + data->player->dy * 50;
-	printf("X: %i\tY: %i\tangle: %f\tdx: %f\tdy: %f\n", data->player->img->instances[0].x, data->player->img->instances[0].y, data->player->angle, data->player->dx, data->player->dy);
+	data->p_img->instances[0].x = data->p_x;
+	data->p_img->instances[0].y = data->p_y;
+	data->crosshair->instances[0].x = data->p_x + data->d_x * 50;
+	data->crosshair->instances[0].y = data->p_y + data->d_y * 50;
+	printf("X: %f\tY: %f\tangle: %f\tdx: %f\tdy: %f\n", data->p_x, data->p_y, data->angle, data->d_x, data->d_y);
 }
 
-void	put_walls(mlx_t *mlx, mlx_image_t *walls, char **map)
+void	put_walls(t_data *data, char **map)
 {
 	int	i;
 	int	j;
@@ -82,7 +83,7 @@ void	put_walls(mlx_t *mlx, mlx_image_t *walls, char **map)
 		while (map[i][j])
 		{
 			if (map[i][j] == '1')
-				mlx_image_to_window(mlx, walls, j * 64, i * 64);
+				mlx_image_to_window(data->mlx, data->walls, j * data->ts, i * data->ts);
 			j++;
 		}
 		i++;
@@ -91,20 +92,19 @@ void	put_walls(mlx_t *mlx, mlx_image_t *walls, char **map)
 
 int32_t	main(int argc, char **argv)
 {
-	t_data		*data;
+	t_data		data;
 	t_map		map;
 
 	if (parser(argc, argv, &map) != 0)
 		return (1);
-	if (init(&data, argc, argv) != 0)
+	if (init(&data, &map) != 0)
 		return (1);
-	data->map = map.map;
-	put_walls(data->mlx, data->walls, data->map);
-	mlx_image_to_window(data->mlx, data->player->img, 1 * 64, 1 * 64);
-	draw_line(data);
-	mlx_key_hook(data->mlx, key_hook, data);
-	mlx_loop_hook(data->mlx, &hook, data);
-	mlx_loop(data->mlx);
-	mlx_terminate(data->mlx);
+	put_walls(&data, data.map);
+	mlx_image_to_window(data.mlx, data.p_img, data.p_x, data.p_y);
+	draw_line(&data);
+	mlx_key_hook(data.mlx, key_hook, &data);
+	mlx_loop_hook(data.mlx, &hook, &data);
+	mlx_loop(data.mlx);
+	mlx_terminate(data.mlx);
 	return (EXIT_SUCCESS);
 }

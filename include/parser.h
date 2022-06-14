@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:34:24 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/14 21:51:29 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/15 00:22:04 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ typedef enum e_errors
 
 typedef enum e_pos
 {
-	NO_POS,
-	N,
-	S,
-	E,
-	W
+	E = 0,
+	S = 1,
+	W = 2,
+	N = 3,
+	NO_POS
 }	t_pos;
 
 typedef struct s_map

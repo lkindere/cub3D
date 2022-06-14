@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/14 23:06:47 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/15 01:03:03 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libs/MLX42/include/MLX42/MLX42.h"
 # include "libft.h"
 # include "math_utils.h"
+# include "parser.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -40,18 +41,6 @@ typedef enum s_speed
 	DASH = 96
 }	t_speed;
 
-typedef struct s_player
-{
-	mlx_image_t	*img;
-	mlx_image_t	*crosshair;
-	int			pos_x;
-	int			pos_y;
-	float		angle;
-	float		dx;
-	float		dy;
-	int			speed;
-}	t_player;
-
 /**
  *	@param input_path Path to input map file.
  *	@param map Array of strings with map content.
@@ -68,28 +57,36 @@ typedef struct s_data
 	int			ts;
 	int			ps;
 	mlx_t		*mlx;
-	t_player	*player;
+	mlx_image_t	*p_img;
+	mlx_image_t	*crosshair;
+	int			speed;
+	float		angle;
+	float		d_x;
+	float		d_y;
+	float		p_x;
+	float		p_y;
 	mlx_image_t	*walls;
+	t_map		*map_;
 }	t_data;
 
 /*	hook				*/
 
-void		hook(void* param);
+void		hook(void *param);
 void		key_hook(mlx_key_data_t keydata, void *param);
 
 /*	inits				*/
 
-int			init(t_data **data, int argc, char **argv);
+int			init(t_data *data, t_map *map);
 
 /*	player				*/
 
 void		player_move(t_data *data);
 void		player_dash(t_data *data);
 void		player_rotate(t_data *data);
-void		move_up(t_data *data, t_player *player, int step);
-void		move_down(t_data *data, t_player *player, int step);
-void		move_left(t_data *data, t_player *player, int step);
-void		move_right(t_data *data, t_player *player, int step);
+void		move_up(t_data *data, int step);
+void		move_down(t_data *data, int step);
+void		move_left(t_data *data, int step);
+void		move_right(t_data *data, int step);
 
 void		player_speed(t_data *data);
 

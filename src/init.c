@@ -3,44 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/14 18:08:07 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/15 01:03:15 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	init_data(t_data **data, int argc, char **argv)
+int	init_data(t_data *data)
 {
-	if (argc != 2 || !argv[1])
-		return (1);
-	*data = ft_calloc(1, sizeof(t_data));
-	if (!*data)
+	data->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
+	data->ts = 64;
+	data->ps = 16;
+	data->p_img = mlx_new_image(data->mlx, 16, 16);
+	if (data->p_img == NULL)
 		return (ERROR_MALLOC);
-	(*data)->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
-	// get_map(&(*data)->map, argv);
-	(*data)->ts = 64;
-	(*data)->ps = 16;
+	ft_memset(data->p_img->pixels, 255,
+		data->p_img->width * data->p_img->height * sizeof(int));
+	data->speed = WALK;
 	return (0);
 }
 
-int	init_player(t_data *data)
+int	copy_map(t_data *data, t_map *map)
 {
-	t_player	*player;
-	mlx_image_t	*img;
-
-	player = ft_calloc(1, sizeof(t_player));
-	if (player == NULL)
-		return (ERROR_MALLOC);
-	player->img = mlx_new_image(data->mlx, 16, 16);
-	if (player == NULL)
-		return (ERROR_MALLOC);
-	img = player->img;
-	ft_memset(img->pixels, 255, img->width * img->height * sizeof(int));
-	player->speed = WALK;
-	data->player = player;
+	data->map = map->map;
+	map->map = NULL;
+	data->map_ = map;
+	data->angle = data->map_->position * M_PI_2;
+	data->p_x = map->pos_x * data->ts + data->ps / 2;
+	data->p_y = map->pos_y * data->ts + data->ps / 2;
 	return (0);
 }
 
@@ -56,15 +49,13 @@ int	init_walls(t_data *data)
 	return (0);
 }
 
-int	init(t_data **data, int argc, char **argv)
+int	init(t_data *data, t_map *map)
 {
-	if (init_data(data, argc, argv) != 0)
+	if (init_data(data) != 0)
 		return (1);
-	if (init_player(*data) != 0)
+	if (copy_map(data, map) != 0)
 		return (2);
-	if (init_walls(*data) != 0)
+	if (init_walls(data) != 0)
 		return (3);
-	if (init_player(*data) != 0)
-		return (4);
 	return (0);
 }
