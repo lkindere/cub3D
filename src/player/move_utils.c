@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 13:29:32 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/15 02:43:11 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/15 05:50:01 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,8 @@
 
 void	player_dash(t_data *data)
 {
-	if (mlx_is_key_down(data->mlx, MLX_KEY_UP)
-		|| mlx_is_key_down(data->mlx, MLX_KEY_W))
-		move_up(data, DASH);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_DOWN)
-		|| mlx_is_key_down(data->mlx, MLX_KEY_S))
-		move_down(data, DASH);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT)
-		|| mlx_is_key_down(data->mlx, MLX_KEY_A))
-		move_left(data, DASH);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT)
-		|| mlx_is_key_down(data->mlx, MLX_KEY_D))
-		move_right(data, DASH);
+	data->speed = DASH;
+	player_move(data);
 }
 
 /**

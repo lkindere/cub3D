@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/15 02:40:58 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/15 05:53:39 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef enum s_speed
 {
 	WALK = 5,
 	SPRINT = 10,
-	SNEAK = 1,
+	SNEAK = 3,
 	DASH = 96
 }	t_speed;
 
@@ -91,7 +91,7 @@ void		player_dash(t_data *data);
 void		player_speed(t_data *data);
 float		angle_fit(float angle);
 
-int			collision(t_data *data, int32_t x, int32_t y, char **map);
+int			check_collision(t_data *data, float x, float y);
 
 /*	utils				*/
 

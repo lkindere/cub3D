@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+         #
+#    By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 23:16:18 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/14 20:11:16 by mmeising         ###   ########.fr        #
+#    Updated: 2022/06/15 03:11:10 by lkindere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ CFLAGS ?= -Wall -Werror -Wextra
 SRC_M :=	main.c						\
 			utils.c						\
 			init.c						\
-			movement.c					\
 			move_utils.c				\
 			hook.c						\
 			rotate.c					\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/15 02:09:44 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/15 05:23:46 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,42 @@ int	walk = 5;
 int	sprint = 10;
 int	sneak = 1;
 
-int	collision(t_data *data, int32_t x, int32_t y, char **map)
+int	is_wall(t_data *data, int x, int y, char **map)
 {
-	int	step;
-	int	ts;
-	int	ps;
-
-	step = data->speed;
-	ts = data->ts;
-	ps = data->ps;
-	if (map[y / ts][x / ts] == '1'
-		|| map[y / ts][(x + ps - 1) / ts] == '1'
-		|| map[(y + ps - 1) / ts][x / ts] == '1'
-		|| map[(y + ps - 1) / ts][(x + ps - 1) / ts] == '1')
+	if (map[((int)data->p_y + y) / data->ts]
+		[((int)data->p_x + x) / data->ts] == '1')
 		return (1);
+	if (map[((int)data->p_y + data->ps + y) / data->ts]
+		[((int)data->p_x + data->ps + x) / data->ts] == '1')
+		return (1);
+	if (map[((int)data->p_y + data->ps + y) / data->ts]
+		[((int)data->p_x+ x) / data->ts] == '1')
+		return (1);
+	if (map[((int)data->p_y + y) / data->ts]
+		[((int)data->p_x + data->ps + x) / data->ts] == '1')
+		return (1);
+	return (0);
+}
+
+int check_collision(t_data *data, float x, float y)
+{
+	x = x * data->speed * (data->mlx->delta_time * 60);
+	y = y * data->speed * (data->mlx->delta_time * 60);
+	while (is_wall(data, x, y, data->map) && ((int)x != 0 || (int)y != 0))
+	{
+		if ((int)x < 0)
+			x++;
+		if ((int)y < 0)
+			y++;
+		if ((int)x > 0)
+			x--;
+		if ((int)y > 0)
+			y--;
+	}
+	if ((int)x != 0)
+		data->p_x += x;
+	if ((int)y != 0)
+		data->p_y += y;
 	return (0);
 }
 
@@ -68,7 +90,7 @@ void	hook(void* param)
 	data->p_img->instances[0].y = data->p_y;
 	data->crosshair->instances[0].x = data->p_x + 4 + data->d_x * 25;
 	data->crosshair->instances[0].y = data->p_y + 4 + data->d_y * 25;
-	printf("X: %f\tY: %f\tangle: %f\tdx: %f\tdy: %f\tfps: %f\n", data->p_x, data->p_y, data->angle, data->d_x, data->d_y, 1 / data->mlx->delta_time);
+	// printf("X: %f\tY: %f\tangle: %f\tdx: %f\tdy: %f\tfps: %f\n", data->p_x, data->p_y, data->angle, data->d_x, data->d_y, 1 / data->mlx->delta_time);
 }
 
 void	put_walls(t_data *data, char **map)
