@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 20:10:41 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/15 00:45:39 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/15 02:07:41 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	player_rotate(t_data *data)
 		|| mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 	{
 		if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
-			data->angle -= 0.1;
+			data->angle -= 0.1  * data->mlx->delta_time * 60;
 		if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
-			data->angle += 0.1;
+			data->angle += 0.1  * data->mlx->delta_time * 60;
 		if (data->angle < 0)
 			data->angle += PI2;
 		if (data->angle > PI2)
@@ -61,8 +61,8 @@ void	player_rotate(t_data *data)
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 	{
-		data->p_x += data->d_x * data->speed;
-		data->p_y += data->d_y * data->speed;
+		data->p_x += data->d_x * data->speed * data->mlx->delta_time * 60;
+		data->p_y += data->d_y * data->speed * data->mlx->delta_time * 60;
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
 	{

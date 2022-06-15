@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/15 01:03:15 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/15 02:06:18 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	copy_map(t_data *data, t_map *map)
 	data->angle = data->map_->position * M_PI_2;
 	data->p_x = map->pos_x * data->ts + data->ps / 2;
 	data->p_y = map->pos_y * data->ts + data->ps / 2;
+	mlx_set_window_size(data->mlx, data->map_->width * data->ts, data->map_->height * data->ts);
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/15 01:19:15 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/15 02:09:44 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	hook(void* param)
 	data->p_img->instances[0].y = data->p_y;
 	data->crosshair->instances[0].x = data->p_x + 4 + data->d_x * 25;
 	data->crosshair->instances[0].y = data->p_y + 4 + data->d_y * 25;
-	printf("X: %f\tY: %f\tangle: %f\tdx: %f\tdy: %f\n", data->p_x, data->p_y, data->angle, data->d_x, data->d_y);
+	printf("X: %f\tY: %f\tangle: %f\tdx: %f\tdy: %f\tfps: %f\n", data->p_x, data->p_y, data->angle, data->d_x, data->d_y, 1 / data->mlx->delta_time);
 }
 
 void	put_walls(t_data *data, char **map)
