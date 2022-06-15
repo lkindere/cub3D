@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:23:47 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/14 20:01:44 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/15 03:46:40 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	parse_error(t_map *map, char *str)
 {
-	printf("Parse error, valid: %d\n", map->valid);
 	if (str && write(2, str, ft_strlen(str)))
 		return (-1);
 	else if (map->valid == INVALID_ARGS)

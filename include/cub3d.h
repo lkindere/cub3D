@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/15 05:53:39 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/15 05:54:45 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct s_data
 	int			ps;
 	mlx_t		*mlx;
 	mlx_image_t	*p_img;
-	mlx_image_t	*crosshair;
 	int			speed;
 	float		angle;
 	float		d_x;
@@ -67,6 +66,7 @@ typedef struct s_data
 	float		p_y;
 	mlx_image_t	*walls;
 	t_map		*map_;
+	mlx_image_t	*rays;
 }	t_data;
 
 /*	hook				*/
