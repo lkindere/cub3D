@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/15 05:55:47 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/15 06:07:02 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 
 int	is_wall(t_data *data, int x, int y, char **map)
 {
-	if (map[((int)data->p_y + y) / data->ts]
-		[((int)data->p_x + x) / data->ts] == '1')
+	if (map[((int)data->p_y - data->ps / 2 + y) / data->ts]
+		[((int)data->p_x - data->ps / 2 + x)  / data->ts] == '1')
 		return (1);
-	if (map[((int)data->p_y + data->ps + y) / data->ts]
-		[((int)data->p_x + data->ps + x) / data->ts] == '1')
+	if (map[((int)data->p_y + data->ps / 2 + y) / data->ts]
+		[((int)data->p_x + data->ps / 2 + x)  / data->ts] == '1')
 		return (1);
-	if (map[((int)data->p_y + data->ps + y) / data->ts]
-		[((int)data->p_x+ x) / data->ts] == '1')
+	if (map[((int)data->p_y + data->ps / 2 + y) / data->ts]
+		[((int)data->p_x - data->ps / 2 + x)  / data->ts] == '1')
 		return (1);
-	if (map[((int)data->p_y + y) / data->ts]
-		[((int)data->p_x + data->ps + x) / data->ts] == '1')
+	if (map[((int)data->p_y - data->ps / 2 + y) / data->ts]
+		[((int)data->p_x + data->ps / 2 + x)  / data->ts] == '1')
 		return (1);
 	return (0);
 }
