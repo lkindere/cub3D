@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/15 02:09:44 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/15 05:45:24 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,36 @@ int	collision(t_data *data, int32_t x, int32_t y, char **map)
 	return (0);
 }
 
-void	draw_line(t_data *data)
+// data->d_x = cos(data->angle);
+// data->d_y = sin(data->angle);
+void	do_rays(t_data *data)
 {
-	data->crosshair = mlx_new_image(data->mlx, 20, 20);
+	float	x;
+	float	y;
+	float	angle;
+	float	d_x;
+	float	d_y;
 
-	for (int i = 0; i < 10; i++)
+	angle = data->angle - M_PI_4;
+	ft_memset(data->rays->pixels, 0,
+		data->map_->width * data->ts * data->map_->height * data->ts * sizeof(int));
+	while (angle < data->angle + M_PI_4)
 	{
-		for (int j = 0; j < 10; j++)
-			mlx_put_pixel(data->crosshair, i, j, 0xFF00FF);
+		d_x = cos(angle);
+		d_y = sin(angle);
+		x = data->p_x;
+		y = data->p_y;
+		for (float i = 0; i < 100; i += 0.01)
+		{
+			if (!((x > 0 && x < data->map_->width * data->ts)
+				&& (y > 0 && y < data->map_->height * data->ts)))
+				break ;
+			mlx_put_pixel(data->rays, x, y, 0x00FF00FF);
+			x = x + d_x;
+			y = y + d_y;
+		}
+		angle += 0.006544984694979;
 	}
-	mlx_image_to_window(data->mlx, data->crosshair, data->p_x , data->p_y);
 }
 
 void	hook(void* param)
@@ -64,10 +84,9 @@ void	hook(void* param)
 	}
 	player_speed(data);
 	player_rotate(data);
-	data->p_img->instances[0].x = data->p_x;
-	data->p_img->instances[0].y = data->p_y;
-	data->crosshair->instances[0].x = data->p_x + 4 + data->d_x * 25;
-	data->crosshair->instances[0].y = data->p_y + 4 + data->d_y * 25;
+	do_rays(data);
+	data->p_img->instances[0].x = data->p_x - data->ps / 2;
+	data->p_img->instances[0].y = data->p_y - data->ps / 2;
 	printf("X: %f\tY: %f\tangle: %f\tdx: %f\tdy: %f\tfps: %f\n", data->p_x, data->p_y, data->angle, data->d_x, data->d_y, 1 / data->mlx->delta_time);
 }
 
@@ -101,7 +120,6 @@ int32_t	main(int argc, char **argv)
 		return (1);
 	put_walls(&data, data.map);
 	mlx_image_to_window(data.mlx, data.p_img, data.p_x, data.p_y);
-	draw_line(&data);
 	mlx_key_hook(data.mlx, key_hook, &data);
 	mlx_loop_hook(data.mlx, &hook, &data);
 	mlx_loop(data.mlx);
