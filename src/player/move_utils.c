@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 13:29:32 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/15 00:48:39 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/15 02:43:11 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,16 @@ void	player_speed(t_data *data)
 		data->speed = SNEAK;
 	else
 		data->speed = WALK;
+}
+
+/**
+ * Returns input angle converted to 0 < angle < PI2.
+ */
+float	angle_fit(float angle)
+{
+	while (angle < 0)
+		angle += PI2;
+	while (angle > PI2)
+		angle -= PI2;
+	return (angle);
 }

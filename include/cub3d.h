@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/15 02:03:11 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/15 02:40:58 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,15 @@ int			init(t_data *data, t_map *map);
 /*	player				*/
 
 void		player_move(t_data *data);
-void		player_dash(t_data *data);
 void		player_rotate(t_data *data);
 void		move_up(t_data *data, int step);
 void		move_down(t_data *data, int step);
 void		move_left(t_data *data, int step);
 void		move_right(t_data *data, int step);
 
+void		player_dash(t_data *data);
 void		player_speed(t_data *data);
+float		angle_fit(float angle);
 
 int			collision(t_data *data, int32_t x, int32_t y, char **map);
 
