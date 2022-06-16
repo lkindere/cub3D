@@ -6,34 +6,11 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:24:54 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/16 15:35:08 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/16 18:07:35 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-//Returns 1 if a whitespace is found
-//Returns 1 if path is empty
-//Ignores newline at end of line;
-//Returns 0 if no whitespace
-static int	space_check(char *line)
-{
-	int	i;
-
-	i = -1;
-	while (line[++i])
-	{
-		if (line[i] == ' ' || line[i] == '\t')
-			return (1);
-		if (line[i] >= 11 && line[i] <= 13)
-			return (1);
-		if (line[i] == '\n' && line[i + 1])
-			return (1);
-	}
-	if (i < 1)
-		return (1);
-	return (0);
-}	
 
 //Returns 1 on valid texture
 //Returns -1 on invalid
@@ -45,7 +22,7 @@ static int	try_set_texture(t_map *map, char **texture, char *line)
 		return (invalidate_map(map, DUPLICATE_DEFINITION));
 	while (ft_isspace(*line))
 		line++;
-	if (space_check(line) != 0)
+	if (!*line)
 		return (invalidate_map(map, INVALID_PATH_FORMAT));
 	(*texture) = ft_strdup(line);
 	i = ft_strlen(*texture);
