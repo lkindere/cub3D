@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/16 06:47:38 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/16 07:20:58 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "libft.h"
 # include "math_utils.h"
 # include "map.h"
+# include "math_utils.h"
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -39,8 +40,22 @@ typedef enum s_speed
 	WALK = 5,
 	SPRINT = 10,
 	SNEAK = 3,
-	DASH = 96
+	DASH = 220
 }	t_speed;
+
+/**
+ * @param angle angle of the ray
+ * @param d delta in directions, basically direction vector
+ * @param p starting position, to be iterated in functions
+ * @param o offset in x and y directions
+ */
+typedef struct s_ray
+{
+	float	angle;
+	t_vec	d;
+	t_vec	p;
+	t_vec	o;
+}	t_ray;
 
 typedef struct s_textures
 {

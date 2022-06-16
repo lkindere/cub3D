@@ -6,34 +6,47 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 06:29:16 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/15 07:29:07 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/16 07:32:52 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "rays.h"
+
+t_ray	init_ray(t_data *data, float angle)
+{
+	t_ray	ray;
+
+	ray.angle = angle;
+	ray.d.x = cos(angle);
+	ray.d.y = sin(angle);
+	ray.p.x = data->p_x;
+	ray.p.y = data->p_y;
+	ray.o.x = 0;
+	ray.o.y = 0;
+	return (ray);
+}
+
 //add a struct for this stuff here. this file only
-void	one_ray(t_data *data, float x, float y, float angle, float d_y)
+// void	one_ray(t_data *data, t_ray ray);
+void	one_ray(t_data *data, t_ray ray)
 {
 	float	i;
-	float	d_x;
-	float	r_x;
-	float	r_y;
 
 	i = 0;
-	d_x = cos(angle);
 	while (i < 100)
 	{
-		if (!((x > 0 && x < data->map_->width * data->ts)
-			&& (y > 0 && y < data->map_->height * data->ts)))
+		if (!((ray.p.x > 0 && ray.p.x < data->map_->width * data->ts)
+			&& (ray.p.y > 0 && ray.p.y < data->map_->height * data->ts)))
 			break ;
-		if (angle > M_PI)
+		if (ray.angle > M_PI)
 		{
-			r_y = (((int)y >> 6) << 6) - 0.0001;
-			r_x = (y - r_y) * atan(angle) + x;
+			ray.o.y = (((int)ray.p.y >> 6) << 6) - 0.0001;
+			ray.o.x = (ray.p.y - ray.o.y) * atan(ray.angle) + ray.p.x;
 		}
-		mlx_put_pixel(data->rays, x, y, 0x00FF00FF);
-		x = x + d_x;
-		y = y + d_y;
+		mlx_put_pixel(data->rays, ray.p.x, ray.p.y, 0x00FF00FF);
+		ray.p.x = ray.p.x + ray.d.x;
+		ray.p.y = ray.p.y + ray.d.y;
 		i += 0.01;
 	}
 }
@@ -47,7 +60,7 @@ void	do_rays(t_data *data)
 	angle = data->angle - M_PI_4;
 	while (angle < data->angle + M_PI_4)
 	{
-		one_ray(data, data->p_x, data->p_y, angle, sin(angle));
+		one_ray(data, init_ray(data, angle));
 		angle += 0.006544984694979;
 	}
 }
