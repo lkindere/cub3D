@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/16 14:25:07 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/16 15:13:00 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@ typedef enum s_speed
 	DASH = 96
 }	t_speed;
 
+typedef struct s_textures
+{
+	xpm_t	*n;
+	xpm_t	*s;
+	xpm_t	*e;
+	xpm_t	*w;
+}	t_textures;
+
 /**
  *	@param input_path Path to input map file.
  *	@param map Array of strings with map content.
@@ -68,6 +76,7 @@ typedef struct s_data
 	mlx_image_t	*walls;
 	t_map		*map_;
 	mlx_image_t	*rays;
+	t_textures	textures;
 }	t_data;
 
 /*	hook				*/
