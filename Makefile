@@ -6,7 +6,7 @@
 #    By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 23:16:18 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/16 05:18:03 by lkindere         ###   ########.fr        #
+#    Updated: 2022/06/16 05:53:27 by lkindere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,10 @@ CFLAGS ?= -Wall -Werror -Wextra
 SRC_M :=	main.c						\
 			utils.c						\
 			init.c						\
-			move_utils.c				\
 			hook.c						\
 			rotate.c					\
+			movement.c					\
+			collision.c					\
 
 PARSE_S := 	parser.c					\
 			inits.c 					\

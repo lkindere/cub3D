@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:34:16 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/14 20:23:25 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/16 06:14:59 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_line(t_map *map, char *line)
 {
 	if (check_empty(line) == 1)
 	{
-		if (map->map[1])
+		if (map->map[0] && map->map[1])
 			return (invalidate_map(map, INVALID_MAP_FORMAT));
 		return (0);
 	}
