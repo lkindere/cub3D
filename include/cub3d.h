@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/16 12:21:27 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/16 14:25:07 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include "../libs/MLX42/include/MLX42/MLX42.h"
 # include "libft.h"
 # include "math_utils.h"
-# include "parser.h"
+# include "map.h"
+
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>

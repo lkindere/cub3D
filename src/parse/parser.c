@@ -6,12 +6,11 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:34:16 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/16 13:59:28 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/16 14:28:12 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "limits.h"
 
 //Returns 1 on valid line
 //Returns 0 on empty line
@@ -74,7 +73,7 @@ int	check_end(char *str, char *end)
 	elen = ft_strlen(end);
 	if (len <= elen)
 		return (-1);
-	while (--len >= 0 && --end >= 0)
+	while (--len >= 0 && --elen >= 0)
 	{
 		if (str[len] != end[elen])
 			return (-1);

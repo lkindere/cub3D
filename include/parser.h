@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:34:24 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/16 12:38:47 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/16 14:22:08 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <sys/uio.h>
 # include <fcntl.h>
 # include <sys/errno.h>
+# include <limits.h>
 
 # include "map.h"
 

@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 12:19:30 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/16 12:28:49 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/16 14:25:13 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,7 @@ typedef struct s_map
 	enum e_pos		position;
 	enum e_errors	valid;
 }	t_map;
+
+int		parser(int argc, char **argv, t_map *map);
 
 #endif
