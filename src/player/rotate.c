@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 20:10:41 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/15 05:51:40 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/16 05:14:32 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,21 @@ void	player_move(t_data *data)
 {
     float       angle;
 
-    if (mlx_is_key_down(data->mlx, MLX_KEY_W))
+    if (mlx_is_key_down(data->mlx, MLX_KEY_W)
+		&& !mlx_is_key_down(data->mlx, MLX_KEY_S))
         check_collision(data, data->d_x, data->d_y);
-    if (mlx_is_key_down(data->mlx, MLX_KEY_S))
+    if (mlx_is_key_down(data->mlx, MLX_KEY_S)
+		&& !mlx_is_key_down(data->mlx, MLX_KEY_W))
         check_collision(data, data->d_x * -1, data->d_y * -1);
-    if (mlx_is_key_down(data->mlx, MLX_KEY_A))
+    if (mlx_is_key_down(data->mlx, MLX_KEY_A)
+		&& !mlx_is_key_down(data->mlx, MLX_KEY_D))
         angle = data->angle - M_PI_2;
-    if (mlx_is_key_down(data->mlx, MLX_KEY_D))
+    if (mlx_is_key_down(data->mlx, MLX_KEY_D)
+		&& !mlx_is_key_down(data->mlx, MLX_KEY_A))
         angle = data->angle + M_PI_2;
     if (mlx_is_key_down(data->mlx, MLX_KEY_A)
-        || mlx_is_key_down(data->mlx, MLX_KEY_D))
+       	!= mlx_is_key_down(data->mlx, MLX_KEY_D))
         check_collision(data, (cos(angle_fit(angle))), (sin(angle_fit(angle))));
-
 }
 
 void	player_rotate(t_data *data)

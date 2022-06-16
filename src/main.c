@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/15 06:07:02 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/16 05:14:49 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,22 @@ int check_collision(t_data *data, float x, float y)
 {
 	x = x * data->speed * (data->mlx->delta_time * 60);
 	y = y * data->speed * (data->mlx->delta_time * 60);
-	while (is_wall(data, x, y, data->map) && ((int)x != 0 || (int)y != 0))
+	while (is_wall(data, 0, y, data->map) && (int)y != 0)
 	{
-		if ((int)x < 0)
-			x++;
 		if ((int)y < 0)
 			y++;
-		if ((int)x > 0)
-			x--;
 		if ((int)y > 0)
 			y--;
 	}
-	if ((int)x != 0)
-		data->p_x += x;
-	if ((int)y != 0)
-		data->p_y += y;
+	while (is_wall(data, x, 0, data->map) && (int)x != 0)
+	{
+		if ((int)x < 0)
+			x++;
+		if ((int)x > 0)
+			x--;
+	}
+	data->p_x += (int)x;
+	data->p_y += (int)y;
 	return (0);
 }
 
@@ -88,11 +89,9 @@ void	hook(void* param)
 {
 	t_data	*data;
 	mlx_t	*mlx;
-	char	**map;
 
 	data = param;
 	mlx = data->mlx;
-	map = data->map;
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_R))

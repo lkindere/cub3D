@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/15 05:05:35 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/16 04:42:56 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ int	init_walls(t_data *data)
 
 int	init_rays(t_data *data, t_map *map)
 {
-	float	x;
-	float	y;
+	// float	x;
+	// float	y;
 
-	x = data->p_x;
-	y = data->p_y;
+	// x = data->p_x;
+	// y = data->p_y;
 	// printf("%i %i\n", map->width, map->height);
 	// exit(0);
 	data->rays = mlx_new_image(data->mlx, map->width * data->ts, map->height * data->ts);

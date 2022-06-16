@@ -6,7 +6,7 @@
 #    By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 23:16:18 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/15 03:11:10 by lkindere         ###   ########.fr        #
+#    Updated: 2022/06/16 05:18:03 by lkindere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ OBJ := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 OBJ_DEBUG := $(addprefix $(OBJ_DIR_DEBUG)/, $(SRC:.c=.o))
 
-LIB := -lglfw -L "/Users/$(USER)/.brew/opt/glfw/lib" ./libs/MLX42/libmlx42.a
+LIB := -lglfw -L "/Users/$(USER)/.brew/opt/glfw/lib" ./libs/MLX42/libmlx42.a -lm
 INC := -I ./include -I ./libs/MLX42/include/MLX42/ -I ./libs/libft/header/
 
 # Colorcodes
@@ -79,6 +79,7 @@ $(MLX):
 	make -C $(MLX_PATH)
 
 clean:
+	make clean -C $(LIBFT_PATH)
 	@if [ -d "${OBJ_DIR}" ]; then \
 		echo $(R)Cleaning"  "[$(OBJ_DIR)]...$(X); \
 		rm -r ${OBJ_DIR}; \
@@ -93,6 +94,7 @@ clean_debug:
 	fi
 
 fclean: clean clean_debug
+	make fclean -C $(LIBFT_PATH)
 	@if [ -f "$(NAME)" ]; then \
 		echo $(R)Cleaning"  "[$(NAME)]...$(X); \
 		rm -r $(NAME); \
