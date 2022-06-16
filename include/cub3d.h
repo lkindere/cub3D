@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/16 07:45:34 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/16 08:17:08 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,19 @@ typedef enum s_speed
 
 /**
  * @param angle angle of the ray
+ * @param r position being checked, iterates
  * @param d delta in directions, basically direction vector
- * @param p starting position, to be iterated in functions
+ * @param p starting position
  * @param o offset in x and y directions
  */
 typedef struct s_ray
 {
 	float	angle;
-	t_vec	d;
-	t_vec	p;
-	t_vec	o;
+	t_vec		r;
+	t_vec		d;
+	t_vec		p;
+	t_vec		o;
+	t_vec_int	m;
 }	t_ray;
 
 typedef struct s_textures
