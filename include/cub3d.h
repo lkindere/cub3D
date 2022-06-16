@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/15 06:30:13 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/16 06:47:38 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include "../libs/MLX42/include/MLX42/MLX42.h"
 # include "libft.h"
 # include "math_utils.h"
-# include "parser.h"
+# include "map.h"
+
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -40,6 +41,14 @@ typedef enum s_speed
 	SNEAK = 3,
 	DASH = 96
 }	t_speed;
+
+typedef struct s_textures
+{
+	xpm_t	*n;
+	xpm_t	*s;
+	xpm_t	*e;
+	xpm_t	*w;
+}	t_textures;
 
 /**
  *	@param input_path Path to input map file.
@@ -67,6 +76,7 @@ typedef struct s_data
 	mlx_image_t	*walls;
 	t_map		*map_;
 	mlx_image_t	*rays;
+	t_textures	textures;
 }	t_data;
 
 /*	hook				*/
@@ -80,19 +90,14 @@ void		do_rays(t_data *data);
 int			init(t_data *data, t_map *map);
 
 /*	player				*/
-
-void		player_move(t_data *data);
+float		angle_fit(float angle);
 void		player_rotate(t_data *data);
-void		move_up(t_data *data, int step);
-void		move_down(t_data *data, int step);
-void		move_left(t_data *data, int step);
-void		move_right(t_data *data, int step);
-
+void		player_move(t_data *data);
+int			check_collision(t_data *data, float x, float y);
 void		player_dash(t_data *data);
 void		player_speed(t_data *data);
-float		angle_fit(float angle);
 
-int			check_collision(t_data *data, float x, float y);
+void		do_rays(t_data *data);
 
 /*	utils				*/
 

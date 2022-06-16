@@ -6,7 +6,7 @@
 #    By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 23:16:18 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/15 06:31:47 by mmeising         ###   ########.fr        #
+#    Updated: 2022/06/16 06:45:44 by mmeising         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,11 @@ CFLAGS ?= -Wall -Werror -Wextra
 SRC_M :=	main.c						\
 			utils.c						\
 			init.c						\
-			move_utils.c				\
-			hook.c						\
+			hooks.c						\
 			rotate.c					\
 			do_rays.c					\
+			movement.c					\
+			collision.c					\
 
 PARSE_S := 	parser.c					\
 			inits.c 					\
@@ -50,7 +51,7 @@ OBJ := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 OBJ_DEBUG := $(addprefix $(OBJ_DIR_DEBUG)/, $(SRC:.c=.o))
 
-LIB := -lglfw -L "/Users/$(USER)/.brew/opt/glfw/lib" ./libs/MLX42/libmlx42.a
+LIB := -lglfw -L "/Users/$(USER)/.brew/opt/glfw/lib" ./libs/MLX42/libmlx42.a -lm
 INC := -I ./include -I ./libs/MLX42/include/MLX42/ -I ./libs/libft/header/
 
 # Colorcodes
@@ -80,6 +81,7 @@ $(MLX):
 	make -C $(MLX_PATH)
 
 clean:
+	make clean -C $(LIBFT_PATH)
 	@if [ -d "${OBJ_DIR}" ]; then \
 		echo $(R)Cleaning"  "[$(OBJ_DIR)]...$(X); \
 		rm -r ${OBJ_DIR}; \
@@ -94,6 +96,7 @@ clean_debug:
 	fi
 
 fclean: clean clean_debug
+	make fclean -C $(LIBFT_PATH)
 	@if [ -f "$(NAME)" ]; then \
 		echo $(R)Cleaning"  "[$(NAME)]...$(X); \
 		rm -r $(NAME); \
