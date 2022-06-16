@@ -1,7 +1,7 @@
-      NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-         WE            ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO _textures/test.xpm42
+SO _textures/test.xpm42
+WE _textures/test.xpm42
+EA _textures/test.xpm42
 
 
 C 225,30,0   
