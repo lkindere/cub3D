@@ -6,11 +6,12 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/16 04:42:56 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/16 12:21:33 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "map.h"
 
 int	init_data(t_data *data)
 {

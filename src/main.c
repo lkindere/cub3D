@@ -6,12 +6,11 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/16 06:28:42 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/16 12:20:46 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "parser.h"
 
 // data->d_x = cos(data->angle);
 // data->d_y = sin(data->angle);

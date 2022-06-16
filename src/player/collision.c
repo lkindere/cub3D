@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 05:49:20 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/16 06:16:13 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/16 12:25:06 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static int	is_wall(t_data *data, int x, int y, char **map)
 {
-	if (data->p_y - data->ps / 2 + y < 2 
-		|| data->p_y + data->ps / 2 + y > data->map_->height * 64 - 2)
+	if (data->p_y - data->ps / 2 + y < 1 
+		|| data->p_y + data->ps / 2 + y > data->map_->height * 64 - 1)
 		return (1);
-	if (data->p_x - data->ps / 2 + x < 2 
-		|| data->p_x + data->ps / 2 + x > data->map_->width * 64 - 2)
+	if (data->p_x - data->ps / 2 + x < 1 
+		|| data->p_x + data->ps / 2 + x > data->map_->width * 64 - 1)
 		return (1);
 	if (map[((int)data->p_y - data->ps / 2 + y) / data->ts]
 		[((int)data->p_x - data->ps / 2 + x)  / data->ts] == '1')
