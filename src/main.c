@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/15 06:07:02 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/15 06:32:35 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,38 +50,6 @@ int check_collision(t_data *data, float x, float y)
 	if ((int)y != 0)
 		data->p_y += y;
 	return (0);
-}
-
-// data->d_x = cos(data->angle);
-// data->d_y = sin(data->angle);
-void	do_rays(t_data *data)
-{
-	float	x;
-	float	y;
-	float	angle;
-	float	d_x;
-	float	d_y;
-
-	angle = data->angle - M_PI_4;
-	ft_memset(data->rays->pixels, 0,
-		data->map_->width * data->ts * data->map_->height * data->ts * sizeof(int));
-	while (angle < data->angle + M_PI_4)
-	{
-		d_x = cos(angle);
-		d_y = sin(angle);
-		x = data->p_x;
-		y = data->p_y;
-		for (float i = 0; i < 100; i += 0.01)
-		{
-			if (!((x > 0 && x < data->map_->width * data->ts)
-				&& (y > 0 && y < data->map_->height * data->ts)))
-				break ;
-			mlx_put_pixel(data->rays, x, y, 0x00FF00FF);
-			x = x + d_x;
-			y = y + d_y;
-		}
-		angle += 0.006544984694979;
-	}
 }
 
 void	hook(void* param)
