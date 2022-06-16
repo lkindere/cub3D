@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/16 06:17:49 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/16 06:28:42 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,6 @@ void	do_rays(t_data *data)
 		}
 		angle += 0.006544984694979;
 	}
-}
-
-void	hook(void* param)
-{
-	t_data	*data;
-	mlx_t	*mlx;
-
-	data = param;
-	mlx = data->mlx;
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_R))
-	{
-		data->p_x = 2 * data->ts;
-		data->p_y = 2 * data->ts;
-	}
-	player_speed(data);
-	player_rotate(data);
-	do_rays(data);
-	data->p_img->instances[0].x = data->p_x - data->ps / 2;
-	data->p_img->instances[0].y = data->p_y - data->ps / 2;
-	printf("X: %f\tY: %f\tangle: %f\tdx: %f\tdy: %f\tfps: %f\n", data->p_x, data->p_y, data->angle, data->d_x, data->d_y, 1 / data->mlx->delta_time);
 }
 
 void	put_walls(t_data *data, char **map)

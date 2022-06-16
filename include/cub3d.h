@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/15 05:54:45 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/16 06:30:44 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,14 @@ void		key_hook(mlx_key_data_t keydata, void *param);
 int			init(t_data *data, t_map *map);
 
 /*	player				*/
-
-void		player_move(t_data *data);
+float		angle_fit(float angle);
 void		player_rotate(t_data *data);
-void		move_up(t_data *data, int step);
-void		move_down(t_data *data, int step);
-void		move_left(t_data *data, int step);
-void		move_right(t_data *data, int step);
-
+void		player_move(t_data *data);
+int			check_collision(t_data *data, float x, float y);
 void		player_dash(t_data *data);
 void		player_speed(t_data *data);
-float		angle_fit(float angle);
 
-int			check_collision(t_data *data, float x, float y);
+void		do_rays(t_data *data);
 
 /*	utils				*/
 
