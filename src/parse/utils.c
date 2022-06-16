@@ -6,13 +6,12 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:22:22 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/14 21:54:01 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/16 15:22:11 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-#include <string.h>
+#include <stdio.h>
 
 //Sets map valid to enum
 //Returns -1

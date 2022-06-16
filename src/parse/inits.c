@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:23:47 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/15 03:46:40 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/16 12:29:08 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	parse_error(t_map *map, char *str)
 	else if (map->valid == UNCLOSED_MAP)
 		write(2, "Map is not closed off", 22);
 	else if (map->valid == NO_MAP)
-		write(2, "No map provided", 16);
+		write(2, "Invalid map provided", 21);
 	else if (map->valid == MALLOC)
 		write(2, "Malloc failed", 14);
 	write (2, "\n", 1);

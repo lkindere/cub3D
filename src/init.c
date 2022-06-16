@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/16 04:42:56 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/16 15:38:06 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,20 @@ void	copy_map(t_data *data, t_map *map)
 	data->p_y = map->pos_y * data->ts + data->ps / 2;
 	mlx_set_window_size(data->mlx, map->width * data->ts,
 		map->height * data->ts);
+}
+
+int	init_textures(t_data *data)
+{
+	data->textures.n = mlx_load_xpm42(data->map_->no);
+	data->textures.s = mlx_load_xpm42(data->map_->so);
+	data->textures.e = mlx_load_xpm42(data->map_->ea);
+	data->textures.w = mlx_load_xpm42(data->map_->we);
+	if (mlx_errno != 0)
+	{
+		printf("%s\n", mlx_strerror(mlx_errno));
+		return (-1);
+	}
+	return (0);
 }
 
 int	init_walls(t_data *data)
@@ -83,9 +97,11 @@ int	init(t_data *data, t_map *map)
 	if (init_data(data) != 0)
 		return (1);
 	copy_map(data, map);
-	if (init_walls(data) != 0)
+	if (init_textures(data) != 0)
 		return (2);
-	if (init_rays(data, map) != 0)
+	if (init_walls(data) != 0)
 		return (3);
+	if (init_rays(data, map) != 0)
+		return (4);
 	return (0);
 }
