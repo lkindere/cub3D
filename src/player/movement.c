@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 05:47:59 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/16 05:54:43 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/17 04:16:00 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	player_speed(t_data *data)
 {
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT_SHIFT)
 		&& !mlx_is_key_down(data->mlx, MLX_KEY_C))
-		data->speed = SPRINT;
+		data->speed = 0.05 * SPRINT;
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_C)
 		&& !mlx_is_key_down(data->mlx, MLX_KEY_LEFT_SHIFT))
-		data->speed = SNEAK;
+		data->speed = 0.05 * SNEAK;
 	else
-		data->speed = WALK;
+		data->speed = 0.05 * WALK;
 }

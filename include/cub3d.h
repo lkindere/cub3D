@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/17 00:48:00 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/17 04:15:39 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ typedef enum s_error
 
 typedef enum s_speed
 {
-	WALK = 5,
-	SPRINT = 10,
-	SNEAK = 3,
-	DASH = 220
+	WALK = 2,
+	SPRINT = 3,
+	SNEAK = 1,
+	DASH = 4
 }	t_speed;
 
 /**
@@ -84,10 +84,10 @@ typedef struct s_data
 	char		*input_path;
 	char		**map;
 	int			ts;
-	int			ps;
+	float		ps;
 	mlx_t		*mlx;
 	mlx_image_t	*p_img;
-	int			speed;
+	float		speed;
 	float		angle;
 	float		d_x;
 	float		d_y;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/16 06:47:00 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/17 04:10:10 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	init_data(t_data *data)
 {
 	data->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
 	data->ts = 64;
-	data->ps = 16;
+	data->ps = 0.25;
 	data->p_img = mlx_new_image(data->mlx, 16, 16);
 	if (data->p_img == NULL)
 		return (ERROR_MALLOC);
@@ -34,8 +34,8 @@ void	copy_map(t_data *data, t_map *map)
 	data->angle = data->map_->position * M_PI_2;
 	data->d_x = cos(data->angle);
 	data->d_y = sin(data->angle);
-	data->p_x = map->pos_x * data->ts + data->ps / 2;
-	data->p_y = map->pos_y * data->ts + data->ps / 2;
+	data->p_x = map->pos_x + data->ps / 2;
+	data->p_y = map->pos_y + data->ps / 2;
 	mlx_set_window_size(data->mlx, map->width * data->ts,
 		map->height * data->ts);
 }
@@ -58,7 +58,7 @@ int	init_walls(t_data *data)
 {
 	mlx_image_t	*walls;
 
-	walls = mlx_new_image(data->mlx, 64, 64);
+	walls = mlx_new_image(data->mlx, 63, 63);
 	if (walls == NULL)
 		return (ERROR_MALLOC);
 	ft_memset(walls->pixels, 180, walls->width * walls->height * sizeof(int));
