@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 06:29:16 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/17 21:37:22 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/17 22:44:51 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	do_rays(t_data *data)
 
 			safe_pixel(data->rays, draw, 0x00FF00FF);
 		}
-		printf("X axis is shorter\n");
+		// printf("X axis is shorter\n");
 	}
 	else
 	{
@@ -95,7 +95,7 @@ void	do_rays(t_data *data)
 
 			safe_pixel(data->rays, draw, 0x00FFF0FF);
 		}
-		printf("Y axis is shorter\n");
+		// printf("Y axis is shorter\n");
 	}
 	// printf("Step x: %f\n", step.x);
 	// printf("X len: %f\n", len.x);

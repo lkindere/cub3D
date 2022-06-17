@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 20:48:25 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/17 21:37:01 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/17 22:49:46 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,46 +46,32 @@ void safe_pixel(mlx_image_t *image, t_vec vec, uint32_t color)
 
 void	draw_line_xy(mlx_image_t *image, t_line line, uint32_t color)
 {
-	int i;
-
-	i = 0;
-	while ((line.p1.x != line.p2.x || line.p1.y != line.p2.y) && ++i)
+	while ((int)line.p1.x != (int)line.p2.x)
 	{
 		if (line.p1.x < line.p2.x)
 			line.p1.x++;
-		if (line.p1.x > line.p2.x)
+		else if (line.p1.x > line.p2.x)
 			line.p1.x--;
-		if (line.step * i >= 1)
-		{
-			if (line.p1.y < line.p2.y)
-				line.p1.y++;
-			if (line.p1.y > line.p2.y)
-				line.p1.y--;
-			i = 0;
-		}
+		if (line.p1.y < line.p2.y)
+			line.p1.y += line.step;
+		else if (line.p1.y > line.p2.y)
+			line.p1.y -= line.step;
 		safe_pixel(image, line.p1, color);
 	}
 }
 
 void	draw_line_yx(mlx_image_t *image, t_line line, uint32_t color)
 {
-	int	i;
-
-	i = 0;
-	while ((line.p1.x != line.p2.x || line.p1.y != line.p2.y) && ++i)
+	while ((int)line.p1.y != (int)line.p2.y)
 	{
 		if (line.p1.y < line.p2.y)
 			line.p1.y++;
-		if (line.p1.y > line.p2.y)
+		else if (line.p1.y > line.p2.y)
 			line.p1.y--;
-		if (line.step * i >= 1)
-		{
-			if (line.p1.x < line.p2.x)
-				line.p1.x++;;
-			if (line.p1.x > line.p2.x)
-				line.p1.x--;
-			i = 0;
-		}
+		if (line.p1.x < line.p2.x)
+			line.p1.x += line.step;
+		else if (line.p1.x > line.p2.x)
+			line.p1.x -= line.step;
 		safe_pixel(image, line.p1, color);
 	}
 }
@@ -93,17 +79,13 @@ void	draw_line_yx(mlx_image_t *image, t_line line, uint32_t color)
 //Draws a line from point 1 to point 2 using safe_pixel
 void	draw_line(mlx_image_t *image, t_vec p1, t_vec p2, uint32_t color)
 {
-	int		i;
 	t_vec	dist;
 	t_line	line;
 
-	i = -1;
-	vec_ftoi(&p1);
-	vec_ftoi(&p2);
 	line.p1 = p1;
 	line.p2 = p2;
-	dist.x = abs(p1.x - p2.x);
-	dist.y = abs(p1.y - p2.y);
+	dist.x = fabs(p1.x - p2.x);
+	dist.y = fabs(p1.y - p2.y);
 	if (dist.x >= dist.y)
 	{
 		line.step = dist.y / dist.x;

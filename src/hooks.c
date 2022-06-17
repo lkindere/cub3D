@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/17 05:04:56 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/17 22:46:58 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,20 @@
 
 void	play_dir_line(t_data *data)
 {
-	for (float i = 0; i < 30; i += 1)
-	{
-		mlx_put_pixel(data->rays, data->p_x * data->ts + data->d_x * i,
-			data->p_y * data->ts + data->d_y * i, 0x00FF00FF);
-	}
+	t_vec	p1;
+	t_vec	p2;
+
+	// printf("DX: %f, DY: %f\n", data->d_x, data->d_y);
+	p1.x = data->p_x * data->ts;
+	p1.y = data->p_y * data->ts;
+	p2.x = p1.x + data->d_x * 100;
+	p2.y = p1.y + data->d_y * 100;
+	draw_line(data->rays, p1, p2, 0x00FF00FF);
+	// for (float i = 0; i < 30; i += 1)
+	// {
+	// 	mlx_put_pixel(data->rays, data->p_x * data->ts + data->d_x * i,
+	// 		data->p_y * data->ts + data->d_y * i, 0x00FF00FF);
+	// }
 }
 
 int i = 0;
