@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/17 04:10:10 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/17 21:13:52 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ int	init(t_data *data, t_map *map)
 		return (3);
 	if (init_rays(data, map) != 0)
 		return (4);
+	screen_bounds(data->mlx->width, data->mlx->height);
 	return (0);
 }

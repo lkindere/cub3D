@@ -6,9 +6,12 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 06:29:16 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/17 06:15:53 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/17 21:37:22 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+int	width;
+int	height;
 
 #include "cub3d.h"
 #include "rays.h"
@@ -34,18 +37,10 @@ t_ray	init_ray(t_data *data, float angle)
 	return (ray);
 }
 
-
-void safe_pixel(mlx_image_t* image, t_data *data, t_vec vec, uint32_t color)
-{
-	if (vec.x < 1 || vec.x > data->mlx->width - 1)
-		return ;
-	if (vec.y < 1 || vec.y > data->mlx->height - 1)
-		return ;
-	mlx_put_pixel(image, vec.x, vec.y, color);
-}
-
 void	do_rays(t_data *data)
 {
+	width = data->mlx->width - 1;
+	height = data->mlx->height -1;
 	t_vec_int	map;
 	t_vec		step;
 	t_vec		start;
@@ -59,8 +54,8 @@ void	do_rays(t_data *data)
 	dir.x = data->d_x;
 	dir.y = data->d_y;
 
-	printf("Angle: %f, d_x: %f, d_y: %f, p_x: %f, p_y: %f\n", 
-		data->angle, data->d_x, data->d_y, data->p_x, data->p_y);
+	// printf("Angle: %f, d_x: %f, d_y: %f, p_x: %f, p_y: %f\n", 
+		// data->angle, data->d_x, data->d_y, data->p_x, data->p_y);
 		
 	step.x = sqrt(1 + (dir.y / dir.x) * (dir.y / dir.x));
 	step.y = sqrt(1 + (dir.x / dir.y) * (dir.x / dir.y));
@@ -85,7 +80,7 @@ void	do_rays(t_data *data)
 			draw.x = ((start.x) * data->ts);
 			draw.y = (start.y + i) * data->ts;
 
-			safe_pixel(data->rays, data, draw, 0x00FF00FF);
+			safe_pixel(data->rays, draw, 0x00FF00FF);
 		}
 		printf("X axis is shorter\n");
 	}
@@ -98,12 +93,40 @@ void	do_rays(t_data *data)
 			draw.x = ((start.x + i) * data->ts);
 			draw.y = (start.y) * data->ts;
 
-			safe_pixel(data->rays, data, draw, 0x00FFF0FF);
+			safe_pixel(data->rays, draw, 0x00FFF0FF);
 		}
 		printf("Y axis is shorter\n");
 	}
-	printf("Step x: %f\n", step.x);
-	printf("X len: %f\n", len.x);
+	// printf("Step x: %f\n", step.x);
+	// printf("X len: %f\n", len.x);
+	t_vec p1;
+	t_vec p2;
+
+	p1.x = 0;
+	p1.y = 0;
+	p2.x = 200;
+	p2.y = 500;
+	draw_line(data->rays, p1, p2, 0x00FFF0FF);
+	p1.x = 200;
+	p2.y = 0;
+	p2.x = 200;
+	p2.y = 500;
+		draw_line(data->rays, p1, p2, 0x00FFF0FF);
+	p1.x = 400;
+	p2.y = 0;
+	p2.x = 200;
+	p2.y = 200;
+			draw_line(data->rays, p1, p2, 0x00FFF0FF);
+		p1.x = 400;
+	p2.y = 0;
+	p2.x = 700;
+	p2.y = 600;
+			draw_line(data->rays, p1, p2, 0x00FFF0FF);
+				p1.x = 1000;
+	p2.y = 500;
+	p2.x = 200;
+	p2.y = 200;
+			draw_line(data->rays, p1, p2, 0x00FFF0FF);
 	// printf("Step y: %f\n", step.y);
 	// printf("Y len: %f\n", len.y);
 }

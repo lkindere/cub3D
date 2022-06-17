@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/17 04:15:39 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/17 21:15:55 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef enum s_speed
  * @param p starting position
  * @param o offset in x and y directions
  */
+
 typedef struct s_ray
 {
 	float	angle;
@@ -123,5 +124,14 @@ void		do_rays(t_data *data);
 
 int			ft_add_char(char **str, char c);
 int			ft_add_str(char **str, char *add);
+
+
+
+t_vec_int	screen_bounds(int x, int y);
+
+void	safe_pixel(mlx_image_t *image, t_vec vec, uint32_t color);
+void	draw_line(mlx_image_t *image, t_vec p1, t_vec p2, uint32_t color);
+
+void	vec_ftoi(t_vec *vec);
 
 #endif

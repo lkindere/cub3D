@@ -6,13 +6,13 @@
 #    By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 23:16:18 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/17 03:34:34 by lkindere         ###   ########.fr        #
+#    Updated: 2022/06/17 21:16:45 by lkindere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # gcc main.c libmlx42.a -lglfw -L "/Users/$USER/.brew/opt/glfw/lib" -I ./include/
 
-VPATH = src src/parse src/player src/rays
+VPATH = src src/parse src/player src/rays src/math src/draw
 
 NAME := ./cub3d
 LIBFT_PATH := ./libs/libft/
@@ -30,6 +30,8 @@ SRC_M :=	main.c						\
 			do_rays.c					\
 			movement.c					\
 			collision.c					\
+			vector.c 					\
+			draw.c						\
 
 PARSE_S := 	parser.c					\
 			inits.c 					\

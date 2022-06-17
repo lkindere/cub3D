@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 22:58:23 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/14 00:12:43 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/17 20:48:59 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,11 @@ t_vec	v_norm(t_vec vec)
 float	v_dot(t_vec a, t_vec b)
 {
 	return (sqrt(a.x * b.x + a.y + b.y));
+}
+
+//Normalizes a float vector to int value
+void	vec_ftoi(t_vec *vec)
+{
+	vec->x = (int)vec->x;
+	vec->y = (int)vec->y;
 }
