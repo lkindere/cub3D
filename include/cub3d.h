@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/16 08:17:08 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/17 00:48:00 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef enum s_speed
 
 /**
  * @param angle angle of the ray
+ * @param s starting offset in player's block
  * @param r position being checked, iterates
  * @param d delta in directions, basically direction vector
  * @param p starting position
@@ -53,10 +54,11 @@ typedef enum s_speed
 typedef struct s_ray
 {
 	float	angle;
-	t_vec		r;
-	t_vec		d;
-	t_vec		p;
-	t_vec		o;
+	t_vec		s;//starting offset
+	t_vec		r;//iterates
+	t_vec		d;//maybe not needed
+	t_vec		p;//maybe not needed
+	t_vec		o;//later offset
 	t_vec_int	m;
 }	t_ray;
 

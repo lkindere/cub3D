@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/16 12:23:41 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/17 01:00:39 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	play_dir_line(t_data *data)
+{
+	for (float i = 0; i < 30; i += 1)
+	{
+		mlx_put_pixel(data->rays, data->p_x + data->d_x * i,
+			data->p_y + data->d_y * i, 0x00FF00FF);
+	}
+}
 
 void	hook(void* param)
 {
@@ -19,7 +28,9 @@ void	hook(void* param)
 	data = param;
 	player_speed(data);
 	player_rotate(data);
+	data->angle = angle_fit(data->angle);
 	do_rays(data);
+	play_dir_line(data);
 	data->p_img->instances[0].x = data->p_x - data->ps / 2;
 	data->p_img->instances[0].y = data->p_y - data->ps / 2;
 	// printf("X: %f\tY: %f\tangle: %f\tdx: %f\tdy: %f\tfps: %f\n", data->p_x, data->p_y, data->angle, data->d_x, data->d_y, 1 / data->mlx->delta_time);
