@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/18 12:34:21 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/18 14:01:54 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	copy_map(t_data *data, t_map *map)
 	data->d_y = sin(data->angle);
 	data->p_x = map->pos_x + 0.5;
 	data->p_y = map->pos_y + 0.5;
-	// printf("PX PY: %f %f\n", data->p_x, data->p_y);
-	// exit(0);
 	mlx_set_window_size(data->mlx, map->width * data->ts,
 		map->height * data->ts);
 }
@@ -70,26 +68,9 @@ int	init_walls(t_data *data)
 
 int	init_rays(t_data *data, t_map *map)
 {
-	// float	x;
-	// float	y;
-
-	// x = data->p_x;
-	// y = data->p_y;
-	// printf("%i %i\n", map->width, map->height);
-	// exit(0);
 	data->rays = mlx_new_image(data->mlx, map->width * data->ts, map->height * data->ts);
 	if (data->rays == NULL)
 		return (ERROR_MALLOC);
-	// ft_memset(data->rays->pixels, 110,
-	// 	map->width * data->ts * map->height * data->ts * sizeof(int));
-	// for (int i = 0; i < 100; i++)
-	// {
-	// 	if ((x > 0 && x < data->map_->width * data->ts)
-	// 		&& (y > 0 && y < data->map_->height * data->ts))
-	// 		mlx_put_pixel(data->rays, x, y, 0x00FF00FF);
-	// 	x = x + data->d_x * i * 0.1;
-	// 	y = y + data->d_y * i * 0.1;
-	// }
 	mlx_image_to_window(data->mlx, data->rays, 0, 0);
 	return (0);
 }

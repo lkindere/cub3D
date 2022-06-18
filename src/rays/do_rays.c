@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 06:29:16 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/18 13:48:53 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/18 13:59:08 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 //Step:		Unit step size in x or y
 //Hit:		Wall hit x and y
 //Distance:	Distance to wall hit
-
 typedef struct s_ray
 {
 	t_vec_int	map;
@@ -41,7 +40,7 @@ t_ray	ray_init(t_data *data, t_ray *r)
 	if (r->dir.x < 0)
 	{
 		r->dir.x = -1;
-		r->len.x = (r->start.x - (r->map.x)) * r->step.x;
+		r->len.x = (r->start.x - r->map.x) * r->step.x;
 	}
 	if (r->dir.x > 0)
 	{
@@ -51,7 +50,7 @@ t_ray	ray_init(t_data *data, t_ray *r)
 	if (r->dir.y < 0)
 	{
 		r->dir.y = -1;
-		r->len.y = (r->start.y - (r->map.y)) * r->step.y;
+		r->len.y = (r->start.y - r->map.y) * r->step.y;
 	}
 	if (r->dir.y > 0)
 	{

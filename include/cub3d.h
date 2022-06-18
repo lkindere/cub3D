@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/18 13:25:49 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/18 14:09:49 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,6 @@ typedef enum s_speed
 	SNEAK = 1,
 	DASH = 4
 }	t_speed;
-
-/**
- * @param angle angle of the ray
- * @param s starting offset in player's block
- * @param r position being checked, iterates
- * @param d delta in directions, basically direction vector
- * @param p starting position
- * @param o offset in x and y directions
- */
 
 typedef struct s_textures
 {
@@ -120,7 +111,5 @@ t_vec_int	screen_bounds(int x, int y);
 
 void	safe_pixel(mlx_image_t *image, t_vec vec, uint32_t color);
 void	draw_line(mlx_image_t *image, t_vec p1, t_vec p2, uint32_t color);
-
-void	vec_ftoi(t_vec *vec);
 
 #endif
