@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/18 12:05:30 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/18 13:50:21 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		mlx_close_window(data->mlx);
 	if (keydata.key == MLX_KEY_R)
 	{
-		data->p_x = 2 * data->ts;
-		data->p_y = 2 * data->ts;
+		data->p_x = 2.5;
+		data->p_y = 2.5;
 	}
 	if (keydata.key == MLX_KEY_F && keydata.action == MLX_PRESS)
 		player_dash(data);

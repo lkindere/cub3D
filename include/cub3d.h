@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/17 21:15:55 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/18 13:25:49 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,6 @@ typedef enum s_speed
  * @param p starting position
  * @param o offset in x and y directions
  */
-
-typedef struct s_ray
-{
-	float	angle;
-	t_vec		s;//starting offset
-	t_vec		r;//iterates
-	t_vec		d;//maybe not needed
-	t_vec		p;//maybe not needed
-	t_vec		o;//later offset
-	t_vec_int	m;
-}	t_ray;
 
 typedef struct s_textures
 {
