@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 20:48:25 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/17 22:49:46 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/18 07:39:09 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void safe_pixel(mlx_image_t *image, t_vec vec, uint32_t color)
 	t_vec_int	bounds;
 
 	bounds = screen_bounds(-1, -1);
-	if (vec.x < 1 || vec.x > bounds.x)
+	if (vec.x < 1 || vec.x > bounds.x - 1)
 		return ;
-	if (vec.y < 1 || vec.y > bounds.y)
+	if (vec.y < 1 || vec.y > bounds.y - 1)
 		return ;
 	mlx_put_pixel(image, vec.x, vec.y, color);
 }
@@ -86,6 +86,9 @@ void	draw_line(mlx_image_t *image, t_vec p1, t_vec p2, uint32_t color)
 	line.p2 = p2;
 	dist.x = fabs(p1.x - p2.x);
 	dist.y = fabs(p1.y - p2.y);
+	if (fabs(p1.x) > 5000 || fabs(p1.y) > 5000
+		|| fabs(p2.x) > 5000 || fabs(p2.y) > 5000)
+		return ;
 	if (dist.x >= dist.y)
 	{
 		line.step = dist.y / dist.x;
