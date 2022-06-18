@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 22:58:23 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/17 20:48:59 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/18 11:48:38 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,26 @@ t_vec	v_norm(t_vec vec)
 float	v_dot(t_vec a, t_vec b)
 {
 	return (sqrt(a.x * b.x + a.y + b.y));
+}
+
+//Returns a vector from x y
+t_vec	set_vector(float x, float y)
+{
+	t_vec	vec;
+
+	vec.x = x;
+	vec.y = y;
+	return (vec);
+}
+
+//Returns a vector from x y
+t_vec_int	set_vector_int(int x, int y)
+{
+	t_vec_int	vec;
+
+	vec.x = x;
+	vec.y = y;
+	return (vec);
 }
 
 //Normalizes a float vector to int value

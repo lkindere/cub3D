@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_utils.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 22:58:40 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/16 23:30:11 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/18 11:48:59 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,8 @@ typedef struct s_vec_int
 float	v_len(t_vec vec);
 t_vec	v_norm(t_vec vec);
 float	v_dot(t_vec a, t_vec b);
+
+t_vec		set_vector(float x, float y);
+t_vec_int	set_vector_int(int x, int y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/18 09:00:51 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/18 12:05:30 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	play_dir_line(t_data *data)
 
 	p1.x = data->p_x * data->ts;
 	p1.y = data->p_y * data->ts;
-	p2.x = p1.x + data->d_x * 64;
-	p2.y = p1.y + data->d_y * 64;
+	p2.x = p1.x + data->d_x * 32;
+	p2.y = p1.y + data->d_y * 32;
 	draw_line(data->rays, p1, p2, 0x00FF00FF);
 }
 

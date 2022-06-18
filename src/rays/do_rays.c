@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 06:29:16 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/18 10:45:57 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/18 13:19:33 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,29 +45,28 @@ void	do_rays(t_data *data)
 	t_vec		dir;
 	t_vec		len;
 	t_vec		hit;
+	float		distance;
 
-	map.x = data->p_x;
-	map.y = data->p_y;
-	start.x = data->p_x;
-	start.y = data->p_y;
-	dir.x = data->d_x;
-	dir.y = data->d_y;
+	map = set_vector_int(data->p_x, data->p_y);
+	start = set_vector(data->p_x, data->p_y);
+	dir = set_vector(data->d_x, data->d_y);
 
-	printf("Angle: %f, d_x: %f, d_y: %f, p_x: %f, p_y: %f\n", 
-		data->angle, data->d_x, data->d_y, data->p_x, data->p_y);
+	// printf("Angle: %f, d_x: %f, d_y: %f, p_x: %f, p_y: %f\n\n", 
+	// 	data->angle, data->d_x, data->d_y, data->p_x, data->p_y);
 		
 	step.x = sqrt(1 + (dir.y / dir.x) * (dir.y / dir.x));	//Unit step in x direction
 	step.y = sqrt(1 + (dir.x / dir.y) * (dir.x / dir.y));	//Unit step in y direction
 
+	printf("Unit step X: %f, Y: %f\n\n", step.x, step.y);
 	if (dir.x < 0)
 	{
 		dir.x = -1;
-		len.x = (start.x - (map.x + 1)) * step.x;
+		len.x = (start.x - (map.x)) * step.x;
 	}
 	if (dir.x > 0)
 	{
 		dir.x = 1;
-		len.x = ((map.x) - start.x) * step.x;
+		len.x = ((float)map.x + 1 - start.x) * step.x;
 	}
 	if (dir.y < 0)
 	{
@@ -77,27 +76,23 @@ void	do_rays(t_data *data)
 	if (dir.y > 0)
 	{
 		dir.y = 1;
-		len.y = (map.y + 1 - start.y) * step.y;
+		len.y = ((float)map.y + 1 - start.y) * step.y;
 	}
-
-	printf("\nDist X: %f, dist Y: %f\n", len.x, len.y);
-	printf("Step X: %f, step Y: %f\n\n", step.x, step.y);
 	t_vec	player;
-	t_vec	wall;
 
-	player.x = (data->p_x) * 64;
-	player.y = (data->p_y) * 64;
-
+	player = set_vector(data->p_x * 64, data->p_y * 64);
 	while (1)
 	{
 		if (len.x < len.y)
 		{
 			map.x += dir.x;
+			distance = len.x;
 			len.x += step.x;
 		}
-		if (len.y < len.x)
+		else if (len.y < len.x)
 		{
 			map.y += dir.y;
+			distance = len.y;
 			len.y += step.y;
 		}
 		if (map.x >= data->map_->width || map.y >= data->map_->height
@@ -105,20 +100,9 @@ void	do_rays(t_data *data)
 			break ;
 		if (data->map[map.y][map.x] == '1')
 		{
-			printf("x len: %f, y len: %f\n", len.x, len.y);
-			if (len.x < len.y)
-			{
-				hit.x = (start.x) * 64 + data->d_x * (len.x * 64); 
-				hit.y = (start.y) * 64 + data->d_y * (len.x * 64);
-				draw_line(data->rays, player, hit, 0xFF0000FF);
-			}
-			// if (len.y < len.x)
-			// {
-			// 	hit.x = (start.x) * 64 + data->d_x * (len.y * 64);
-			// 	hit.y = (start.y) * 64 + data->d_y * (len.y * 64);
-			// 	draw_line(data->rays, player, hit, 0xFF0000FF);
-			// }
-			printf("Hit x: %f, y: %f\n", hit.x, hit.y);
+			hit.x = (start.x) * 64 + data->d_x * (distance * 64); 
+			hit.y = (start.y) * 64 + data->d_y * (distance * 64);
+			draw_line(data->rays, player, hit, 0xFF0000FF);
 			break ;
 		}
 	}

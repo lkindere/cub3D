@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/18 09:11:04 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/18 12:34:21 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ void	copy_map(t_data *data, t_map *map)
 	data->angle = data->map_->position * M_PI_2 * -1 + M_PI_2;
 	data->d_x = cos(data->angle);
 	data->d_y = sin(data->angle);
-	data->p_x = map->pos_x + data->ps / 2;
-	data->p_y = map->pos_y + data->ps / 2;
+	data->p_x = map->pos_x + 0.5;
+	data->p_y = map->pos_y + 0.5;
+	// printf("PX PY: %f %f\n", data->p_x, data->p_y);
+	// exit(0);
 	mlx_set_window_size(data->mlx, map->width * data->ts,
 		map->height * data->ts);
 }
