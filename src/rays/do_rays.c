@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 06:29:16 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/18 07:43:07 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/18 10:45:57 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	do_rays(t_data *data)
 	t_vec		start;
 	t_vec		dir;
 	t_vec		len;
+	t_vec		hit;
 
 	map.x = data->p_x;
 	map.y = data->p_y;
@@ -55,41 +56,76 @@ void	do_rays(t_data *data)
 	printf("Angle: %f, d_x: %f, d_y: %f, p_x: %f, p_y: %f\n", 
 		data->angle, data->d_x, data->d_y, data->p_x, data->p_y);
 		
-	step.x = sqrt(1 + (dir.y / dir.x) * (dir.y / dir.x));
-	step.y = sqrt(1 + (dir.x / dir.y) * (dir.x / dir.y));
+	step.x = sqrt(1 + (dir.y / dir.x) * (dir.y / dir.x));	//Unit step in x direction
+	step.y = sqrt(1 + (dir.x / dir.y) * (dir.x / dir.y));	//Unit step in y direction
 
 	if (dir.x < 0)
-		len.x = (start.x - map.x) * step.x;
+	{
+		dir.x = -1;
+		len.x = (start.x - (map.x + 1)) * step.x;
+	}
 	if (dir.x > 0)
-		len.x = ((float)(map.x + 1) - start.x) * step.x;
+	{
+		dir.x = 1;
+		len.x = ((map.x) - start.x) * step.x;
+	}
 	if (dir.y < 0)
-		len.y = (start.y - map.y) * step.y;
+	{
+		dir.y = -1;
+		len.y = (start.y - (map.y)) * step.y;
+	}
 	if (dir.y > 0)
-		len.y = ((float)start.y + 1 - start.y) * step.y;
+	{
+		dir.y = 1;
+		len.y = (map.y + 1 - start.y) * step.y;
+	}
 
 	printf("\nDist X: %f, dist Y: %f\n", len.x, len.y);
 	printf("Step X: %f, step Y: %f\n\n", step.x, step.y);
-
-
 	t_vec	player;
 	t_vec	wall;
 
 	player.x = (data->p_x) * 64;
 	player.y = (data->p_y) * 64;
-	if (len.x < len.y)
+
+	while (1)
 	{
-		wall.x = player.x + (sin(data->angle * -1 + M_PI_2) * (len.x * 64));
-		wall.y = player.y + (cos(data->angle * -1 + M_PI_2) * (len.x * 64));
-		draw_line(data->rays, player, wall, 0x0000FFFF);
+		if (len.x < len.y)
+		{
+			map.x += dir.x;
+			len.x += step.x;
+		}
+		if (len.y < len.x)
+		{
+			map.y += dir.y;
+			len.y += step.y;
+		}
+		if (map.x >= data->map_->width || map.y >= data->map_->height
+			|| map.x < 0 || map.y < 0)
+			break ;
+		if (data->map[map.y][map.x] == '1')
+		{
+			printf("x len: %f, y len: %f\n", len.x, len.y);
+			if (len.x < len.y)
+			{
+				hit.x = (start.x) * 64 + data->d_x * (len.x * 64); 
+				hit.y = (start.y) * 64 + data->d_y * (len.x * 64);
+				draw_line(data->rays, player, hit, 0xFF0000FF);
+			}
+			// if (len.y < len.x)
+			// {
+			// 	hit.x = (start.x) * 64 + data->d_x * (len.y * 64);
+			// 	hit.y = (start.y) * 64 + data->d_y * (len.y * 64);
+			// 	draw_line(data->rays, player, hit, 0xFF0000FF);
+			// }
+			printf("Hit x: %f, y: %f\n", hit.x, hit.y);
+			break ;
+		}
 	}
-	if (len.y < len.x)
-	{
-		wall.x = player.x + (sin(data->angle * -1 + M_PI_2) * (len.y * 64));
-		wall.y = player.y + (cos(data->angle * -1 + M_PI_2) * (len.y * 64));
-		draw_line(data->rays, player, wall, 0xFF0000FF);
-	}
-	// printf("Sin of data angle: %f\n", sin(data->angle));
-	// printf("Cos of data angle: %f\n", cos(data->angle));
+
+	// wall.x = player.x + (sin(data->angle * -1 + M_PI_2) * (len.y * 64));
+	// wall.y = player.y + (cos(data->angle * -1 + M_PI_2) * (len.y * 64));
+	// draw_line(data->rays, player, wall, 0xFF0000FF);
 	// printf("Player x: %f, player y: %f\n", player.x, player.y);
 	// printf("Wall x: %f, wall y: %f\n", wall.x, wall.y);
 }

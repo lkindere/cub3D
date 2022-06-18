@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/17 21:13:52 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/18 09:11:04 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	copy_map(t_data *data, t_map *map)
 	data->map = map->map;
 	map->map = NULL;
 	data->map_ = map;
-	data->angle = data->map_->position * M_PI_2;
+	data->angle = data->map_->position * M_PI_2 * -1 + M_PI_2;
 	data->d_x = cos(data->angle);
 	data->d_y = sin(data->angle);
 	data->p_x = map->pos_x + data->ps / 2;

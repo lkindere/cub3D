@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/18 07:39:29 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/18 09:00:51 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	hook(void* param)
 		// printf("Px py %f %f\n", data->p_x, data->p_y);
 	// }
 	i++;
-	// play_dir_line(data);
+	play_dir_line(data);
 	data->p_img->instances[0].x = (data->p_x - data->ps / 2 )* data->ts;
 	data->p_img->instances[0].y = (data->p_y - data->ps / 2) * data->ts;
 }
