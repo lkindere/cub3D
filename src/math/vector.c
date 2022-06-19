@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 22:58:23 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/18 11:48:38 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/18 14:56:13 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,12 @@ t_vec	set_vector(float x, float y)
 	vec.x = x;
 	vec.y = y;
 	return (vec);
+}
+
+//Returns the distance between 2 points
+float	get_distance(t_vec p1, t_vec p2)
+{
+	return (sqrtf(powf(p1.x - p2.x, 2) + powf(p1.y - p2.y, 2)));
 }
 
 //Returns a vector from x y

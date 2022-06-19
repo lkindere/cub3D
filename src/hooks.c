@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/18 14:07:38 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/19 01:48:11 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	hook(void* param)
 	data->angle = angle_fit(data->angle);
 	ft_memset(data->rays->pixels, 0,
 		data->map_->width * data->ts * data->map_->height * data->ts * sizeof(int));
-	play_dir_line(data);
-	do_rays(data);
+	do_rays(data, set_vector(data->p_x, data->p_y), set_vector(data->d_x, data->d_y), -1);
 	data->p_img->instances[0].x = (data->p_x - data->ps / 2 )* data->ts;
 	data->p_img->instances[0].y = (data->p_y - data->ps / 2) * data->ts;
+	play_dir_line(data);
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)

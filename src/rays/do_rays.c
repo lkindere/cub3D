@@ -6,35 +6,15 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 06:29:16 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/18 13:59:08 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/19 01:28:54 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//Map: 		int representation of starting tile
-//Start: 	Starting x and y
-//Dir:		Starting direction
-//Len:		Length in x or y
-//Step:		Unit step size in x or y
-//Hit:		Wall hit x and y
-//Distance:	Distance to wall hit
-typedef struct s_ray
+static t_ray	ray_init(t_data *data, t_ray *r)
 {
-	t_vec_int	map;
-	t_vec		start;
-	t_vec		dir;
-	t_vec		len;
-	t_vec		step;
-	t_vec		hit;
-	float		distance;
-}	t_ray;
-
-t_ray	ray_init(t_data *data, t_ray *r)
-{
-	r->map = set_vector_int(data->p_x, data->p_y);
-	r->start = set_vector(data->p_x, data->p_y);
-	r->dir = set_vector(data->d_x, data->d_y);
+	r->map = set_vector_int(r->start.x, r->start.y);
 	r->step.x = sqrt(1 + (r->dir.y / r->dir.x) * (r->dir.y / r->dir.x));
 	r->step.y = sqrt(1 + (r->dir.x / r->dir.y) * (r->dir.x / r->dir.y));
 	if (r->dir.x < 0)
@@ -59,7 +39,7 @@ t_ray	ray_init(t_data *data, t_ray *r)
 	}
 }
 
-void	ray_step(t_ray *r)
+static void	ray_step(t_ray *r)
 {
 	if (r->len.x < r->len.y)
 	{
@@ -75,14 +55,18 @@ void	ray_step(t_ray *r)
 	}
 }
 
-void	do_rays(t_data *data)
+t_ray	do_rays(t_data *data, t_vec start, t_vec dir, float range)
 {
 	t_ray	r;
 
+	r.dir = dir;
+	r.start = start;
 	ray_init(data, &r);
 	while (1)
 	{
 		ray_step(&r);
+		if (range != -1 && r.distance > range)
+			break ;
 		if (r.map.x >= data->map_->width || r.map.y >= data->map_->height
 			|| r.map.x < 0 || r.map.y < 0)
 			break ;
@@ -90,10 +74,11 @@ void	do_rays(t_data *data)
 		{
 			r.hit.x = (r.start.x) * 64 + data->d_x * (r.distance * 64);
 			r.hit.y = (r.start.y) * 64 + data->d_y * (r.distance * 64);
-			draw_line(data->rays, set_vector(data->p_x * 64, data->p_y * 64),
-				r.hit, 0xFF0000FF);
-			printf("Distance to wall: %f\n", r.distance);
-			break ;
+			// draw_line(data->rays, set_vector(data->p_x * 64, data->p_y * 64),
+			// 	r.hit, 0xFF0000FF);
+			return (r);
 		}
 	}
+	r.hit = set_vector(-1, -1);
+	return (r);
 }
