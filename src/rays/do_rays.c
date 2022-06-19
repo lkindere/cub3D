@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 06:29:16 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/19 01:28:54 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/19 23:28:39 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,14 @@ t_ray	do_rays(t_data *data, t_vec start, t_vec dir, float range)
 			break ;
 		if (data->map[r.map.y][r.map.x] == '1')
 		{
-			r.hit.x = (r.start.x) * 64 + data->d_x * (r.distance * 64);
-			r.hit.y = (r.start.y) * 64 + data->d_y * (r.distance * 64);
-			// draw_line(data->rays, set_vector(data->p_x * 64, data->p_y * 64),
-			// 	r.hit, 0xFF0000FF);
+			r.hit.x = r.start.x + data->d_x * r.distance;
+			r.hit.y = r.start.y + data->d_y * r.distance;
+
+			t_vec	hit64;
+			hit64.x = (r.start.x) * 64 + data->d_x * (r.distance * 64);
+			hit64.y = (r.start.y) * 64 + data->d_y * (r.distance * 64);
+			draw_line(data->rays, set_vector(data->p_x * 64, data->p_y * 64),
+				hit64, 0xFF0000FF);
 			return (r);
 		}
 	}
