@@ -6,7 +6,7 @@
 #    By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 23:16:18 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/17 21:16:45 by lkindere         ###   ########.fr        #
+#    Updated: 2022/06/20 02:06:08 by lkindere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC_M :=	main.c						\
 			collision.c					\
 			vector.c 					\
 			draw.c						\
+			draw_rays.c					\
 
 PARSE_S := 	parser.c					\
 			inits.c 					\

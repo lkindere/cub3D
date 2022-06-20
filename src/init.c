@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 00:45:43 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 02:01:55 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	copy_map(t_data *data, t_map *map)
 	data->d_y = sin(data->angle);
 	data->p_x = map->pos_x + 0.5;
 	data->p_y = map->pos_y + 0.5;
-	mlx_set_window_size(data->mlx, map->width * data->ts,
+	mlx_set_window_size(data->mlx, map->width * data->ts * 2,
 		map->height * data->ts);
 }
 
@@ -72,6 +72,10 @@ int	init_rays(t_data *data, t_map *map)
 	if (data->rays == NULL)
 		return (ERROR_MALLOC);
 	mlx_image_to_window(data->mlx, data->rays, 0, 0);
+	data->draw = mlx_new_image(data->mlx, map->width * data->ts, map->height * data->ts);
+	if (data->draw == NULL)
+		return (ERROR_MALLOC);
+	mlx_image_to_window(data->mlx, data->draw, map->width * data->ts, 0);
 	return (0);
 }
 

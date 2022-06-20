@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 00:45:46 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 03:50:18 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,44 @@ void	play_dir_line(t_data *data)
 	draw_line(data->rays, p1, p2, 0x00FF00FF);
 }
 
+void	reset_images(t_data *data)
+{
+	ft_memset(data->rays->pixels, 0,
+		data->map_->width * data->ts * data->map_->height * data->ts * sizeof(int));
+	ft_memset(data->draw->pixels, 0,
+		data->map_->width * data->ts * data->map_->height * data->ts * sizeof(int));
+	data->p_img->instances[0].x = (data->p_x - data->ps / 2) * data->ts;
+	data->p_img->instances[0].y = (data->p_y - data->ps / 2) * data->ts;
+	play_dir_line(data);
+}
+
+void	cast_rays(t_data *data)
+{
+	float	ray_step;
+	float	pixel_step;
+	float	temp_angle;
+	int		raycount;
+	t_vec	start;
+	t_vec	dir;
+	t_ray	r;
+
+	ray_step = 0.0025;
+	raycount = 300;
+	start = set_vector(data->map_->width * data->ts / 2, data->map_->height * data->ts / 2);
+	temp_angle = angle_fit(data->angle - (ray_step * raycount / 2));
+	pixel_step = (float)data->rays->width / raycount;
+	start.x -= pixel_step * raycount / 2;
+	while (raycount)
+	{
+		dir = set_vector(cos(temp_angle), sin(temp_angle));
+		r = do_rays(data, set_vector(data->p_x, data->p_y), dir, -1);
+		draw_rays(data, r, start);
+		temp_angle = angle_fit(temp_angle += ray_step);
+		start.x += pixel_step;
+		raycount--;
+	}
+}
+
 void	hook(void* param)
 {
 	t_data	*data;
@@ -30,12 +68,8 @@ void	hook(void* param)
 	player_speed(data);
 	player_rotate(data);
 	data->angle = angle_fit(data->angle);
-	ft_memset(data->rays->pixels, 0,
-		data->map_->width * data->ts * data->map_->height * data->ts * sizeof(int));
-	do_rays(data, set_vector(data->p_x, data->p_y), set_vector(data->d_x, data->d_y), -1);
-	data->p_img->instances[0].x = (data->p_x - data->ps / 2) * data->ts;
-	data->p_img->instances[0].y = (data->p_y - data->ps / 2) * data->ts;
-	play_dir_line(data);
+	reset_images(data);
+	cast_rays(data);
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)

@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 01:43:20 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 02:47:53 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_data
 	mlx_image_t	*walls;
 	t_map		*map_;
 	mlx_image_t	*rays;
+	mlx_image_t	*draw;
 	t_textures	textures;
 }	t_data;
 
@@ -103,6 +104,7 @@ typedef struct s_data
 void		hook(void *param);
 void		key_hook(mlx_key_data_t keydata, void *param);
 t_ray		do_rays(t_data *data, t_vec start, t_vec dir, float range);
+void		draw_rays(t_data *data, t_ray r, t_vec start);
 
 /*	inits				*/
 
