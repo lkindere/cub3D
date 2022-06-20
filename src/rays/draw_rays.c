@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 02:05:12 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/20 11:24:04 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 12:06:58 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	draw_rays(t_data *data, t_ray r, t_vec start)
 	t_vec	up;
 	t_vec	down;
 
-	height = 1.0 / r.distance * data->map_->height * 2;
-	up = vector(start.x, start.y + height / 2 * TS);
-	down = vector(start.x, start.y - height / 2 * TS);
+	height = 1.0 / r.distance * HEIGHT;
+	up = vector(start.x, start.y + height / 2);
+	down = vector(start.x, start.y - height / 2);
 	draw_line(data->draw, start, up, 0x00FF00FF);
 	draw_line(data->draw, start, down, 0x00FF00FF);
 }

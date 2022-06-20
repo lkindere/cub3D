@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 11:27:33 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 13:26:01 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@
 # include <memory.h>
 # include <fcntl.h>
 
-# define WIDTH 920
-# define HEIGHT 480
-# define TS 64
-# define PS 0.25
+# define WIDTH 1024
+# define HEIGHT 768
+# define MM 0.3
+# define TS 1
+# define PS 0.5
+# define SPEED_MULTIPLIER 0.05
 
 //Map: 		int representation of starting tile
 //Start: 	Starting x and y
@@ -60,7 +62,7 @@ typedef enum s_speed
 	WALK = 2,
 	SPRINT = 3,
 	SNEAK = 1,
-	DASH = 20
+	DASH = 15
 }	t_speed;
 
 typedef struct s_textures
@@ -90,6 +92,7 @@ typedef struct s_data
 	float		angle;
 	t_vec		dir;
 	t_vec		player;
+	int			tsm;
 	t_map		*map_;
 }	t_data;
 

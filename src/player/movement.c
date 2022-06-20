@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 05:47:59 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/20 11:13:57 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 13:19:31 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	player_move(t_data *data)
 
 void	player_dash(t_data *data)
 {
-	data->speed = 0.1 * DASH;
+	data->speed = SPEED_MULTIPLIER * DASH;
 	player_move(data);
 }
 
@@ -47,10 +47,10 @@ void	player_speed(t_data *data)
 {
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT_SHIFT)
 		&& !mlx_is_key_down(data->mlx, MLX_KEY_C))
-		data->speed = 0.1 * SPRINT;
+		data->speed = SPEED_MULTIPLIER * SPRINT;
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_C)
 		&& !mlx_is_key_down(data->mlx, MLX_KEY_LEFT_SHIFT))
-		data->speed = 0.1 * SNEAK;
+		data->speed = SPEED_MULTIPLIER * SNEAK;
 	else
-		data->speed = 0.1 * WALK;
+		data->speed = SPEED_MULTIPLIER * WALK;
 }

@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 06:29:16 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 11:23:36 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 12:59:05 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ t_ray	do_rays(t_data *data, t_vec start, t_vec dir, float range)
 			r.hit.y = r.start.y + dir.y * r.distance;
 
 			t_vec	hit64;
-			hit64.x = (r.start.x) * TS + dir.x * (r.distance * TS);
-			hit64.y = (r.start.y) * TS + dir.y * (r.distance * TS);
-			draw_line(data->rays, mult_vector(data->player, TS),
+			hit64.x = (r.start.x) * data->tsm + dir.x * (r.distance * data->tsm);
+			hit64.y = (r.start.y) * data->tsm + dir.y * (r.distance * data->tsm);
+			draw_line(data->rays, mult_vector(data->player, data->tsm),
 				hit64, 0xFF0000FF);
 			return (r);
 		}

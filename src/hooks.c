@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 11:22:44 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 13:17:59 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ void	play_dir_line(t_data *data)
 	t_vec	p1;
 	t_vec	p2;
 
-	p1 = mult_vector(data->player, TS);
-	p2 = add_vector(p1, vector(data->dir.x * TS, data->dir.y * TS));
+	p1 = mult_vector(data->player, data->tsm);
+	p2 = add_vector(p1, vector(data->dir.x * data->tsm, data->dir.y * data->tsm));
 	draw_line(data->rays, p1, p2, 0x00FF00FF);
 }
 
 void	reset_images(t_data *data)
 {
 	ft_memset(data->rays->pixels, 0,
-		data->map_->width * TS * data->map_->height * TS * sizeof(int));
+		data->rays->width * data->rays->height * sizeof(int));
 	ft_memset(data->draw->pixels, 0,
-		data->map_->width * TS * data->map_->height * TS * sizeof(int));
-	data->p_img->instances[0].x = (data->player.x - PS / 2) * TS;
-	data->p_img->instances[0].y = (data->player.y - PS / 2) * TS;
+		WIDTH * HEIGHT * sizeof(int));
+	data->p_img->instances[0].x = (data->player.x - PS / 2) * data->tsm;
+	data->p_img->instances[0].y = (data->player.y - PS / 2) * data->tsm;
 	play_dir_line(data);
 }
 
@@ -55,13 +55,15 @@ void	cast_rays(t_data *data)
 	i = -1;
 	angle_offset = 0;
 	pixel_offset = 0;
-	rc.ray_step = 1.0 / data->draw->width;
-	rc.raycount = data->draw->width;
-	rc.pixel = vector(data->draw->width / 2, data->draw->height / 2);
+	rc.ray_step = 1.0 / WIDTH;
+	rc.raycount = WIDTH;
+	rc.pixel = vector(WIDTH / 2, HEIGHT / 2);
 	rc.angle = data->angle;
-	rc.pixel_step = (float)data->draw->width / rc.raycount;
+	rc.pixel_step = (float)WIDTH / rc.raycount;
 	while (++i < rc.raycount / 2)
 	{
+		if (mlx_is_key_down(data->mlx, MLX_KEY_Y))
+			return ;
 		rc.dir = vector(cos(rc.angle + angle_offset), sin(rc.angle + angle_offset));
 		rc.ray = do_rays(data, data->player, rc.dir, -1);
 		rc.ray.distance *= cos(rc.angle + angle_offset - data->angle);
@@ -73,7 +75,7 @@ void	cast_rays(t_data *data)
 		
 		angle_offset += rc.ray_step;
 		pixel_offset += rc.pixel_step;
-		rc.ray_step -= rc.ray_step / 1000;
+		rc.ray_step -= rc.ray_step / 2000;
 	}
 }
 

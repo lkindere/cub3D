@@ -6,16 +6,17 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 11:31:27 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 13:00:27 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	init_data(t_data *data)
+int	init_data(t_data *data, t_map *map)
 {
 	data->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
-	data->p_img = mlx_new_image(data->mlx, 16, 16);
+	data->tsm = WIDTH * MM / (map->height + map->width / 2.0);
+	data->p_img = mlx_new_image(data->mlx, data->tsm * PS, data->tsm * PS);
 	if (data->p_img == NULL)
 		return (ERROR_MALLOC);
 	ft_memset(data->p_img->pixels, 255,
@@ -32,7 +33,7 @@ void	copy_map(t_data *data, t_map *map)
 	data->angle = data->map_->position * M_PI_2 * -1 + M_PI_2;
 	data->dir = vector(cos(data->angle), sin(data->angle));
 	data->player = vector(map->pos_x + 0.5, map->pos_y + 0.5);
-	mlx_set_window_size(data->mlx, map->width * TS * 2, map->height * TS);
+	mlx_set_window_size(data->mlx, WIDTH, HEIGHT);
 }
 
 int	init_textures(t_data *data)
@@ -53,7 +54,7 @@ int	init_walls(t_data *data)
 {
 	mlx_image_t	*walls;
 
-	walls = mlx_new_image(data->mlx, 63, 63);
+	walls = mlx_new_image(data->mlx, data->tsm, data->tsm);
 	if (walls == NULL)
 		return (ERROR_MALLOC);
 	ft_memset(walls->pixels, 180, walls->width * walls->height * sizeof(int));
@@ -63,20 +64,20 @@ int	init_walls(t_data *data)
 
 int	init_rays(t_data *data, t_map *map)
 {
-	data->rays = mlx_new_image(data->mlx, map->width * TS, map->height * TS);
+	data->rays = mlx_new_image(data->mlx, map->width * data->tsm, map->height * data->tsm);
 	if (data->rays == NULL)
 		return (ERROR_MALLOC);
 	mlx_image_to_window(data->mlx, data->rays, 0, 0);
-	data->draw = mlx_new_image(data->mlx, map->width * TS, map->height * TS);
+	data->draw = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (data->draw == NULL)
 		return (ERROR_MALLOC);
-	mlx_image_to_window(data->mlx, data->draw, map->width * TS, 0);
+	mlx_image_to_window(data->mlx, data->draw, 0, 0);
 	return (0);
 }
 
 int	init(t_data *data, t_map *map)
 {
-	if (init_data(data) != 0)
+	if (init_data(data, map) != 0)
 		return (1);
 	copy_map(data, map);
 	if (init_textures(data) != 0)
