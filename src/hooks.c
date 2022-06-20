@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 03:50:18 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 08:06:31 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ void	cast_rays(t_data *data)
 	{
 		dir = set_vector(cos(temp_angle), sin(temp_angle));
 		r = do_rays(data, set_vector(data->p_x, data->p_y), dir, -1);
+		r.distance *= cos(temp_angle - data->angle);
 		draw_rays(data, r, start);
 		temp_angle = angle_fit(temp_angle += ray_step);
+		
 		start.x += pixel_step;
 		raycount--;
 	}
