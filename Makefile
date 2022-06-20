@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+         #
+#    By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 23:16:18 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/16 06:45:44 by mmeising         ###   ########.fr        #
+#    Updated: 2022/06/20 02:06:08 by lkindere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # gcc main.c libmlx42.a -lglfw -L "/Users/$USER/.brew/opt/glfw/lib" -I ./include/
 
-VPATH = src src/parse src/player src/rays
+VPATH = src src/parse src/player src/rays src/math src/draw
 
 NAME := ./cub3d
 LIBFT_PATH := ./libs/libft/
@@ -20,7 +20,7 @@ LIBFT := $(LIBFT_PATH)libft.a
 MLX_PATH := ./libs/MLX42/
 MLX := $(MLX_PATH)libmlx42.a
 
-CFLAGS ?= -Wall -Werror -Wextra
+# CFLAGS ?= -Wall -Werror -Wextra
 
 SRC_M :=	main.c						\
 			utils.c						\
@@ -30,6 +30,9 @@ SRC_M :=	main.c						\
 			do_rays.c					\
 			movement.c					\
 			collision.c					\
+			vector.c 					\
+			draw.c						\
+			draw_rays.c					\
 
 PARSE_S := 	parser.c					\
 			inits.c 					\

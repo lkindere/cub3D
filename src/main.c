@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/16 06:48:40 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/20 12:48:50 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static float tsw;
+static float tsh;
 
 void	put_walls(t_data *data, char **map)
 {
@@ -24,7 +27,7 @@ void	put_walls(t_data *data, char **map)
 		while (map[i][j])
 		{
 			if (map[i][j] == '1')
-				mlx_image_to_window(data->mlx, data->walls, j * data->ts, i * data->ts);
+				mlx_image_to_window(data->mlx, data->walls, j * data->tsm, i * data->tsm);
 			j++;
 		}
 		i++;
@@ -41,7 +44,7 @@ int32_t	main(int argc, char **argv)
 	if (init(&data, &map) != 0)
 		return (1);
 	put_walls(&data, data.map);
-	mlx_image_to_window(data.mlx, data.p_img, data.p_x, data.p_y);
+	mlx_image_to_window(data.mlx, data.p_img, data.player.x, data.player.y);
 	mlx_key_hook(data.mlx, key_hook, &data);
 	mlx_loop_hook(data.mlx, &hook, &data);
 	mlx_loop(data.mlx);

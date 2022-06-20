@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 05:47:59 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/16 05:54:43 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 13:19:31 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	player_move(t_data *data)
 
     if (mlx_is_key_down(data->mlx, MLX_KEY_W)
 		&& !mlx_is_key_down(data->mlx, MLX_KEY_S))
-        check_collision(data, data->d_x, data->d_y);
+        check_collision(data, data->dir.x, data->dir.y);
     if (mlx_is_key_down(data->mlx, MLX_KEY_S)
 		&& !mlx_is_key_down(data->mlx, MLX_KEY_W))
-        check_collision(data, data->d_x * -1, data->d_y * -1);
+        check_collision(data, data->dir.x * -1, data->dir.y * -1);
     if (mlx_is_key_down(data->mlx, MLX_KEY_A)
 		&& !mlx_is_key_down(data->mlx, MLX_KEY_D))
         angle = data->angle - M_PI_2;
@@ -35,7 +35,7 @@ void	player_move(t_data *data)
 
 void	player_dash(t_data *data)
 {
-	data->speed = DASH;
+	data->speed = SPEED_MULTIPLIER * DASH;
 	player_move(data);
 }
 
@@ -47,10 +47,10 @@ void	player_speed(t_data *data)
 {
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT_SHIFT)
 		&& !mlx_is_key_down(data->mlx, MLX_KEY_C))
-		data->speed = SPRINT;
+		data->speed = SPEED_MULTIPLIER * SPRINT;
 	else if (mlx_is_key_down(data->mlx, MLX_KEY_C)
 		&& !mlx_is_key_down(data->mlx, MLX_KEY_LEFT_SHIFT))
-		data->speed = SNEAK;
+		data->speed = SPEED_MULTIPLIER * SNEAK;
 	else
-		data->speed = WALK;
+		data->speed = SPEED_MULTIPLIER * WALK;
 }

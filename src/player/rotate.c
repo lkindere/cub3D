@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 20:10:41 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/16 22:15:17 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/20 11:23:03 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,8 @@ void	player_rotate(t_data *data)
 			data->angle -= 0.1  * data->mlx->delta_time * 60;
 		if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 			data->angle += 0.1  * data->mlx->delta_time * 60;
-		// if (data->angle < 0)
-		// 	data->angle += PI2;
-		// if (data->angle > PI2)
-		// 	data->angle -= PI2;
-		data->d_x = cos(data->angle);
-		data->d_y = sin(data->angle);
+		data->angle = angle_fit(data->angle);
+		data->dir = vector(cos(data->angle), sin(data->angle));
 	}
 	player_move(data);
 }
