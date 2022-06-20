@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 08:06:31 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 10:26:20 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,32 +33,47 @@ void	reset_images(t_data *data)
 	play_dir_line(data);
 }
 
-void	cast_rays(t_data *data)
+typedef struct s_raycast
 {
+	int		raycount;
 	float	ray_step;
 	float	pixel_step;
-	float	temp_angle;
-	int		raycount;
-	t_vec	start;
+	float	angle;
+	t_vec	pixel;
 	t_vec	dir;
-	t_ray	r;
+	t_ray	ray;
+} t_raycast;
 
-	ray_step = 0.0025;
-	raycount = 300;
-	start = set_vector(data->map_->width * data->ts / 2, data->map_->height * data->ts / 2);
-	temp_angle = angle_fit(data->angle - (ray_step * raycount / 2));
-	pixel_step = (float)data->rays->width / raycount;
-	start.x -= pixel_step * raycount / 2;
-	while (raycount)
+
+void	cast_rays(t_data *data)
+{
+	t_raycast	rc;
+	float		angle_offset;
+	float		pixel_offset;
+	int			i;
+
+	i = -1;
+	angle_offset = 0;
+	pixel_offset = 0;
+	rc.ray_step = 1.0 / data->draw->width;
+	rc.raycount = data->draw->width;
+	rc.pixel = set_vector(data->draw->width / 2, data->draw->height / 2);
+	rc.angle = data->angle;
+	rc.pixel_step = (float)data->draw->width / rc.raycount;
+	while (++i < rc.raycount / 2)
 	{
-		dir = set_vector(cos(temp_angle), sin(temp_angle));
-		r = do_rays(data, set_vector(data->p_x, data->p_y), dir, -1);
-		r.distance *= cos(temp_angle - data->angle);
-		draw_rays(data, r, start);
-		temp_angle = angle_fit(temp_angle += ray_step);
+		rc.dir = set_vector(cos(rc.angle + angle_offset), sin(rc.angle + angle_offset));
+		rc.ray = do_rays(data, set_vector(data->p_x, data->p_y), rc.dir, -1);
+		rc.ray.distance *= cos(rc.angle + angle_offset - data->angle);
+		draw_rays(data, rc.ray, set_vector(rc.pixel.x + pixel_offset, rc.pixel.y));
+		rc.dir = set_vector(cos(rc.angle - angle_offset), sin(rc.angle - angle_offset));
+		rc.ray = do_rays(data, set_vector(data->p_x, data->p_y), rc.dir, -1);
+		rc.ray.distance *= cos(rc.angle - angle_offset - data->angle);
+		draw_rays(data, rc.ray, set_vector(rc.pixel.x - pixel_offset, rc.pixel.y));
 		
-		start.x += pixel_step;
-		raycount--;
+		angle_offset += rc.ray_step;
+		pixel_offset += rc.pixel_step;
+		rc.ray_step -= rc.ray_step / 1000;
 	}
 }
 
