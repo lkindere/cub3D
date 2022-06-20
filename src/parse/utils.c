@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:22:22 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/16 15:22:11 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 16:32:13 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,16 @@ void	print_map(t_map map)
 	printf("SP: %s\n", map.so);
 	printf("WE: %s\n", map.we);
 	printf("EA: %s\n", map.ea);
-	printf("Floor: %d\n", map.floor_color);
-	printf("R: %d, G: %d, B: %d\n\n",
-		(unsigned int)map.floor_color >> 16,
-		(unsigned int)(map.floor_color << 16) >> 24,
-		(unsigned int)(map.floor_color << 24) >> 24);
-	printf("Ceiling: %d\n", map.ceiling_color);
-	printf("R: %d, G: %d, B: %d\n\n",
-		(unsigned int)map.ceiling_color >> 16,
-		(unsigned int)(map.ceiling_color << 16) >> 24,
-		(unsigned int)(map.ceiling_color << 24) >> 24);
+	printf("Floor: %u\n", map.floor_color);
+	printf("R: %u, G: %u, B: %u\n\n",
+		map.floor_color >> 24,
+		(map.floor_color << 8) >> 24,
+		(map.floor_color << 16) >> 24);
+	printf("Ceiling: %u\n", map.ceiling_color);
+	printf("R: %u, G: %u, B: %u\n\n",
+		map.ceiling_color >> 24,
+		(map.ceiling_color << 8) >> 24,
+		(map.ceiling_color << 16) >> 24);
 	printf("Valid: %d\n", map.valid);
 	printf("\nMap:\n");
 	if (map.map)

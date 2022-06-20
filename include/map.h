@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 12:19:30 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/16 23:38:33 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/20 16:08:54 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ typedef struct s_map
 	char			*so;
 	char			*we;
 	char			*ea;
-	int				floor_color;
-	int				ceiling_color;
+	unsigned int	floor_color;
+	unsigned int	ceiling_color;
 	unsigned int	width;
 	unsigned int	height;
 	unsigned int	pos_x;

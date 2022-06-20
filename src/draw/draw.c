@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 20:48:25 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/18 07:39:09 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 17:03:08 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void safe_pixel(mlx_image_t *image, t_vec vec, uint32_t color)
 	t_vec_int	bounds;
 
 	bounds = screen_bounds(-1, -1);
+	if (vec.x > image->width || vec.y > image->height)
+		return ;
 	if (vec.x < 1 || vec.x > bounds.x - 1)
 		return ;
 	if (vec.y < 1 || vec.y > bounds.y - 1)

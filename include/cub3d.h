@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 13:26:01 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 17:49:33 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 
 # define WIDTH 1024
 # define HEIGHT 768
+# define TS 64
 # define MM 0.3
-# define TS 1
 # define PS 0.5
 # define SPEED_MULTIPLIER 0.05
 

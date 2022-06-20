@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 06:29:16 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 12:59:05 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 13:55:09 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_ray	do_rays(t_data *data, t_vec start, t_vec dir, float range)
 	ray_init(data, &r);
 	while (1)
 	{
+		// printf("While\n");
 		ray_step(&r);
 		if (range != -1 && r.distance > range)
 			break ;

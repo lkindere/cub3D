@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 13:17:59 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:24:45 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ void	cast_rays(t_data *data)
 	rc.pixel_step = (float)WIDTH / rc.raycount;
 	while (++i < rc.raycount / 2)
 	{
-		if (mlx_is_key_down(data->mlx, MLX_KEY_Y))
-			return ;
 		rc.dir = vector(cos(rc.angle + angle_offset), sin(rc.angle + angle_offset));
 		rc.ray = do_rays(data, data->player, rc.dir, -1);
 		rc.ray.distance *= cos(rc.angle + angle_offset - data->angle);
@@ -81,7 +79,9 @@ void	cast_rays(t_data *data)
 
 void	hook(void* param)
 {
-	t_data	*data;
+	uint32_t	color;
+	uint8_t		rgba[4];
+	t_data		*data;
 
 	data = param;
 	player_speed(data);

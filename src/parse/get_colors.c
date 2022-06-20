@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:25:22 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/14 20:01:20 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 16:26:31 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ static int	valid_format(char *line)
 
 //Returns 1 on valid color
 //Returns -1 on invalid
-static int	try_set_color(t_map *map, int *color, char *line)
+static int	try_set_color(t_map *map, unsigned int *color, char *line)
 {
-	int	i;
-	int	c;
-	int	rgb[3];
+	int				i;
+	int				c;
+	unsigned int	rgb[3];
 
 	i = 0;
 	c = 0;
@@ -68,7 +68,7 @@ static int	try_set_color(t_map *map, int *color, char *line)
 	}
 	if (rgb[0] > 255 || rgb[1] > 255 || rgb[2] > 255)
 		return (invalidate_map(map, INVALID_COLOR_FORMAT));
-	*color = ((rgb[0] << 16) + (rgb[1] << 8) + rgb[2]);
+	*color = ((rgb[0] << 24) + (rgb[1] << 16) + (rgb[2] << 8) + 255);
 	return (1);
 }
 
