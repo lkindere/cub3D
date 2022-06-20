@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 06:29:16 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 10:21:28 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 11:23:36 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_ray	ray_init(t_data *data, t_ray *r)
 {
-	r->map = set_vector_int(r->start.x, r->start.y);
+	r->map = vector_int(r->start.x, r->start.y);
 	r->step.x = sqrt(1 + (r->dir.y / r->dir.x) * (r->dir.y / r->dir.x));
 	r->step.y = sqrt(1 + (r->dir.x / r->dir.y) * (r->dir.x / r->dir.y));
 	if (r->dir.x < 0)
@@ -76,13 +76,13 @@ t_ray	do_rays(t_data *data, t_vec start, t_vec dir, float range)
 			r.hit.y = r.start.y + dir.y * r.distance;
 
 			t_vec	hit64;
-			hit64.x = (r.start.x) * 64 + dir.x * (r.distance * 64);
-			hit64.y = (r.start.y) * 64 + dir.y * (r.distance * 64);
-			draw_line(data->rays, set_vector(data->p_x * 64, data->p_y * 64),
+			hit64.x = (r.start.x) * TS + dir.x * (r.distance * TS);
+			hit64.y = (r.start.y) * TS + dir.y * (r.distance * TS);
+			draw_line(data->rays, mult_vector(data->player, TS),
 				hit64, 0xFF0000FF);
 			return (r);
 		}
 	}
-	r.hit = set_vector(-1, -1);
+	r.hit = vector(-1, -1);
 	return (r);
 }

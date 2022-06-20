@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 05:47:59 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/19 00:20:57 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 11:13:57 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	player_move(t_data *data)
 
     if (mlx_is_key_down(data->mlx, MLX_KEY_W)
 		&& !mlx_is_key_down(data->mlx, MLX_KEY_S))
-        check_collision(data, data->d_x, data->d_y);
+        check_collision(data, data->dir.x, data->dir.y);
     if (mlx_is_key_down(data->mlx, MLX_KEY_S)
 		&& !mlx_is_key_down(data->mlx, MLX_KEY_W))
-        check_collision(data, data->d_x * -1, data->d_y * -1);
+        check_collision(data, data->dir.x * -1, data->dir.y * -1);
     if (mlx_is_key_down(data->mlx, MLX_KEY_A)
 		&& !mlx_is_key_down(data->mlx, MLX_KEY_D))
         angle = data->angle - M_PI_2;

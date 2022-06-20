@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 20:10:41 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/19 02:31:18 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 11:23:03 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,7 @@ void	player_rotate(t_data *data)
 		if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 			data->angle += 0.1  * data->mlx->delta_time * 60;
 		data->angle = angle_fit(data->angle);
-		// if (data->angle < 0)
-		// 	data->angle += PI2;
-		// if (data->angle > PI2)
-		// 	data->angle -= PI2;
-		data->d_x = cos(data->angle);
-		data->d_y = sin(data->angle);
+		data->dir = vector(cos(data->angle), sin(data->angle));
 	}
 	player_move(data);
 }

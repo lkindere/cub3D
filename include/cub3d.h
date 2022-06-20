@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 02:47:53 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 11:27:33 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 
 # define WIDTH 920
 # define HEIGHT 480
+# define TS 64
+# define PS 0.25
 
 //Map: 		int representation of starting tile
 //Start: 	Starting x and y
@@ -70,33 +72,25 @@ typedef struct s_textures
 }	t_textures;
 
 /**
- *	@param input_path Path to input map file.
  *	@param map Array of strings with map content.
- *	@param ts Tile size.
  *	@param ps Player size.
  *	@param mlx Main mlx handle.
- *	@param player Player struct carrying important data for the player.
  *	@param walls Walls struct to be rendered.
  */
 typedef struct s_data
 {
-	char		*input_path;
-	char		**map;
-	int			ts;
-	float		ps;
 	mlx_t		*mlx;
+	char		**map;
+	t_textures	textures;
 	mlx_image_t	*p_img;
-	float		speed;
-	float		angle;
-	float		d_x;
-	float		d_y;
-	float		p_x;
-	float		p_y;
 	mlx_image_t	*walls;
-	t_map		*map_;
 	mlx_image_t	*rays;
 	mlx_image_t	*draw;
-	t_textures	textures;
+	float		speed;
+	float		angle;
+	t_vec		dir;
+	t_vec		player;
+	t_map		*map_;
 }	t_data;
 
 /*	hook				*/

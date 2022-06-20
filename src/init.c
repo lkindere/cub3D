@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 02:01:55 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 11:31:27 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int	init_data(t_data *data)
 {
 	data->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
-	data->ts = 64;
-	data->ps = 0.25;
 	data->p_img = mlx_new_image(data->mlx, 16, 16);
 	if (data->p_img == NULL)
 		return (ERROR_MALLOC);
@@ -32,12 +30,9 @@ void	copy_map(t_data *data, t_map *map)
 	map->map = NULL;
 	data->map_ = map;
 	data->angle = data->map_->position * M_PI_2 * -1 + M_PI_2;
-	data->d_x = cos(data->angle);
-	data->d_y = sin(data->angle);
-	data->p_x = map->pos_x + 0.5;
-	data->p_y = map->pos_y + 0.5;
-	mlx_set_window_size(data->mlx, map->width * data->ts * 2,
-		map->height * data->ts);
+	data->dir = vector(cos(data->angle), sin(data->angle));
+	data->player = vector(map->pos_x + 0.5, map->pos_y + 0.5);
+	mlx_set_window_size(data->mlx, map->width * TS * 2, map->height * TS);
 }
 
 int	init_textures(t_data *data)
@@ -68,14 +63,14 @@ int	init_walls(t_data *data)
 
 int	init_rays(t_data *data, t_map *map)
 {
-	data->rays = mlx_new_image(data->mlx, map->width * data->ts, map->height * data->ts);
+	data->rays = mlx_new_image(data->mlx, map->width * TS, map->height * TS);
 	if (data->rays == NULL)
 		return (ERROR_MALLOC);
 	mlx_image_to_window(data->mlx, data->rays, 0, 0);
-	data->draw = mlx_new_image(data->mlx, map->width * data->ts, map->height * data->ts);
+	data->draw = mlx_new_image(data->mlx, map->width * TS, map->height * TS);
 	if (data->draw == NULL)
 		return (ERROR_MALLOC);
-	mlx_image_to_window(data->mlx, data->draw, map->width * data->ts, 0);
+	mlx_image_to_window(data->mlx, data->draw, map->width * TS, 0);
 	return (0);
 }
 
