@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 00:39:57 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/21 03:42:14 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 22:47:21 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ void	raycaster(t_data *data)
 	i = -1;
 	rc.angle_offset = 0;
 	rc.pixel_offset = 0;
-	rc.ray_step = 1.0 / WIDTH;
-	rc.raycount = WIDTH;
-	rc.pixel = vector(WIDTH / 2, HEIGHT / 2);
+	rc.ray_step = 1.0 / data->width;
+	rc.raycount = data->width;
+	rc.pixel = vector(data->width / 2, data->height / 2);
 	rc.angle = data->angle;
-	rc.pixel_step = (float)WIDTH / rc.raycount;
+	rc.pixel_step = (float)data->width / rc.raycount;
 	while (++i < rc.raycount / 2)
 	{
 		cast_rays(data, &rc);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 02:05:12 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/21 03:36:29 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 22:46:46 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,16 @@ void	draw_rays(t_data *data, t_ray *r, t_vec start)
 
 	i = -1;
 	set_texture(data->textures, &rd, r);
-	rd.height = 1.0 / r->distance * HEIGHT;
+	rd.height = 1.0 / r->distance * data->height;
 	rd.step = TS / rd.height;
 	index = TS / 2;
 	rd.offset = 0;
 	rd.line = split_line(rd.texture, rd.pixel);
 	while (++i < rd.height / 2)
 	{
-		safe_pixel(data->draw, vector(start.x, HEIGHT / 2 - i),
+		safe_pixel(data->draw, vector(start.x, data->height / 2 - i),
 			rd.line[index - (int)rd.offset]);
-		safe_pixel(data->draw, vector(start.x, HEIGHT / 2 + i),
+		safe_pixel(data->draw, vector(start.x, data->height / 2 + i),
 			rd.line[index + (int)rd.offset]);
 		rd.offset += rd.step;
 	}

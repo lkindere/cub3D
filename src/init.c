@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/21 18:16:08 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 20:28:24 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 static int	init_data(t_data *data, t_map *map)
 {
 	data->mouse = vector(-1, -1);
-	data->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
-	data->tsm = WIDTH * MM / (map->height + map->width / 2.0);
+	data->width = 1024;
+	data->height = 768;
+	data->mlx = mlx_init(data->width, data->height, "MLX42", true);
+	data->tsm = data->width * MM / (map->height + map->width / 2.0);
 	data->p_img = mlx_new_image(data->mlx, data->tsm * PS, data->tsm * PS);
 	if (data->p_img == NULL)
 		return (ERROR_MALLOC);
@@ -34,7 +36,7 @@ static void	copy_map(t_data *data, t_map *map)
 	data->angle = data->map_->position * M_PI_2 * -1 + M_PI_2;
 	data->dir = vector(cos(data->angle), sin(data->angle));
 	data->player = vector(map->pos_x + 0.5, map->pos_y + 0.5);
-	mlx_set_window_size(data->mlx, WIDTH, HEIGHT);
+	mlx_set_window_size(data->mlx, data->width, data->height);
 }
 
 static int	init_textures(t_data *data)
@@ -64,7 +66,7 @@ static int	init_images(t_data *data)
 		return (ERROR_MALLOC);
 	mlx_image_to_window(data->mlx, data->rays, 0, 0);
 	mlx_set_instance_depth(&data->rays->instances[0], 5);
-	data->draw = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	data->draw = mlx_new_image(data->mlx, data->width, data->height);
 	if (data->draw == NULL)
 		return (ERROR_MALLOC);
 	mlx_image_to_window(data->mlx, data->draw, 0, 0);

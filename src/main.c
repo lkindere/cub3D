@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/21 03:41:54 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 22:49:59 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@ void	put_walls(t_data *data, char **map)
 	}
 }
 
+void	resize(int32_t width, int32_t height, void* param)
+{
+	t_data	*data;
+
+	data = (t_data *)param;
+	data->width = width;
+	data->height = height;
+	mlx_resize_image(data->p_img, width, height);
+	mlx_resize_image(data->walls, width, height);
+	mlx_resize_image(data->rays, width, height);
+	mlx_resize_image(data->draw, width, height);
+}
+
 int32_t	main(int argc, char **argv)
 {
 	t_data		data;
@@ -45,6 +58,8 @@ int32_t	main(int argc, char **argv)
 	mlx_image_to_window(data.mlx, data.p_img, data.player.x, data.player.y);
 	mlx_key_hook(data.mlx, key_hook, &data);
 	mlx_loop_hook(data.mlx, &hook, &data);
+	mlx_resize_hook(data.mlx, resize, &data);
+	// mlx_set_cursor_mode(data.mlx, MLX_MOUSE_HIDDEN);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
 	return (EXIT_SUCCESS);
