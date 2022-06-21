@@ -6,14 +6,11 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 12:48:50 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 03:41:54 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static float tsw;
-static float tsh;
 
 void	put_walls(t_data *data, char **map)
 {
@@ -27,7 +24,8 @@ void	put_walls(t_data *data, char **map)
 		while (map[i][j])
 		{
 			if (map[i][j] == '1')
-				mlx_image_to_window(data->mlx, data->walls, j * data->tsm, i * data->tsm);
+				mlx_image_to_window(data->mlx, data->walls,
+					j * data->tsm, i * data->tsm);
 			j++;
 		}
 		i++;

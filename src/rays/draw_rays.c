@@ -6,13 +6,13 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 02:05:12 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/21 02:40:03 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 03:36:29 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-typedef	struct	s_raydrawer
+typedef struct s_raydrawer
 {
 	mlx_texture_t	*texture;
 	uint32_t		*line;
@@ -73,19 +73,23 @@ static void	set_texture(t_textures textures, t_raydrawer *rd, t_ray *r)
 
 void	draw_rays(t_data *data, t_ray *r, t_vec start)
 {
-	t_raydrawer	rd;
+	int			i;
 	int			index;
+	t_raydrawer	rd;
 
+	i = -1;
 	set_texture(data->textures, &rd, r);
 	rd.height = 1.0 / r->distance * HEIGHT;
 	rd.step = TS / rd.height;
 	index = TS / 2;
 	rd.offset = 0;
 	rd.line = split_line(rd.texture, rd.pixel);
-	for (int i = 0; i < rd.height / 2; i++)
+	while (++i < rd.height / 2)
 	{
-		safe_pixel(data->draw, vector(start.x, HEIGHT / 2 - i), rd.line[index - (int)rd.offset]);
-		safe_pixel(data->draw, vector(start.x, HEIGHT / 2 + i), rd.line[index + (int)rd.offset]);
+		safe_pixel(data->draw, vector(start.x, HEIGHT / 2 - i),
+			rd.line[index - (int)rd.offset]);
+		safe_pixel(data->draw, vector(start.x, HEIGHT / 2 + i),
+			rd.line[index + (int)rd.offset]);
 		rd.offset += rd.step;
 	}
 }

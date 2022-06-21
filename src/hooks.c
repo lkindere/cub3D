@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/21 03:16:16 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 03:36:41 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	reset_background(t_data *data)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = -1;
 	j = -1;
@@ -25,13 +25,13 @@ void	reset_background(t_data *data)
 			mlx_put_pixel(data->draw, j, i, data->map_->ceiling_color);
 		j = -1;
 	}
-	while (++i < data->draw->height)
+	while (i < data->draw->height)
 	{
 		while (++j < data->draw->width)
 			mlx_put_pixel(data->draw, j, i, data->map_->floor_color);
 		j = -1;
+		i++;
 	}
-
 }
 
 void	reset_images(t_data *data)
@@ -39,8 +39,6 @@ void	reset_images(t_data *data)
 	ft_memset(data->rays->pixels, 0,
 		data->rays->width * data->rays->height * sizeof(int));
 	reset_background(data);
-	// // ft_memset(data->draw->pixels, data->map_->ceiling_color, half);
-	// // ft_memset(&data->draw->pixels[half], data->map_->ceiling_color, half);
 	data->p_img->instances[0].x = (data->player.x - PS / 2) * data->tsm;
 	data->p_img->instances[0].y = (data->player.y - PS / 2) * data->tsm;
 }
@@ -56,8 +54,6 @@ void	hook(void *param)
 	player_rotate(data);
 	data->angle = angle_fit(data->angle);
 	reset_images(data);
-	// draw_line(data->draw, vector(0, 0), vector(200, 500), data->map_->ceiling_color);
-	// draw_line(data->draw, vector(2, 2), vector(200, 500), data->map_->floor_color);
 	raycaster(data);
 }
 

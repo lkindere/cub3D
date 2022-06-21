@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 20:48:25 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/20 17:03:08 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 03:40:24 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_line
 //Sets or gets screen max bounds for safe drawing
 t_vec_int	screen_bounds(int x, int y)
 {
-	static t_vec_int bounds;
+	static t_vec_int	bounds;
 
 	if (x > -1 || y > -1)
 	{
@@ -32,7 +32,7 @@ t_vec_int	screen_bounds(int x, int y)
 	return (bounds);
 }
 
-void safe_pixel(mlx_image_t *image, t_vec vec, uint32_t color)
+void	safe_pixel(mlx_image_t *image, t_vec vec, uint32_t color)
 {
 	t_vec_int	bounds;
 

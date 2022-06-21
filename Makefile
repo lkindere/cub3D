@@ -6,7 +6,7 @@
 #    By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 23:16:18 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/21 00:42:47 by lkindere         ###   ########.fr        #
+#    Updated: 2022/06/21 03:40:03 by lkindere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC_M :=	main.c						\
 			movement.c					\
 			collision.c					\
 			vector.c 					\
+			math.c 						\
 			draw.c						\
 			draw_rays.c					\
 

@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/21 01:18:04 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 03:48:43 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,15 @@ typedef struct s_data
 }	t_data;
 
 /*	hook				*/
-
 void		hook(void *param);
 void		key_hook(mlx_key_data_t keydata, void *param);
+
+/* rays					*/
 t_ray		do_rays(t_data *data, t_vec start, t_vec dir, float range);
 void		draw_rays(t_data *data, t_ray *r, t_vec start);
 void		raycaster(t_data *data);
 
-/*	inits				*/
-
+/*	init				*/
 int			init(t_data *data, t_map *map);
 
 /*	player				*/
@@ -117,17 +117,9 @@ int			check_collision(t_data *data, float x, float y);
 void		player_dash(t_data *data);
 void		player_speed(t_data *data);
 
-
-/*	utils				*/
-
-int			ft_add_char(char **str, char c);
-int			ft_add_str(char **str, char *add);
-
-
-
+/* draw					*/
 t_vec_int	screen_bounds(int x, int y);
-
-void	safe_pixel(mlx_image_t *image, t_vec vec, uint32_t color);
-void	draw_line(mlx_image_t *image, t_vec p1, t_vec p2, uint32_t color);
+void		safe_pixel(mlx_image_t *image, t_vec vec, uint32_t color);
+void		draw_line(mlx_image_t *image, t_vec p1, t_vec p2, uint32_t color);
 
 #endif
