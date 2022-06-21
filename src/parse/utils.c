@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:22:22 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/20 16:32:13 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 03:16:54 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	invalidate_map(t_map *map, enum e_errors err)
 		map->valid = err;
 	return (-1);
 }
-
 
 //Checks if map block is a valid identifier
 //Spaces and null are considered valid

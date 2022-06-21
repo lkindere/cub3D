@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 23:27:50 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 01:18:04 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ typedef struct s_data
 void		hook(void *param);
 void		key_hook(mlx_key_data_t keydata, void *param);
 t_ray		do_rays(t_data *data, t_vec start, t_vec dir, float range);
-void		draw_rays(t_data *data, t_ray r, t_vec start);
+void		draw_rays(t_data *data, t_ray *r, t_vec start);
+void		raycaster(t_data *data);
 
 /*	inits				*/
 
