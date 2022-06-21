@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 18:24:45 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 00:09:42 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,18 @@ void	cast_rays(t_data *data)
 	{
 		rc.dir = vector(cos(rc.angle + angle_offset), sin(rc.angle + angle_offset));
 		rc.ray = do_rays(data, data->player, rc.dir, -1);
-		rc.ray.distance *= cos(rc.angle + angle_offset - data->angle);
-		draw_rays(data, rc.ray, vector(rc.pixel.x + pixel_offset, rc.pixel.y));
+		if (rc.ray.hit_pos != NO_POS)
+		{
+			rc.ray.distance *= cos(rc.angle + angle_offset - data->angle);
+			draw_rays(data, rc.ray, vector(rc.pixel.x + pixel_offset, rc.pixel.y));
+		}
 		rc.dir = vector(cos(rc.angle - angle_offset), sin(rc.angle - angle_offset));
 		rc.ray = do_rays(data, data->player, rc.dir, -1);
-		rc.ray.distance *= cos(rc.angle - angle_offset - data->angle);
-		draw_rays(data, rc.ray, vector(rc.pixel.x - pixel_offset, rc.pixel.y));
-		
+		if (rc.ray.hit_pos != NO_POS)
+		{
+			rc.ray.distance *= cos(rc.angle - angle_offset - data->angle);
+			draw_rays(data, rc.ray, vector(rc.pixel.x - pixel_offset, rc.pixel.y));
+		}
 		angle_offset += rc.ray_step;
 		pixel_offset += rc.pixel_step;
 		rc.ray_step -= rc.ray_step / 2000;

@@ -1,7 +1,7 @@
-NO _textures/test.xpm42
-SO _textures/test.xpm42
-WE _textures/test.xpm42
-EA _textures/test.xpm42
+NO _textures/wall.xpm42
+SO _textures/wall.xpm42
+WE _textures/floor.xpm42
+EA _textures/floor.xpm42
 
 F 220,100,0
 C 225,30,0

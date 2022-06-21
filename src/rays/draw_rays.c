@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 02:05:12 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/20 18:29:04 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 00:13:47 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,47 @@ uint32_t	*split_line(mlx_texture_t *texture, int index)
 	return (line);
 }
 
+mlx_texture_t	*set_texture(t_textures textures, t_ray r, float *pixel)
+{
+	mlx_texture_t	*texture;
+
+	texture = NULL;
+	if (r.hit_pos == N || r.hit_pos == S)
+	{
+		*pixel = (int)((r.hit.x - (int)r.hit.x) * TS);
+		if (r.hit_pos == N)
+			texture = &textures.n->texture;
+		if (r.hit_pos == S)
+			texture = &textures.s->texture;
+		return (texture);
+	}
+	if (r.hit_pos == E || r.hit_pos == W)
+	{
+		*pixel = (int)((r.hit.y - (int)r.hit.y) * TS);
+		if (r.hit_pos == E)
+			texture = &textures.e->texture;
+		if (r.hit_pos == W)
+			texture = &textures.w->texture;
+	}
+	return (texture);
+}
+
 void	draw_rays(t_data *data, t_ray r, t_vec start)
 {
-	uint32_t	*line;
-	int			index;
-	float		offset;
-	float		step;
-	float		height;
+	mlx_texture_t	*texture;
+	uint32_t		*line;
+	int				index;
+	float			pixel;
+	float			offset;
+	float			step;
+	float			height;
 
+	texture = set_texture(data->textures, r, &pixel);
 	height = 1.0 / r.distance * HEIGHT;
-	if (height > HEIGHT)
-		height = HEIGHT;
 	step = TS / height;
 	index = TS / 2;
 	offset = 0;
-	line = split_line(&data->textures.n->texture, 50);
+	line = split_line(texture, pixel);
 	for (int i = 0; i < height / 2; i++)
 	{
 		safe_pixel(data->draw, vector(start.x, HEIGHT / 2 - i), line[index - (int)offset]);

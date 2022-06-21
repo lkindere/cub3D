@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 17:49:33 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/20 23:27:50 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_ray
 	t_vec		len;
 	t_vec		step;
 	t_vec		hit;
+	t_pos		hit_pos;
 	float		distance;
 }	t_ray;
 
