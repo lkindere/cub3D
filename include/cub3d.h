@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/21 03:48:43 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:17:51 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define MM 0.3
 # define PS 0.5
 # define SPEED_MULTIPLIER 0.05
+# define RAY_COLOR 0x0000FFFF
 
 //Map: 		int representation of starting tile
 //Start: 	Starting x and y
@@ -93,6 +94,7 @@ typedef struct s_data
 	float		angle;
 	t_vec		dir;
 	t_vec		player;
+	t_vec		mouse;
 	int			tsm;
 	t_map		*map_;
 }	t_data;

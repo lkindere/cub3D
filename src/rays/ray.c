@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   do_rays.c                                          :+:      :+:    :+:   */
+/*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 06:29:16 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/21 00:19:36 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:17:19 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_ray	do_rays(t_data *data, t_vec start, t_vec dir, float range)
 			r.hit.x = r.start.x + dir.x * r.distance;
 			r.hit.y = r.start.y + dir.y * r.distance;
 			draw_line(data->rays, mult_vector(data->player, data->tsm),
-				mult_vector(r.hit, data->tsm), 0xFF0000FF);
+				mult_vector(r.hit, data->tsm), RAY_COLOR);
 			return (r);
 		}
 	}

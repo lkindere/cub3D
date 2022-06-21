@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/21 03:47:01 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:16:08 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	init_data(t_data *data, t_map *map)
 {
+	data->mouse = vector(-1, -1);
 	data->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
 	data->tsm = WIDTH * MM / (map->height + map->width / 2.0);
 	data->p_img = mlx_new_image(data->mlx, data->tsm * PS, data->tsm * PS);
@@ -62,6 +63,7 @@ static int	init_images(t_data *data)
 	if (data->rays == NULL)
 		return (ERROR_MALLOC);
 	mlx_image_to_window(data->mlx, data->rays, 0, 0);
+	mlx_set_instance_depth(&data->rays->instances[0], 5);
 	data->draw = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (data->draw == NULL)
 		return (ERROR_MALLOC);
