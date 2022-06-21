@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 02:05:12 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/21 03:36:29 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 22:03:20 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,5 @@ void	draw_rays(t_data *data, t_ray *r, t_vec start)
 			rd.line[index + (int)rd.offset]);
 		rd.offset += rd.step;
 	}
+	free(rd.line);
 }
