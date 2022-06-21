@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/21 18:17:51 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 21:02:38 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,10 @@ typedef struct s_textures
 	xpm_t	*s;
 	xpm_t	*e;
 	xpm_t	*w;
+	xpm_t	*n2;
+	xpm_t	*s2;
+	xpm_t	*e2;
+	xpm_t	*w2;
 }	t_textures;
 
 /**
@@ -96,6 +100,7 @@ typedef struct s_data
 	t_vec		player;
 	t_vec		mouse;
 	int			tsm;
+	int			effects;
 	t_map		*map_;
 }	t_data;
 

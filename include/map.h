@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 12:19:30 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/20 23:28:54 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 21:00:21 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ typedef struct s_map
 	char			*so;
 	char			*we;
 	char			*ea;
+	char			*no2;
+	char			*so2;
+	char			*we2;
+	char			*ea2;
 	unsigned int	floor_color;
 	unsigned int	ceiling_color;
 	unsigned int	width;

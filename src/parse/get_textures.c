@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:24:54 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/16 18:07:35 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 20:59:32 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@ int	get_textures(t_map *map, char *line)
 	if (!ft_strncmp("WE ", line, 3))
 		return (try_set_texture(map, &map->we, &line[3]));
 	if (!ft_strncmp("EA ", line, 3))
+		return (try_set_texture(map, &map->ea, &line[3]));
+	if (!ft_strncmp("NO2 ", line, 4))
+		return (try_set_texture(map, &map->no, &line[3]));
+	if (!ft_strncmp("SO2 ", line, 4))
+		return (try_set_texture(map, &map->so, &line[3]));
+	if (!ft_strncmp("WE2 ", line, 4))
+		return (try_set_texture(map, &map->we, &line[3]));
+	if (!ft_strncmp("EA2 ", line, 4))
 		return (try_set_texture(map, &map->ea, &line[3]));
 	return (0);
 }
