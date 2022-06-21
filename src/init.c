@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/21 18:16:08 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 22:20:36 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,5 @@ int	init(t_data *data, t_map *map)
 		return (2);
 	if (init_images(data) != 0)
 		return (3);
-	screen_bounds(data->mlx->width, data->mlx->height);
 	return (0);
 }

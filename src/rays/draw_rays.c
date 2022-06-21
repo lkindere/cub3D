@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 02:05:12 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/21 22:03:20 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 22:57:10 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void	draw_rays(t_data *data, t_ray *r, t_vec start)
 	index = TS / 2;
 	rd.offset = 0;
 	rd.line = split_line(rd.texture, rd.pixel);
+	if (rd.height > HEIGHT)
+		rd.height = HEIGHT;
 	while (++i < rd.height / 2)
 	{
 		safe_pixel(data->draw, vector(start.x, HEIGHT / 2 - i),

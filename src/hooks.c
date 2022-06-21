@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/21 20:57:25 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/21 22:12:39 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	hook(void *param)
 	t_data		*data;
 
 	data = param;
+	printf("Fps: %f\n", 1 / data->mlx->delta_time);
 	player_speed(data);
 	player_rotate(data);
 	data->angle = angle_fit(data->angle);
