@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/21 21:02:38 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/22 11:20:13 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void		key_hook(mlx_key_data_t keydata, void *param);
 
 /* rays					*/
 t_ray		do_rays(t_data *data, t_vec start, t_vec dir, float range);
-void		draw_rays(t_data *data, t_ray *r, t_vec start);
+int			draw_rays(t_data *data, t_ray *r, t_vec start);
 void		raycaster(t_data *data);
 
 /*	init				*/

@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 02:05:12 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/21 22:57:10 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/22 11:35:08 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,24 @@ typedef struct s_raydrawer
 {
 	mlx_texture_t	*texture;
 	uint32_t		*line;
-	float			pixel;
 	float			offset;
 	float			step;
 	float			height;
+	int				cutoff;
 }	t_raydrawer;
 
-uint32_t	*split_line(mlx_texture_t *texture, int pixel)
+static int	split_line(uint32_t **line, mlx_texture_t *texture, int pixel)
 {
 	int			i;
 	int			bpp;
 	int			size;
 	uint8_t		rgb[4];
-	uint32_t	*line;
 
 	i = -1;
 	bpp = texture->bytes_per_pixel;
-	line = malloc(sizeof(uint32_t) * 64);
-	if (!line)
-		return (NULL);
+	*line = malloc(sizeof(uint32_t) * 64);
+	if (!(*line))
+		return (ERROR_MALLOC);
 	pixel *= bpp;
 	size = texture->width * texture->height * bpp;
 	while (pixel < size)
@@ -43,56 +42,91 @@ uint32_t	*split_line(mlx_texture_t *texture, int pixel)
 		rgb[1] = texture->pixels[pixel + 1];
 		rgb[2] = texture->pixels[pixel + 2];
 		rgb[3] = texture->pixels[pixel + 3];
-		line[++i] = (rgb[0] << 24) + (rgb[1] << 16) + (rgb[2] << 8) + rgb[3];
+		(*line)[++i] = (rgb[0] << 24) + (rgb[1] << 16) + (rgb[2] << 8) + rgb[3];
 		pixel += 64 * bpp;
 	}
-	return (line);
+	return (0);
 }
 
-static void	set_texture(t_textures textures, t_raydrawer *rd, t_ray *r)
+static int	set_texture(t_textures textures, t_raydrawer *rd, t_ray *r)
 {
-	rd->texture = NULL;
+	int	pixel;
+
 	if (r->hit_pos == N || r->hit_pos == S)
 	{
-		rd->pixel = (int)((r->hit.x - (int)r->hit.x) * TS);
+		pixel = (int)((r->hit.x - (int)r->hit.x) * TS);
 		if (r->hit_pos == N)
 			rd->texture = &textures.n->texture;
 		if (r->hit_pos == S)
 			rd->texture = &textures.s->texture;
-		return ;
+		return (split_line(&rd->line, rd->texture, pixel));
 	}
 	if (r->hit_pos == E || r->hit_pos == W)
 	{
-		rd->pixel = (int)((r->hit.y - (int)r->hit.y) * TS);
+		pixel = (int)((r->hit.y - (int)r->hit.y) * TS);
 		if (r->hit_pos == E)
 			rd->texture = &textures.e->texture;
 		if (r->hit_pos == W)
 			rd->texture = &textures.w->texture;
 	}
+	return (split_line(&rd->line, rd->texture, pixel));
 }
 
-void	draw_rays(t_data *data, t_ray *r, t_vec start)
+static void	set_params(t_data *data, t_raydrawer *rd, t_ray *r)
+{
+	rd->offset = 0;
+	rd->height = 1.0 / r->distance * HEIGHT;
+	rd->step = TS / rd->height;
+	rd->cutoff = (HEIGHT - rd->height) / 2;
+	if (rd->cutoff < 0)
+	{
+		rd->offset = rd->step * -rd->cutoff;
+		rd->cutoff = 0;
+	}
+}
+
+int	draw_rays(t_data *data, t_ray *r, t_vec start)
 {
 	int			i;
-	int			index;
 	t_raydrawer	rd;
 
-	i = -1;
-	set_texture(data->textures, &rd, r);
-	rd.height = 1.0 / r->distance * HEIGHT;
-	rd.step = TS / rd.height;
-	index = TS / 2;
-	rd.offset = 0;
-	rd.line = split_line(rd.texture, rd.pixel);
-	if (rd.height > HEIGHT)
-		rd.height = HEIGHT;
-	while (++i < rd.height / 2)
+	if (set_texture(data->textures, &rd, r) != 0)
+		return (ERROR_MALLOC);
+	set_params(data, &rd, r);
+	i = rd.cutoff - 1;
+	while (++i < HEIGHT - rd.cutoff && rd.offset < TS)
 	{
-		safe_pixel(data->draw, vector(start.x, HEIGHT / 2 - i),
-			rd.line[index - (int)rd.offset]);
-		safe_pixel(data->draw, vector(start.x, HEIGHT / 2 + i),
-			rd.line[index + (int)rd.offset]);
+		safe_pixel(data->draw, vector(start.x, i),
+			rd.line[(int)rd.offset]);
 		rd.offset += rd.step;
 	}
 	free(rd.line);
+	return (0);
 }
+
+
+// void	draw_rays(t_data *data, t_ray *r, t_vec start)
+// {
+// 	int			i;
+// 	int			index;
+// 	t_raydrawer	rd;
+
+// 	i = -1;
+// 	set_texture(data->textures, &rd, r);
+// 	rd.height = 1.0 / r->distance * HEIGHT;
+// 	rd.step = TS / rd.height;
+// 	index = TS / 2;
+// 	rd.offset = 0;
+// 	rd.line = split_line(rd.texture, rd.pixel);
+// 	if (rd.height > HEIGHT)
+// 		rd.height = HEIGHT;
+// 	while (++i < rd.height / 2)
+// 	{
+// 		safe_pixel(data->draw, vector(start.x, HEIGHT / 2 - i),
+// 			rd.line[index - (int)rd.offset]);
+// 		safe_pixel(data->draw, vector(start.x, HEIGHT / 2 + i),
+// 			rd.line[index + (int)rd.offset]);
+// 		rd.offset += rd.step;
+// 	}
+// 	free(rd.line);
+// }
