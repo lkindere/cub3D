@@ -6,11 +6,19 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 20:10:41 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/23 15:38:37 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:19:52 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	reset_mouse(t_data *data, int mouse[2])
+{
+	if (data->mouse.x < 0 || data->mouse.x > data->width)
+		mlx_set_mouse_pos(data->mlx, data->width / 2, mouse[1]);
+	if (data->mouse.y < 0 || data->mouse.y > data->height)
+		mlx_set_mouse_pos(data->mlx, mouse[0], data->height / 2);
+}
 
 void	player_rotate(t_data *data)
 {
@@ -33,12 +41,7 @@ void	player_rotate(t_data *data)
 	data->mouse.x = mouse[0];
 	data->mouse.y = mouse[1];
 	if (~data->effects & 2)
-	{
-		if (data->mouse.x < 0 || data->mouse.x > data->width)
-			mlx_set_mouse_pos(data->mlx, data->width / 2, mouse[1]);
-		if (data->mouse.y < 0 || data->mouse.y > data->height)
-			mlx_set_mouse_pos(data->mlx, mouse[0], data->height / 2);
-	}
+		reset_mouse(data, mouse);
 	player_move(data);
 }
 
