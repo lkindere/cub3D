@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/23 15:59:28 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:03:33 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,27 @@
 
 void	reset_background(t_data *data, uint32_t ceiling, uint32_t floor)
 {
-	int	i;
-	int	j;
+	unsigned int	i;
+	unsigned int	j;
 
-	i = -1;
-	j = -1;
-	while (++i < data->draw->height / 2)
+	i = 0;
+	j = 0;
+	while (i < data->draw->height / 2)
 	{
-		while (data->effects & 4 && ++j < data->draw->width)
-			mlx_put_pixel(data->draw, j, i, funky_stuff(ceiling));
-		while (++j < data->draw->width)
-			mlx_put_pixel(data->draw, j, i, ceiling);
-		j = -1;
+		while (data->effects & 4 && j < data->draw->width)
+			mlx_put_pixel(data->draw, j++, i, funky_stuff(ceiling));
+		while (j < data->draw->width)
+			mlx_put_pixel(data->draw, j++, i, ceiling);
+		j = 0;
+		i++;
 	}
 	while (i < data->draw->height)
 	{
-		while (data->effects & 8 && ++j < data->draw->width)
-			mlx_put_pixel(data->draw, j, i, funky_stuff(floor));
-		while (++j < data->draw->width)
-			mlx_put_pixel(data->draw, j, i, floor);
-		j = -1;
+		while (data->effects & 8 && j < data->draw->width)
+			mlx_put_pixel(data->draw, j++, i, funky_stuff(floor));
+		while (j < data->draw->width)
+			mlx_put_pixel(data->draw, j++, i, floor);
+		j = 0;
 		i++;
 	}
 }

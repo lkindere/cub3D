@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 02:05:12 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/23 15:31:39 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:03:55 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	set_texture(t_textures *txt, t_raydrawer *rd, t_ray *r, int effects)
 	return (split_line(&rd->line, rd->texture, pixel));
 }
 
-static void	set_params(t_data *data, t_raydrawer *rd, t_ray *r)
+static void	set_params(t_raydrawer *rd, t_ray *r)
 {
 	rd->offset = 0;
 	rd->height = 1.0 / r->distance * HEIGHT;
@@ -94,7 +94,7 @@ int	draw_rays(t_data *data, t_ray *r, t_vec start)
 
 	if (set_texture(&data->textures, &rd, r, data->effects) != 0)
 		return (ERROR_MALLOC);
-	set_params(data, &rd, r);
+	set_params(&rd, r);
 	i = rd.cutoff - 1;
 	while (++i < HEIGHT - rd.cutoff && rd.offset < TS)
 	{

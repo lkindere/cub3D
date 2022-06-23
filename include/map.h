@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 12:19:30 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/23 14:30:11 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:53:12 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ typedef struct s_map
 	char			*we;
 	char			*ea;
 	char			**door_text;
-	unsigned int	floor_color;
-	unsigned int	ceiling_color;
-	unsigned int	width;
-	unsigned int	height;
+	long			floor_color;
+	long			ceiling_color;
+	int				width;
+	int				height;
 	unsigned int	pos_x;
 	unsigned int	pos_y;
 	enum e_pos		position;

@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 22:58:40 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/20 11:25:05 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:01:33 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,10 @@ typedef struct s_vec_int
 	int	y;
 }	t_vec_int;
 
-float	v_len(t_vec vec);
-t_vec	v_norm(t_vec vec);
-float	v_dot(t_vec a, t_vec b);
-
 float		get_distance(t_vec p1, t_vec p2);
 t_vec		vector(float x, float y);
 t_vec_int	vector_int(int x, int y);
-
-t_vec	add_vector(t_vec vec1, t_vec vec2);
-t_vec	mult_vector(t_vec vec, float mult);
+t_vec		add_vector(t_vec vec1, t_vec vec2);
+t_vec		mult_vector(t_vec vec, float mult);
 
 #endif

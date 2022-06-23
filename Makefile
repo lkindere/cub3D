@@ -6,11 +6,9 @@
 #    By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 23:16:18 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/23 13:27:43 by lkindere         ###   ########.fr        #
+#    Updated: 2022/06/23 16:01:04 by lkindere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-# gcc main.c libmlx42.a -lglfw -L "/Users/$USER/.brew/opt/glfw/lib" -I ./include/
 
 VPATH = src src/parse src/player src/rays src/math src/draw
 
@@ -19,8 +17,8 @@ LIBFT_PATH := ./libs/libft/
 LIBFT := $(LIBFT_PATH)libft.a
 MLX_PATH := ./libs/MLX42/
 MLX := $(MLX_PATH)libmlx42.a
-
-# CFLAGS ?= -Wall -Werror -Wextra
+# 
+CFLAGS ?= -Wall -Werror -Wextra
 
 SRC_M :=	main.c						\
 			utils.c						\
@@ -32,7 +30,6 @@ SRC_M :=	main.c						\
 			movement.c					\
 			collision.c					\
 			vector.c 					\
-			math.c 						\
 			draw.c						\
 			draw_rays.c					\
 			effects.c 					\

@@ -6,11 +6,17 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 22:58:23 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/23 06:25:25 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:00:55 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "math_utils.h"
+
+//Returns the distance between 2 points
+float	get_distance(t_vec p1, t_vec p2)
+{
+	return (sqrtf(powf(p1.x - p2.x, 2) + powf(p1.y - p2.y, 2)));
+}
 
 //Adds 2 vectors
 t_vec	add_vector(t_vec vec1, t_vec vec2)
