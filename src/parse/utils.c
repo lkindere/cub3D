@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:22:22 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/23 15:55:01 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:16:03 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,37 +33,37 @@ int	is_block(char c)
 	return (1);
 }
 
-void	print_map(t_map map)
-{
-	printf("NO: %s\n", map.no);
-	printf("SP: %s\n", map.so);
-	printf("WE: %s\n", map.we);
-	printf("EA: %s\n", map.ea);
-	printf("Floor: %ld\n", map.floor_color);
-	printf("R: %ld, G: %ld, B: %ld\n\n",
-		map.floor_color >> 24,
-		(map.floor_color << 8) >> 24,
-		(map.floor_color << 16) >> 24);
-	printf("Ceiling: %ld\n", map.ceiling_color);
-	printf("R: %ld, G: %ld, B: %ld\n\n",
-		map.ceiling_color >> 24,
-		(map.ceiling_color << 8) >> 24,
-		(map.ceiling_color << 16) >> 24);
-	printf("Valid: %d\n", map.valid);
-	printf("\nMap:\n");
-	if (map.map)
-		for (int i = 0; map.map[i]; i++)
-			printf("%s\n", map.map[i]);
-	printf("\nHeight: %d\n", map.height);
-	printf("Width: %d\n\n", map.width);
-	printf("Starting pos: %d\n", map.position);
-	printf("Starting X: %d, Y:%d\n", map.pos_x, map.pos_y);
-	for (int i = 0; map.doors && map.doors[i].x != -1; i++)
-		printf("Door %d at %d %d, dir: %c\n", i + 1,
-			map.doors[i].x, map.doors[i].y, map.doors[i].direction);
-	for (int i = 0; map.door_text && map.door_text[i]; i++)
-		printf("Door texture %d: %s\n", i + 1, map.door_text[i]);
-}
+// void	print_map(t_map map)
+// {
+// 	printf("NO: %s\n", map.no);
+// 	printf("SP: %s\n", map.so);
+// 	printf("WE: %s\n", map.we);
+// 	printf("EA: %s\n", map.ea);
+// 	printf("Floor: %ld\n", map.floor_color);
+// 	printf("R: %ld, G: %ld, B: %ld\n\n",
+// 		map.floor_color >> 24,
+// 		(map.floor_color << 8) >> 24,
+// 		(map.floor_color << 16) >> 24);
+// 	printf("Ceiling: %ld\n", map.ceiling_color);
+// 	printf("R: %ld, G: %ld, B: %ld\n\n",
+// 		map.ceiling_color >> 24,
+// 		(map.ceiling_color << 8) >> 24,
+// 		(map.ceiling_color << 16) >> 24);
+// 	printf("Valid: %d\n", map.valid);
+// 	printf("\nMap:\n");
+// 	if (map.map)
+// 		for (int i = 0; map.map[i]; i++)
+// 			printf("%s\n", map.map[i]);
+// 	printf("\nHeight: %d\n", map.height);
+// 	printf("Width: %d\n\n", map.width);
+// 	printf("Starting pos: %d\n", map.position);
+// 	printf("Starting X: %d, Y:%d\n", map.pos_x, map.pos_y);
+// 	for (int i = 0; map.doors && map.doors[i].x != -1; i++)
+// 		printf("Door %d at %d %d, dir: %c\n", i + 1,
+// 			map.doors[i].x, map.doors[i].y, map.doors[i].direction);
+// 	for (int i = 0; map.door_text && map.door_text[i]; i++)
+// 		printf("Door texture %d: %s\n", i + 1, map.door_text[i]);
+// }
 
 //Returns 1 if line is empty
 //Returns 0 if not
