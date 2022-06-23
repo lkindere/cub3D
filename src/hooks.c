@@ -6,16 +6,11 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/23 06:57:38 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:34:57 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-unsigned int funky_stuff(unsigned int color)
-{
-	return (color + (rand() % 255));
-}
 
 void	reset_background(t_data *data, uint32_t ceiling, uint32_t floor)
 {
@@ -57,51 +52,11 @@ void	hook(void *param)
 	t_data		*data;
 
 	data = param;
-	// printf("Fps: %f\n", 1 / data->mlx->delta_time);
 	player_speed(data);
 	player_rotate(data);
 	data->angle = angle_fit(data->angle);
 	reset_images(data);
 	raycaster(data);
-}
-
-//1	Toggles mouse on/off 	[1]
-//2 Toggles minimap rays 	[2]
-//3 Toggles funky ceilings	[4]
-//4 Toggles funky floors	[8]
-void	set_effects(mlx_key_data_t keydata, t_data *data)
-{
-	if (keydata.key == MLX_KEY_1 && keydata.action == MLX_PRESS)
-		data->effects ^= 1;
-	if (keydata.key == MLX_KEY_2 && keydata.action == MLX_PRESS)
-		data->effects ^= 2;
-	if (keydata.key == MLX_KEY_3 && keydata.action == MLX_PRESS)
-		data->effects ^= 4;
-	if (keydata.key == MLX_KEY_4 && keydata.action == MLX_PRESS)
-		data->effects ^= 8;
-}
-
-void	open_door(t_data *data)
-{
-	int			i;
-	t_vec_int	check;
-
-	i = 0;
-	check.x = data->player.x + data->dir.x;
-	check.y = data->player.y + data->dir.y;
-	while (data->map_->doors && data->map_->doors[i].x != -1)
-	{
-		if (check.x == data->map_->doors[i].x
-			&& check.y == data->map_->doors[i].y)
-			{
-				data->map_->doors[i].open = ~data->map_->doors[i].open & 1;
-				if (data->map[check.y][check.x] == '1')
-					data->map[check.y][check.x] = ' ';
-				else
-					data->map[check.y][check.x] = '1';
-			}
-		i++;
-	}
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)

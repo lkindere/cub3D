@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 05:47:59 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/23 07:15:41 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:22:57 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,27 @@ void	player_speed(t_data *data)
 		data->speed = SPEED_MULTIPLIER * SNEAK;
 	else
 		data->speed = SPEED_MULTIPLIER * WALK;
+}
+
+void	open_door(t_data *data)
+{
+	int			i;
+	t_vec_int	check;
+
+	i = 0;
+	check.x = data->player.x + data->dir.x;
+	check.y = data->player.y + data->dir.y;
+	while (data->map_->doors && data->map_->doors[i].x != -1)
+	{
+		if (check.x == data->map_->doors[i].x
+			&& check.y == data->map_->doors[i].y)
+		{
+			data->map_->doors[i].open = ~data->map_->doors[i].open & 1;
+			if (data->map[check.y][check.x] == '1')
+				data->map[check.y][check.x] = ' ';
+			else
+				data->map[check.y][check.x] = '1';
+		}
+		i++;
+	}
 }

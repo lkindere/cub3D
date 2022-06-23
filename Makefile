@@ -6,7 +6,7 @@
 #    By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 23:16:18 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/21 03:40:03 by lkindere         ###   ########.fr        #
+#    Updated: 2022/06/23 13:27:43 by lkindere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC_M :=	main.c						\
 			math.c 						\
 			draw.c						\
 			draw_rays.c					\
+			effects.c 					\
 
 PARSE_S := 	parser.c					\
 			inits.c 					\
@@ -43,6 +44,7 @@ PARSE_S := 	parser.c					\
 			get_map.c 					\
 			check_map.c 				\
 			check_walls.c 				\
+			doors.c 					\
 			utils.c						\
 			ft_is.c 					\
 			ft_join_free.c 				\

@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/23 07:51:19 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:37:31 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,7 @@ typedef struct s_textures
 	xpm_t	*s;
 	xpm_t	*e;
 	xpm_t	*w;
-	xpm_t	*door1;
-	xpm_t	*door2;
-	xpm_t	*door3;
-	xpm_t	*door4;
+	xpm_t	**door;
 }	t_textures;
 
 /**
@@ -124,10 +121,15 @@ void		player_move(t_data *data);
 int			check_collision(t_data *data, float x, float y);
 void		player_dash(t_data *data);
 void		player_speed(t_data *data);
+void		open_door(t_data *data);
 
 /* draw					*/
 t_vec_int	screen_bounds(int x, int y);
 void		safe_pixel(mlx_image_t *image, t_vec vec, uint32_t color);
 void		draw_line(mlx_image_t *image, t_vec p1, t_vec p2, uint32_t color);
+
+/* effects				*/
+void		set_effects(mlx_key_data_t keydata, t_data *data);
+uint32_t	funky_stuff(unsigned int color);
 
 #endif

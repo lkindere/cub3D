@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/23 07:52:04 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:46:02 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ static int	init_data(t_data *data, t_map *map)
 	data->mouse = vector(-1, -1);
 	data->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
 	data->tsm = WIDTH * MM / (map->height + map->width / 2.0);
-	data->p_img = mlx_new_image(data->mlx, data->tsm * PS, data->tsm * PS);
+	while (data->tsm * PS < 1)
+		data->tsm++;
+	data->p_img = mlx_new_image(data->mlx, (data->tsm * PS), (data->tsm * PS));
 	if (data->p_img == NULL)
 		return (ERROR_MALLOC);
 	ft_memset(data->p_img->pixels, 255,
@@ -39,19 +41,27 @@ static void	copy_map(t_data *data, t_map *map)
 
 static int	init_textures(t_data *data)
 {
+	int	i;
+
+	i = 0;
 	data->textures.n = mlx_load_xpm42(data->map_->no);
 	data->textures.s = mlx_load_xpm42(data->map_->so);
 	data->textures.e = mlx_load_xpm42(data->map_->ea);
 	data->textures.w = mlx_load_xpm42(data->map_->we);
-	data->textures.door1 = mlx_load_xpm42("./_textures/char12.xpm42");
-	data->textures.door2 = mlx_load_xpm42("./_textures/char22.xpm42");
-	data->textures.door3 = mlx_load_xpm42("./_textures/char32.xpm42");
-	data->textures.door4 = mlx_load_xpm42("./_textures/char42.xpm42");
-	if (mlx_errno != 0)
+	while (data->map_->door_text && data->map_->door_text[i])
+		i++;
+	data->textures.door = malloc(sizeof(xpm_t *) * (i + 1));
+	if (!data->textures.door)
+		return (ERROR_MALLOC);
+	i = 0;
+	while (data->map_->door_text && data->map_->door_text[i])
 	{
-		printf("%s\n", mlx_strerror(mlx_errno));
-		return (-1);
+		data->textures.door[i] = mlx_load_xpm42(data->map_->door_text[i]);
+		i++;
 	}
+	data->textures.door[i] = NULL;
+	if (mlx_errno != 0)
+		return (-1);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:22:22 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/23 06:58:21 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:46:31 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	print_map(t_map map)
 	for (int i = 0; map.doors && map.doors[i].x != -1; i++)
 		printf("Door %d at %d %d, dir: %c\n", i + 1,
 			map.doors[i].x, map.doors[i].y, map.doors[i].direction);
+	for (int i = 0; map.door_text && map.door_text[i]; i++)
+		printf("Door texture %d: %s\n", i + 1, map.door_text[i]);
 }
 
 //Returns 1 if line is empty

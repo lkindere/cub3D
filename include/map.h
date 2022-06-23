@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 12:19:30 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/23 06:49:58 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:30:11 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_map
 	char			*so;
 	char			*we;
 	char			*ea;
+	char			**door_text;
 	unsigned int	floor_color;
 	unsigned int	ceiling_color;
 	unsigned int	width;
@@ -66,5 +67,6 @@ typedef struct s_map
 }	t_map;
 
 int		parser(int argc, char **argv, t_map *map);
+int		free_map(t_map *map);
 
 #endif

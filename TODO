@@ -1,1 +1,0 @@
-Change door indexes to door struct with X/Y and open/closed bool

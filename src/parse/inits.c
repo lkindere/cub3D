@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:23:47 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/23 06:45:35 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:15:50 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	init_map(t_map *map)
 	if (!map->map)
 		exit (1);
 	map->map[0] = NULL;
+	map->door_text = NULL;
 	map->doors = NULL;
 	map->no = NULL;
 	map->so = NULL;

@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/23 04:53:54 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:31:44 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int32_t	main(int argc, char **argv)
 	mlx_key_hook(data.mlx, key_hook, &data);
 	mlx_loop_hook(data.mlx, &hook, &data);
 	mlx_loop(data.mlx);
+	free_map(&map);
 	mlx_terminate(data.mlx);
 	return (EXIT_SUCCESS);
 }

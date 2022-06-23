@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 06:29:16 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/23 06:57:32 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:33:21 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,26 +67,26 @@ static int	ray_step(t_ray *r)
 
 void	hit_object(t_data *data, t_ray *r)
 {
-	t_door	*doors;
+	t_door	*door;
 	int		i;
 
 	i = -1;
-	doors = data->map_->doors;
-	while (doors && doors[++i].x != -1)
+	door = data->map_->doors;
+	while (door && door[++i].x != -1)
 	{
-		if (r->map.x == doors[i].x && r->map.y == doors[i].y && doors[i].open == 0)
+		if (r->map.x == door[i].x && r->map.y == door[i].y && door[i].open == 0)
 			r->is_door = 1;
-		else if (r->hit_pos == N && doors[i].open == 1 && doors[i].direction == 'Y'
-			&& r->map.x == doors[i].x && r->map.y + 1 == doors[i].y)
+		if (r->hit_pos == N && door[i].open == 1 && door[i].direction == 'Y'
+			&& r->map.x == door[i].x && r->map.y + 1 == door[i].y)
 			r->is_door = 1;
-		else if (r->hit_pos == S && doors[i].open == 1 && doors[i].direction == 'Y'
-			&& r->map.x == doors[i].x && r->map.y - 1 == doors[i].y)
+		if (r->hit_pos == S && door[i].open == 1 && door[i].direction == 'Y'
+			&& r->map.x == door[i].x && r->map.y - 1 == door[i].y)
 			r->is_door = 1;
-		else if (r->hit_pos == E && doors[i].open == 1 && doors[i].direction == 'X'
-			&& r->map.x - 1 == doors[i].x && r->map.y == doors[i].y)
+		if (r->hit_pos == E && door[i].open == 1 && door[i].direction == 'X'
+			&& r->map.x - 1 == door[i].x && r->map.y == door[i].y)
 			r->is_door = 1;
-		else if (r->hit_pos == W && doors[i].open == 1 && doors[i].direction == 'X'
-			&& r->map.x + 1 == doors[i].x && r->map.y == doors[i].y)
+		if (r->hit_pos == W && door[i].open == 1 && door[i].direction == 'X'
+			&& r->map.x + 1 == door[i].x && r->map.y == door[i].y)
 			r->is_door = 1;
 	}
 }
@@ -109,8 +109,8 @@ t_ray	do_rays(t_data *data, t_vec start, t_vec dir, float range)
 			r.hit.x = r.start.x + dir.x * r.distance;
 			r.hit.y = r.start.y + dir.y * r.distance;
 			if (data->effects & 1)
-			draw_line(data->rays, mult_vector(data->player, data->tsm),
-				mult_vector(r.hit, data->tsm), RAY_COLOR);
+				draw_line(data->rays, mult_vector(data->player, data->tsm),
+					mult_vector(r.hit, data->tsm), RAY_COLOR);
 			return (r);
 		}
 	}
