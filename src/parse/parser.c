@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:34:16 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/23 16:23:28 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/23 17:57:28 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,7 @@ int	parser(int argc, char **argv, t_map *map)
 		return (parse_error(map, NULL));
 	if (index_doors(map) == -1)
 		return (parse_error(map, NULL));
+	if (!map->no || !map->so || !map->we || !map->ea)
+		return (parse_error(NULL, "No texture\n"));
 	return (0);
 }
