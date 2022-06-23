@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 20:10:41 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/23 15:21:44 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:38:37 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	player_rotate(t_data *data)
 		&& data->mouse.x >= 0 && data->mouse.x <= data->width)
 		data->angle -= (data->mouse.x - mouse[0]) / 500;
 	data->dir = vector(cos(data->angle), sin(data->angle));
+	data->mouse.x = mouse[0];
+	data->mouse.y = mouse[1];
 	if (~data->effects & 2)
 	{
 		if (data->mouse.x < 0 || data->mouse.x > data->width)
@@ -37,8 +39,6 @@ void	player_rotate(t_data *data)
 		if (data->mouse.y < 0 || data->mouse.y > data->height)
 			mlx_set_mouse_pos(data->mlx, mouse[0], data->height / 2);
 	}
-	data->mouse.x = mouse[0];
-	data->mouse.y = mouse[1];
 	player_move(data);
 }
 

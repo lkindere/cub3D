@@ -6,21 +6,12 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 02:05:12 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/23 14:57:29 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:31:39 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-typedef struct s_raydrawer
-{
-	mlx_texture_t	*texture;
-	uint32_t		*line;
-	float			offset;
-	float			step;
-	float			height;
-	int				cutoff;
-}	t_raydrawer;
+#include "structs.h"
 
 static int	split_line(uint32_t **line, mlx_texture_t *texture, int pixel)
 {

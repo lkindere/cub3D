@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/23 15:06:04 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:59:28 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,6 @@ void	reset_images(t_data *data)
 	data->p_img->instances[0].y = (data->player.y - PS / 2) * data->tsm;
 }
 
-void	hook(void *param)
-{
-	t_data		*data;
-
-	data = param;
-	player_speed(data);
-	player_rotate(data);
-	data->angle = angle_fit(data->angle);
-	reset_images(data);
-	raycaster(data);
-}
-
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_data	*data;
@@ -77,4 +65,16 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	else if (~data->effects & 2)
 		mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
 	set_effects(keydata, data);
+}
+
+void	hook(void *param)
+{
+	t_data		*data;
+
+	data = param;
+	player_speed(data);
+	player_rotate(data);
+	data->angle = angle_fit(data->angle);
+	reset_images(data);
+	raycaster(data);
 }
