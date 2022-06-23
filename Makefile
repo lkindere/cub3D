@@ -6,7 +6,7 @@
 #    By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 23:16:18 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/23 13:27:43 by lkindere         ###   ########.fr        #
+#    Updated: 2022/06/23 15:55:45 by lkindere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ LIBFT_PATH := ./libs/libft/
 LIBFT := $(LIBFT_PATH)libft.a
 MLX_PATH := ./libs/MLX42/
 MLX := $(MLX_PATH)libmlx42.a
-
-# CFLAGS ?= -Wall -Werror -Wextra
+# 
+CFLAGS ?= -Wall -Werror -Wextra
 
 SRC_M :=	main.c						\
 			utils.c						\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 23:15:33 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/23 15:15:45 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:44:01 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,6 @@ void	put_walls(t_data *data, char **map)
 		i++;
 	}
 }
-
-// void	resize(int32_t width, int32_t height, void* param)
-// {
-// 	t_data	*data;
-
-// 	data = (t_data *)param;
-// 	data->width = width;
-// 	data->height = height;
-// 	mlx_resize_image(data->p_img, width, height);
-// 	mlx_resize_image(data->walls, width, height);
-// 	mlx_resize_image(data->rays, width, height);
-// 	mlx_resize_image(data->draw, width, height);
-// }
 
 int32_t	main(int argc, char **argv)
 {

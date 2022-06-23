@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 14:17:26 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/19 00:32:27 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:56:08 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	stretch_width(t_map *map)
 	j = -1;
 	while (map->map[++i])
 	{
-		if (ft_strlen(map->map[i]) != map->width)
+		if (ft_strlen(map->map[i]) != (size_t)map->width)
 		{
 			temp = malloc(map->width + 1);
 			if (!temp)

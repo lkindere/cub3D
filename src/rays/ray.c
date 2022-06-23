@@ -6,13 +6,13 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 06:29:16 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/23 13:33:21 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:46:44 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	ray_init(t_data *data, t_ray *r)
+static void	ray_init(t_ray *r)
 {
 	r->is_door = 0;
 	r->map = vector_int(r->start.x, r->start.y);
@@ -97,7 +97,7 @@ t_ray	do_rays(t_data *data, t_vec start, t_vec dir, float range)
 
 	r.dir = dir;
 	r.start = start;
-	ray_init(data, &r);
+	ray_init(&r);
 	while (ray_step(&r))
 	{
 		if (r.map.x >= data->map_->width || (range != -1 && r.distance > range)

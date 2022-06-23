@@ -12,7 +12,7 @@ DOOR _textures/char32.xpm42
 DOOR _textures/char41.xpm42
 DOOR _textures/char42.xpm42
 
-F 220,100,0
+F 0,50,50
 C 225,30,0
 
         1
