@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 02:05:12 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/23 05:10:22 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 08:03:25 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,22 @@ static int	split_line(uint32_t **line, mlx_texture_t *texture, int pixel)
 	return (0);
 }
 
-static int	set_texture(t_textures textures, t_raydrawer *rd, t_ray *r)
+mlx_texture_t	*get_door(t_textures *textures)
+{
+	uint32_t	time;
+
+	time = mlx_get_time() % 4;
+	if (time == 0)
+		return (&textures->door1->texture);
+	if (time == 1)
+		return (&textures->door2->texture);
+	if (time == 2)
+		return (&textures->door3->texture);
+	if (time == 3)
+		return (&textures->door4->texture);
+}
+
+static int	set_texture(t_textures *textures, t_raydrawer *rd, t_ray *r)
 {
 	int	pixel;
 
@@ -56,22 +71,22 @@ static int	set_texture(t_textures textures, t_raydrawer *rd, t_ray *r)
 	{
 		pixel = ((r->hit.x - (int)r->hit.x) * TS);
 		if (r->hit_pos == N)
-			rd->texture = &textures.n->texture;
+			rd->texture = &textures->n->texture;
 		if (r->hit_pos == S)
-			rd->texture = &textures.s->texture;
+			rd->texture = &textures->s->texture;
 		if (r->is_door)
-			rd->texture = &textures.door->texture;
+			rd->texture = get_door(textures);
 		return (split_line(&rd->line, rd->texture, pixel));
 	}
 	if (r->hit_pos == E || r->hit_pos == W)
 	{
 		pixel = ((r->hit.y - (int)r->hit.y) * TS);
 		if (r->hit_pos == E)
-			rd->texture = &textures.e->texture;
+			rd->texture = &textures->e->texture;
 		if (r->hit_pos == W)
-			rd->texture = &textures.w->texture;
+			rd->texture = &textures->w->texture;
 		if (r->is_door)
-			rd->texture = &textures.door->texture;
+			rd->texture = get_door(textures);
 	}
 
 	return (split_line(&rd->line, rd->texture, pixel));
@@ -95,7 +110,7 @@ int	draw_rays(t_data *data, t_ray *r, t_vec start)
 	int			i;
 	t_raydrawer	rd;
 
-	if (set_texture(data->textures, &rd, r) != 0)
+	if (set_texture(&data->textures, &rd, r) != 0)
 		return (ERROR_MALLOC);
 	set_params(data, &rd, r);
 	i = rd.cutoff - 1;

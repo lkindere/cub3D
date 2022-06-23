@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/22 14:18:31 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 07:51:19 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef enum s_speed
 	WALK = 2,
 	SPRINT = 3,
 	SNEAK = 1,
-	DASH = 15
+	DASH = 30
 }	t_speed;
 
 typedef struct s_textures
@@ -74,7 +74,10 @@ typedef struct s_textures
 	xpm_t	*s;
 	xpm_t	*e;
 	xpm_t	*w;
-	xpm_t	*door;
+	xpm_t	*door1;
+	xpm_t	*door2;
+	xpm_t	*door3;
+	xpm_t	*door4;
 }	t_textures;
 
 /**

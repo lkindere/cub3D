@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:34:16 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/23 06:59:37 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 07:13:28 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ int	index_doors(t_map *map)
 		}
 		j = -1;
 	}
+	return (0);
 }
 
 int	parser(int argc, char **argv, t_map *map)

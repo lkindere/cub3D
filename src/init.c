@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/23 06:17:00 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 07:52:04 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	copy_map(t_data *data, t_map *map)
 	data->map = map->map;
 	map->map = NULL;
 	data->map_ = map;
-	data->angle = data->map_->position * M_PI_2 * -1 + M_PI_2;
+	data->angle = data->map_->position * M_PI_2;
 	data->dir = vector(cos(data->angle), sin(data->angle));
 	data->player = vector(map->pos_x + 0.5, map->pos_y + 0.5);
 	mlx_set_window_size(data->mlx, WIDTH, HEIGHT);
@@ -43,7 +43,10 @@ static int	init_textures(t_data *data)
 	data->textures.s = mlx_load_xpm42(data->map_->so);
 	data->textures.e = mlx_load_xpm42(data->map_->ea);
 	data->textures.w = mlx_load_xpm42(data->map_->we);
-	data->textures.door = mlx_load_xpm42("./_textures/char12.xpm42");
+	data->textures.door1 = mlx_load_xpm42("./_textures/char12.xpm42");
+	data->textures.door2 = mlx_load_xpm42("./_textures/char22.xpm42");
+	data->textures.door3 = mlx_load_xpm42("./_textures/char32.xpm42");
+	data->textures.door4 = mlx_load_xpm42("./_textures/char42.xpm42");
 	if (mlx_errno != 0)
 	{
 		printf("%s\n", mlx_strerror(mlx_errno));
