@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 23:16:18 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/23 16:01:04 by lkindere         ###   ########.fr        #
+#    Updated: 2022/06/23 16:14:45 by mmeising         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIBFT_PATH := ./libs/libft/
 LIBFT := $(LIBFT_PATH)libft.a
 MLX_PATH := ./libs/MLX42/
 MLX := $(MLX_PATH)libmlx42.a
-# 
+
 CFLAGS ?= -Wall -Werror -Wextra
 
 SRC_M :=	main.c						\
