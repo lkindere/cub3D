@@ -6,11 +6,9 @@
 #    By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 23:16:18 by mmeising          #+#    #+#              #
-#    Updated: 2022/06/23 15:55:45 by lkindere         ###   ########.fr        #
+#    Updated: 2022/06/23 16:01:04 by lkindere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-# gcc main.c libmlx42.a -lglfw -L "/Users/$USER/.brew/opt/glfw/lib" -I ./include/
 
 VPATH = src src/parse src/player src/rays src/math src/draw
 
@@ -32,7 +30,6 @@ SRC_M :=	main.c						\
 			movement.c					\
 			collision.c					\
 			vector.c 					\
-			math.c 						\
 			draw.c						\
 			draw_rays.c					\
 			effects.c 					\
