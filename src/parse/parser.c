@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:34:16 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/16 14:28:12 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:46:24 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int	parser(int argc, char **argv, t_map *map)
 	if (read_map(map, argv) == -1)
 		return (parse_error(map, NULL));
 	if (check_map(map) == -1)
+		return (parse_error(map, NULL));
+	if (index_doors(map) == -1)
 		return (parse_error(map, NULL));
 	print_map(*map);
 	return (0);

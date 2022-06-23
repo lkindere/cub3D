@@ -6,7 +6,7 @@
 /*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/21 20:23:53 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:57:03 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_ray
 	t_vec		hit;
 	t_pos		hit_pos;
 	float		distance;
+	bool		is_door;
 }	t_ray;
 
 typedef enum s_error
@@ -64,7 +65,7 @@ typedef enum s_speed
 	WALK = 2,
 	SPRINT = 3,
 	SNEAK = 1,
-	DASH = 15
+	DASH = 30
 }	t_speed;
 
 typedef struct s_textures
@@ -73,6 +74,7 @@ typedef struct s_textures
 	xpm_t	*s;
 	xpm_t	*e;
 	xpm_t	*w;
+	xpm_t	**door;
 }	t_textures;
 
 /**
@@ -98,6 +100,7 @@ typedef struct s_data
 	t_vec		player;
 	t_vec		mouse;
 	int			tsm;
+	int			effects;
 	t_map		*map_;
 }	t_data;
 
@@ -107,7 +110,7 @@ void		key_hook(mlx_key_data_t keydata, void *param);
 
 /* rays					*/
 t_ray		do_rays(t_data *data, t_vec start, t_vec dir, float range);
-void		draw_rays(t_data *data, t_ray *r, t_vec start);
+int			draw_rays(t_data *data, t_ray *r, t_vec start);
 void		raycaster(t_data *data);
 
 /*	init				*/
@@ -120,10 +123,15 @@ void		player_move(t_data *data);
 int			check_collision(t_data *data, float x, float y);
 void		player_dash(t_data *data);
 void		player_speed(t_data *data);
+void		open_door(t_data *data);
 
 /* draw					*/
 t_vec_int	screen_bounds(int x, int y);
 void		safe_pixel(mlx_image_t *image, t_vec vec, uint32_t color);
 void		draw_line(mlx_image_t *image, t_vec p1, t_vec p2, uint32_t color);
+
+/* effects				*/
+void		set_effects(mlx_key_data_t keydata, t_data *data);
+uint32_t	funky_stuff(unsigned int color);
 
 #endif

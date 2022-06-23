@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 06:29:16 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/21 18:17:19 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:33:21 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	ray_init(t_data *data, t_ray *r)
 {
+	r->is_door = 0;
 	r->map = vector_int(r->start.x, r->start.y);
 	r->step.x = sqrt(1 + (r->dir.y / r->dir.x) * (r->dir.y / r->dir.x));
 	r->step.y = sqrt(1 + (r->dir.x / r->dir.y) * (r->dir.x / r->dir.y));
@@ -64,6 +65,32 @@ static int	ray_step(t_ray *r)
 	return (1);
 }
 
+void	hit_object(t_data *data, t_ray *r)
+{
+	t_door	*door;
+	int		i;
+
+	i = -1;
+	door = data->map_->doors;
+	while (door && door[++i].x != -1)
+	{
+		if (r->map.x == door[i].x && r->map.y == door[i].y && door[i].open == 0)
+			r->is_door = 1;
+		if (r->hit_pos == N && door[i].open == 1 && door[i].direction == 'Y'
+			&& r->map.x == door[i].x && r->map.y + 1 == door[i].y)
+			r->is_door = 1;
+		if (r->hit_pos == S && door[i].open == 1 && door[i].direction == 'Y'
+			&& r->map.x == door[i].x && r->map.y - 1 == door[i].y)
+			r->is_door = 1;
+		if (r->hit_pos == E && door[i].open == 1 && door[i].direction == 'X'
+			&& r->map.x - 1 == door[i].x && r->map.y == door[i].y)
+			r->is_door = 1;
+		if (r->hit_pos == W && door[i].open == 1 && door[i].direction == 'X'
+			&& r->map.x + 1 == door[i].x && r->map.y == door[i].y)
+			r->is_door = 1;
+	}
+}
+
 t_ray	do_rays(t_data *data, t_vec start, t_vec dir, float range)
 {
 	t_ray	r;
@@ -78,10 +105,12 @@ t_ray	do_rays(t_data *data, t_vec start, t_vec dir, float range)
 			break ;
 		if (data->map[r.map.y][r.map.x] == '1')
 		{
+			hit_object(data, &r);
 			r.hit.x = r.start.x + dir.x * r.distance;
 			r.hit.y = r.start.y + dir.y * r.distance;
-			draw_line(data->rays, mult_vector(data->player, data->tsm),
-				mult_vector(r.hit, data->tsm), RAY_COLOR);
+			if (data->effects & 1)
+				draw_line(data->rays, mult_vector(data->player, data->tsm),
+					mult_vector(r.hit, data->tsm), RAY_COLOR);
 			return (r);
 		}
 	}

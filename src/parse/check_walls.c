@@ -6,11 +6,26 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 14:23:00 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/14 21:52:54 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 06:44:53 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+//If either X or Y is not surrounded by walls returns -1
+//If both X and Y surrounded by walls returns -1
+static int	valid_door(t_map *map, int h, int w)
+{
+	if (w == 0 || h == 0)
+		return (invalidate_map(map, INVALID_DOORS));
+	if ((map->map[h][w + 1] != '1' || map->map[h][w - 1] != '1')
+		&& (map->map[h - 1][w] != '1' || map->map[h + 1][w] != '1'))
+		return (invalidate_map(map, INVALID_DOORS));
+	if (map->map[h][w + 1] == '1' && map->map[h][w - 1] == '1'
+		&& map->map[h - 1][w] == '1' && map->map[h + 1][w] == '1')
+		return (invalidate_map(map, INVALID_DOORS));
+	return (1);
+}
 
 //Returns -1 no wall left
 //Returns -2 no wall right
@@ -20,6 +35,7 @@
 //Returns -6 no wall top right
 //Returns -7 no wall bottom left
 //Returns -8 no wall botom right
+//Returns -9 on invalid door
 //Returns 1 on surrounded wall
 static int	is_surrounded(t_map *map, int h, int w)
 {
@@ -39,6 +55,8 @@ static int	is_surrounded(t_map *map, int h, int w)
 		return (-7);
 	if (map->map[h + 1][w + 1] == ' ' || map->map[h + 1][w + 1] == 0)
 		return (-8);
+	if (map->map[h][w] == 'D' && valid_door(map, h, w) != 1)
+		return (-9);
 	return (1);
 }
 

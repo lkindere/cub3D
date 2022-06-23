@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:22:22 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/21 03:16:54 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:46:31 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	invalidate_map(t_map *map, enum e_errors err)
 int	is_block(char c)
 {
 	if (c != '0' && c != '1' && c != 'N' && c != 'S'
-		&& c != 'W' && c != 'E' && c != 0 && c != ' ')
+		&& c != 'W' && c != 'E' && c != 0 && c != ' '
+		&& c != 'D')
 		return (0);
 	return (1);
 }
@@ -57,6 +58,11 @@ void	print_map(t_map map)
 	printf("Width: %d\n\n", map.width);
 	printf("Starting pos: %d\n", map.position);
 	printf("Starting X: %d, Y:%d\n", map.pos_x, map.pos_y);
+	for (int i = 0; map.doors && map.doors[i].x != -1; i++)
+		printf("Door %d at %d %d, dir: %c\n", i + 1,
+			map.doors[i].x, map.doors[i].y, map.doors[i].direction);
+	for (int i = 0; map.door_text && map.door_text[i]; i++)
+		printf("Door texture %d: %s\n", i + 1, map.door_text[i]);
 }
 
 //Returns 1 if line is empty

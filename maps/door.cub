@@ -1,0 +1,28 @@
+NO _textures/wall.xpm42
+SO _textures/wall.xpm42
+WE _textures/floor.xpm42
+EA _textures/floor.xpm42
+
+DOOR _textures/char11.xpm42
+DOOR _textures/char12.xpm42
+DOOR _textures/char21.xpm42
+DOOR _textures/char22.xpm42
+DOOR _textures/char31.xpm42
+DOOR _textures/char32.xpm42
+DOOR _textures/char41.xpm42
+DOOR _textures/char42.xpm42
+
+F 220,100,0
+C 225,30,0
+
+        1
+        1
+1111111111111111
+1000100000000101
+1000100100001001
+100E000D00000001
+1010000100000001
+10100000001D1001
+1111111111111111
+1
+1

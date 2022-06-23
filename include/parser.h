@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:34:24 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/16 14:22:08 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:30:01 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int		parser(int argc, char **argv, t_map *map);
 
 //Init
 void	init_map(t_map *map);
-int		free_map(t_map *map);
 int		parse_error(t_map *map, char *str);
 
 //Get
@@ -38,6 +37,9 @@ int		get_map(t_map *map, char *line);
 //Check
 int		check_map(t_map *map);
 int		check_walls(t_map *map);
+
+//Doors
+int		index_doors(t_map *map);
 
 //Utils
 void	print_map(t_map map);
