@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/23 05:21:43 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 06:57:38 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	hook(void *param)
 	t_data		*data;
 
 	data = param;
-	printf("Fps: %f\n", 1 / data->mlx->delta_time);
+	// printf("Fps: %f\n", 1 / data->mlx->delta_time);
 	player_speed(data);
 	player_rotate(data);
 	data->angle = angle_fit(data->angle);
@@ -83,16 +83,23 @@ void	set_effects(mlx_key_data_t keydata, t_data *data)
 
 void	open_door(t_data *data)
 {
-	int		i;
-	t_vec	check;
+	int			i;
+	t_vec_int	check;
 
 	i = 0;
-	check = add_vector(data->player, data->dir);
-	while (data->map_->door_indexes && data->map_->door_indexes[i].x != -1)
+	check.x = data->player.x + data->dir.x;
+	check.y = data->player.y + data->dir.y;
+	while (data->map_->doors && data->map_->doors[i].x != -1)
 	{
-		if ((int)check.x == data->map_->door_indexes[i].x
-			&& (int)check.y == data->map_->door_indexes[i].y)
-			data->map_->door_indexes[i].x = -1;
+		if (check.x == data->map_->doors[i].x
+			&& check.y == data->map_->doors[i].y)
+			{
+				data->map_->doors[i].open = ~data->map_->doors[i].open & 1;
+				if (data->map[check.y][check.x] == '1')
+					data->map[check.y][check.x] = ' ';
+				else
+					data->map[check.y][check.x] = '1';
+			}
 		i++;
 	}
 }

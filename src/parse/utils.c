@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:22:22 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/22 14:46:01 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 06:58:21 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ void	print_map(t_map map)
 	printf("Width: %d\n\n", map.width);
 	printf("Starting pos: %d\n", map.position);
 	printf("Starting X: %d, Y:%d\n", map.pos_x, map.pos_y);
-	for (int i = 0; map.door_indexes && map.door_indexes[i].x != -1; i++)
-		printf("Door %d at %d %d\n", i + 1, map.door_indexes[i].x, map.door_indexes[i].y);
+	for (int i = 0; map.doors && map.doors[i].x != -1; i++)
+		printf("Door %d at %d %d, dir: %c\n", i + 1,
+			map.doors[i].x, map.doors[i].y, map.doors[i].direction);
 }
 
 //Returns 1 if line is empty

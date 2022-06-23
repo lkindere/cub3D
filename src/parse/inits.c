@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:23:47 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/22 14:27:28 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 06:45:35 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	parse_error(t_map *map, char *str)
 		write(2, "Invalid path format", 20);
 	else if (map->valid == INVALID_COLOR_FORMAT)
 		write(2, "Invalid color format", 21);
+	else if (map->valid == INVALID_DOORS)
+		write(2, "Invalid doors", 14);
 	else if (map->valid == DUPLICATE_DEFINITION)
 		write(2, "Duplicate definitions in map file", 34);
 	else if (map->valid == UNCLOSED_MAP)
@@ -46,7 +48,7 @@ int	free_map(t_map *map)
 	while (map->map && map->map[i])
 		free(map->map[i++]);
 	free(map->map);
-	free(map->door_indexes);
+	free(map->doors);
 	free(map->no);
 	free(map->so);
 	free(map->we);
@@ -60,7 +62,7 @@ void	init_map(t_map *map)
 	if (!map->map)
 		exit (1);
 	map->map[0] = NULL;
-	map->door_indexes = NULL;
+	map->doors = NULL;
 	map->no = NULL;
 	map->so = NULL;
 	map->we = NULL;

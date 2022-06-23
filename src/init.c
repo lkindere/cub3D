@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/22 13:35:51 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 06:17:00 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	init_textures(t_data *data)
 	data->textures.s = mlx_load_xpm42(data->map_->so);
 	data->textures.e = mlx_load_xpm42(data->map_->ea);
 	data->textures.w = mlx_load_xpm42(data->map_->we);
-	data->textures.door = mlx_load_xpm42("/home/lukas/code/cub3d/_textures/char12.xpm42");
+	data->textures.door = mlx_load_xpm42("./_textures/char12.xpm42");
 	if (mlx_errno != 0)
 	{
 		printf("%s\n", mlx_strerror(mlx_errno));

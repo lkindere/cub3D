@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 12:19:30 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/22 14:39:43 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 06:49:58 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef enum e_errors
 	INVALID_MAP_FORMAT,
 	INVALID_PATH_FORMAT,
 	INVALID_COLOR_FORMAT,
+	INVALID_DOORS,
 	DUPLICATE_DEFINITION,
 	UNCLOSED_MAP,
 	NO_MAP,
@@ -38,6 +39,14 @@ typedef enum e_pos
 	NO_POS
 }	t_pos;
 
+typedef struct s_door
+{
+	int		x;
+	int		y;
+	char	open;
+	char	direction;
+}	t_door;
+
 typedef struct s_map
 {
 	char			**map;
@@ -53,7 +62,7 @@ typedef struct s_map
 	unsigned int	pos_y;
 	enum e_pos		position;
 	enum e_errors	valid;
-	t_vec_int		*door_indexes;
+	t_door			*doors;
 }	t_map;
 
 int		parser(int argc, char **argv, t_map *map);
