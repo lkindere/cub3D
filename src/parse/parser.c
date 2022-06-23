@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:34:16 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/23 16:16:11 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:23:28 by mmeising         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,5 @@ int	parser(int argc, char **argv, t_map *map)
 		return (parse_error(map, NULL));
 	if (index_doors(map) == -1)
 		return (parse_error(map, NULL));
-	// print_map(*map);
 	return (0);
 }
