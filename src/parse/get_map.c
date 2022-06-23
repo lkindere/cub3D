@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 08:20:55 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/14 20:25:31 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/22 13:38:05 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	get_map(t_map *map, char *line)
 		i++;
 	if (line[i] == '1' || line[i] == '0'
 		|| line[i] == 'N' || line[i] == 'S'
-		|| line[i] == 'E' || line[i] == 'W')
+		|| line[i] == 'E' || line[i] == 'W'
+		|| line[i] == 'D')
 		return (map_add_line(map, line));
 	return (invalidate_map(map, INVALID_MAP_FORMAT));
 	return (0);

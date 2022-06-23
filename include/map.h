@@ -6,12 +6,14 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 12:19:30 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/21 21:00:21 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/22 14:39:43 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_H
 # define MAP_H
+
+# include "math_utils.h"
 
 typedef enum e_errors
 {
@@ -32,6 +34,7 @@ typedef enum e_pos
 	S = 1,
 	W = 2,
 	N = 3,
+	D = 4,
 	NO_POS
 }	t_pos;
 
@@ -42,10 +45,6 @@ typedef struct s_map
 	char			*so;
 	char			*we;
 	char			*ea;
-	char			*no2;
-	char			*so2;
-	char			*we2;
-	char			*ea2;
 	unsigned int	floor_color;
 	unsigned int	ceiling_color;
 	unsigned int	width;
@@ -54,6 +53,7 @@ typedef struct s_map
 	unsigned int	pos_y;
 	enum e_pos		position;
 	enum e_errors	valid;
+	t_vec_int		*door_indexes;
 }	t_map;
 
 int		parser(int argc, char **argv, t_map *map);

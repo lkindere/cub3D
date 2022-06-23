@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 02:05:12 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/22 11:35:08 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 05:10:22 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,26 @@ static int	set_texture(t_textures textures, t_raydrawer *rd, t_ray *r)
 
 	if (r->hit_pos == N || r->hit_pos == S)
 	{
-		pixel = (int)((r->hit.x - (int)r->hit.x) * TS);
+		pixel = ((r->hit.x - (int)r->hit.x) * TS);
 		if (r->hit_pos == N)
 			rd->texture = &textures.n->texture;
 		if (r->hit_pos == S)
 			rd->texture = &textures.s->texture;
+		if (r->is_door)
+			rd->texture = &textures.door->texture;
 		return (split_line(&rd->line, rd->texture, pixel));
 	}
 	if (r->hit_pos == E || r->hit_pos == W)
 	{
-		pixel = (int)((r->hit.y - (int)r->hit.y) * TS);
+		pixel = ((r->hit.y - (int)r->hit.y) * TS);
 		if (r->hit_pos == E)
 			rd->texture = &textures.e->texture;
 		if (r->hit_pos == W)
 			rd->texture = &textures.w->texture;
+		if (r->is_door)
+			rd->texture = &textures.door->texture;
 	}
+
 	return (split_line(&rd->line, rd->texture, pixel));
 }
 

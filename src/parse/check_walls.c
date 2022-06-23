@@ -6,11 +6,21 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 14:23:00 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/14 21:52:54 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/22 13:50:55 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+static int	valid_door(char **map, int h, int w)
+{
+	if (w == 0 || h == 0)
+		return (-1);
+	if ((map[h][w + 1] != '1' || map[h][w - 1] != '1')
+		&& (map[h - 1][w] != '1' || map[h + 1][w] != '1'))
+		return (-1);
+	return (1);
+}
 
 //Returns -1 no wall left
 //Returns -2 no wall right
@@ -20,25 +30,28 @@
 //Returns -6 no wall top right
 //Returns -7 no wall bottom left
 //Returns -8 no wall botom right
+//Returns -9 on invalid door
 //Returns 1 on surrounded wall
-static int	is_surrounded(t_map *map, int h, int w)
+static int	is_surrounded(char **map, int h, int w)
 {
-	if (w == 0 || map->map[h][w - 1] == ' ')
+	if (w == 0 || map[h][w - 1] == ' ')
 		return (-1);
-	if (map->map[h][w + 1] == ' ' || map->map[h][w + 1] == 0)
+	if (map[h][w + 1] == ' ' || map[h][w + 1] == 0)
 		return (-2);
-	if (map->map[h - 1][w] == ' ')
+	if (map[h - 1][w] == ' ')
 		return (-3);
-	if (map->map[h + 1][w] == ' ' || map->map[h + 1][w] == 0)
+	if (map[h + 1][w] == ' ' || map[h + 1][w] == 0)
 		return (-4);
-	if (map->map[h - 1][w - 1] == ' ')
+	if (map[h - 1][w - 1] == ' ')
 		return (-5);
-	if (map->map[h - 1][w + 1] == ' ' || map->map[h - 1][w + 1] == 0)
+	if (map[h - 1][w + 1] == ' ' || map[h - 1][w + 1] == 0)
 		return (-6);
-	if (map->map[h + 1][w - 1] == ' ')
+	if (map[h + 1][w - 1] == ' ')
 		return (-7);
-	if (map->map[h + 1][w + 1] == ' ' || map->map[h + 1][w + 1] == 0)
+	if (map[h + 1][w + 1] == ' ' || map[h + 1][w + 1] == 0)
 		return (-8);
+	if (map[h][w] == 'D' && valid_door(map, h, w) != 1)
+		return (-9);
 	return (1);
 }
 
@@ -92,7 +105,7 @@ int	check_walls(t_map *map)
 				return (invalidate_map(map, INVALID_MAP_FORMAT));
 			if (!map->map[h][w])
 				break ;
-			if (map->map[h][w] != '1' && is_surrounded(map, h, w) < 0)
+			if (map->map[h][w] != '1' && is_surrounded(map->map, h, w) < 0)
 				return (invalidate_map(map, UNCLOSED_MAP));
 		}
 		w = -1;

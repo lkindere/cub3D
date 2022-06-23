@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:18:21 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/21 23:50:07 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/23 05:21:43 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,22 @@ void	set_effects(mlx_key_data_t keydata, t_data *data)
 		data->effects ^= 8;
 }
 
+void	open_door(t_data *data)
+{
+	int		i;
+	t_vec	check;
+
+	i = 0;
+	check = add_vector(data->player, data->dir);
+	while (data->map_->door_indexes && data->map_->door_indexes[i].x != -1)
+	{
+		if ((int)check.x == data->map_->door_indexes[i].x
+			&& (int)check.y == data->map_->door_indexes[i].y)
+			data->map_->door_indexes[i].x = -1;
+		i++;
+	}
+}
+
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_data	*data;
@@ -92,5 +108,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		data->player = vector(2.5, 2.5);
 	if (keydata.key == MLX_KEY_F && keydata.action == MLX_PRESS)
 		player_dash(data);
+	if (keydata.key == MLX_KEY_G && keydata.action == MLX_PRESS)
+		open_door(data);
 	set_effects(keydata, data);
 }

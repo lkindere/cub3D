@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 20:23:47 by lkindere          #+#    #+#             */
-/*   Updated: 2022/06/16 12:29:08 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/22 14:27:28 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	free_map(t_map *map)
 	while (map->map && map->map[i])
 		free(map->map[i++]);
 	free(map->map);
+	free(map->door_indexes);
 	free(map->no);
 	free(map->so);
 	free(map->we);
@@ -57,8 +58,9 @@ void	init_map(t_map *map)
 {
 	map->map = malloc(sizeof(char *));
 	if (!map->map)
-		exit (0);
+		exit (1);
 	map->map[0] = NULL;
+	map->door_indexes = NULL;
 	map->no = NULL;
 	map->so = NULL;
 	map->we = NULL;

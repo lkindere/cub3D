@@ -6,7 +6,7 @@
 /*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 00:47:44 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/22 11:20:13 by lkindere         ###   ########.fr       */
+/*   Updated: 2022/06/22 14:18:31 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_ray
 	t_vec		hit;
 	t_pos		hit_pos;
 	float		distance;
+	bool		is_door;
 }	t_ray;
 
 typedef enum s_error
@@ -73,10 +74,7 @@ typedef struct s_textures
 	xpm_t	*s;
 	xpm_t	*e;
 	xpm_t	*w;
-	xpm_t	*n2;
-	xpm_t	*s2;
-	xpm_t	*e2;
-	xpm_t	*w2;
+	xpm_t	*door;
 }	t_textures;
 
 /**
