@@ -3,7 +3,7 @@ SO _textures/wall.xpm42
 WE _textures/floor.xpm42
 EA _textures/floor.xpm42
 
-DOOR _textures/char11.xpm42
+DOOR _textures/char11.xpm
 DOOR _textures/char12.xpm42
 DOOR _textures/char21.xpm42
 DOOR _textures/char22.xpm42

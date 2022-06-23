@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeising <mmeising@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lkindere <lkindere@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 20:04:46 by mmeising          #+#    #+#             */
-/*   Updated: 2022/06/23 15:13:26 by mmeising         ###   ########.fr       */
+/*   Updated: 2022/06/23 20:11:42 by lkindere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ static int	init_textures(t_data *data)
 	}
 	data->textures.door[i] = NULL;
 	if (mlx_errno != 0)
+	{
+		write(2, "Failed to load texture\n", 24);
 		return (-1);
+	}
 	return (0);
 }
 
